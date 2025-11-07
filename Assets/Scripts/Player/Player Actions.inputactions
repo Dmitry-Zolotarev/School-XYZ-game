@@ -1,0 +1,97 @@
+{
+    "version": 1,
+    "name": "Player Actions",
+    "maps": [
+        {
+            "name": "Player Actions",
+            "id": "a844d396-509c-493c-be66-149e66968234",
+            "actions": [
+                {
+                    "name": "MoveHorizontal",
+                    "type": "Button",
+                    "id": "0f355cc7-7796-4e03-8be8-c17016429c03",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "ab4276fd-c486-41ee-bf7a-337a45f29646",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Attack",
+                    "type": "Button",
+                    "id": "a8c6de09-900f-46d3-9e57-b8bb83e8d182",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "A/D",
+                    "id": "76b91af8-aae3-4b23-a9b8-2aa4bc267ed0",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveHorizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "4d0a5f96-f720-4c10-a92b-c33164390c36",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "e8bc82e4-80eb-4bbe-9ac0-6c06197fff23",
+                    "path": "<Keyboard>/#(D)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "f45b433b-1b9b-424a-93a6-fd24c759d155",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b16d3d5f-dfbc-4260-ab1e-94942266f2d9",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
