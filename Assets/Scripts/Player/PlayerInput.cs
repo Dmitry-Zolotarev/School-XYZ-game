@@ -17,4 +17,8 @@ public class PlayerInput : MonoBehaviour
     {
         if (context.performed) player.Jump();
     }
+    public void Interact(InputAction.CallbackContext context)
+    {
+        if (context.performed) player.Interact();
+    }
 }

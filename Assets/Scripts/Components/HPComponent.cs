@@ -9,10 +9,11 @@ public class HPComponent : MonoBehaviour
     [SerializeField] private TextMeshProUGUI HPLabel;
     [SerializeField] private UnityEvent onDamage;
     [SerializeField] private UnityEvent onDie;
-    
+    private WalletComponent wallet;
     private int HP;
     private void Start() {
         HP = maxHP;
+        wallet = GetComponent<WalletComponent>();
         UpdateLabel();
     } 
     public void ApplyDamage(int damage)
@@ -21,6 +22,7 @@ public class HPComponent : MonoBehaviour
         onDamage?.Invoke();
         if (HP <= 0) onDie?.Invoke();
         else if(HP > maxHP) HP = maxHP;
+        if(wallet != null) wallet.DropAllCoins();
         UpdateLabel();
     }
     private void UpdateLabel() => HPLabel?.SetText("♥ " + HP);

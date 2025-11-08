@@ -11,9 +11,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles;
-    [SerializeField] private float velocity = 1f, jumpForce = 7f, sprintAcceleration = 2f;
+    [SerializeField] private float velocity = 1f, jumpForce = 7f, interactionRadius = 0.5f;
     [SerializeField] LayerMask groundLayer;
-
     private bool isRunning, isGrounded, isJumping, facingRight = true;
     private int jumpCount;
     private SpawnComponent spawner;
@@ -80,5 +79,12 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         animator.SetTrigger(AnimatorHit);
+    }
+    public void Interact()
+    {
+        var hit = Physics2D.OverlapCircle(transform.position, interactionRadius);
+        var interaction = hit?.GetComponent<InteractableComponent>();
+
+        if (interaction != null) interaction.Interact();
     }
 }
