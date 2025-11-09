@@ -27,12 +27,14 @@ public class HPComponent : MonoBehaviour
         if (wallet != null && HP <= maxHP / 2) wallet.DropAllCoins();
         UpdateLabel();
     }
-    public void Heal(int healing)
+    public int Heal(int healing)
     {
+        var wasHP = HP;
         HP += healing;
         if (HP > maxHP) HP = maxHP;
         onHeal?.Invoke();
         UpdateLabel();
+        return HP - wasHP;
     }
     private void UpdateLabel() => HPLabel?.SetText("♥ " + HP);
 }

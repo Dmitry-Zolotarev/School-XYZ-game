@@ -6,6 +6,8 @@ TagManager:
   tags:
   - SilverCoin
   - Interactiion
+  - GoldenCoin
+  - HealPotion
   layers:
   - Default
   - TransparentFX

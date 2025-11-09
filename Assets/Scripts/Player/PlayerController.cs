@@ -83,18 +83,14 @@ public class PlayerController : MonoBehaviour
     public void Interact()
     {
         var hits = Physics2D.OverlapCircleAll(transform.position, interactionRadius);
-        Debug.Log($"Interact check: {hits.Length} objects found");
         foreach (var hit in hits)
         {
-            Debug.Log($"Found object: {hit.name}");
             var interaction = hit.GetComponent<InteractableComponent>();
             if (interaction != null)
             {
-                Debug.Log("Interaction triggered!");
                 interaction.Interact();
                 break;
             }
         }
     }
-
 }

@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2178704035503042026}
   - component: {fileID: 4990724599152291272}
   m_Layer: 0
-  m_Name: SilverCoin
-  m_TagString: SilverCoin
+  m_Name: GoldenCoin
+  m_TagString: GoldenCoin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,7 +82,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2322180950842035098, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
+  m_Sprite: {fileID: 6582046967323461550, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -108,10 +108,10 @@ MonoBehaviour:
   frameRate: 4
   playLooping: 1
   sprites:
-  - {fileID: -2322180950842035098, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
-  - {fileID: -4893972260818282012, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
-  - {fileID: -6323751108524238166, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
-  - {fileID: 2722280177590742205, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
+  - {fileID: 6582046967323461550, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
+  - {fileID: 1942777921290549423, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
+  - {fileID: 8793606821965667882, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
+  - {fileID: 3444832735345940322, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
   onComplete:
     m_PersistentCalls:
       m_Calls: []
