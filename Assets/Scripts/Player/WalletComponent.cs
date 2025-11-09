@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class WalletComponent : MonoBehaviour
 {
-
     [SerializeField] private TextMeshProUGUI coinAmountLabel;
     [SerializeField] private ParticleSystem coinParticles;
     [HideInInspector] public int coinAmount = 0;
@@ -13,7 +12,7 @@ public class WalletComponent : MonoBehaviour
         if(collision.gameObject.tag == "SilverCoin")
         {
             coinAmount++;
-            coinAmountLabel?.SetText("© " + coinAmount);
+            UpdateLabel();
             Destroy(collision.gameObject);
         }
     }
@@ -22,8 +21,12 @@ public class WalletComponent : MonoBehaviour
         if (coinAmount > 0)
         {
             coinAmount = 0;
-            coinAmountLabel?.SetText("© " + coinAmount);
-            Instantiate(coinParticles, transform);
+            UpdateLabel();
+            Instantiate(coinParticles, transform.position, Quaternion.identity);
         }
+    }
+    private void UpdateLabel()
+    {
+        coinAmountLabel.text = "© " + coinAmount.ToString();
     }
 }

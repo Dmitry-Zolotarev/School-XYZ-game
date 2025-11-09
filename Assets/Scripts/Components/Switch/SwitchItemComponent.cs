@@ -1,12 +1,11 @@
 using UnityEngine;
 
 
-public class SwitchComponent : MonoBehaviour
+public class SwitchItemComponent : MonoBehaviour
 {
-    [SerializeField]private Animator animator;
     [SerializeField] private string animationKey;
     [SerializeField] private bool state;
-    
+    [SerializeField] private Animator animator;
     public void Switch()
     {
         state = !state;

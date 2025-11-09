@@ -9,18 +9,18 @@ public class SpriteAnimation : MonoBehaviour
     [SerializeField] private Sprite[] sprites;
     [SerializeField] private UnityEvent onComplete;
 
-    private SpriteRenderer renderer;
+    private SpriteRenderer renderSprite;
 
     private float secondsPerFrame, nextFrameTime;
     private int i;
     private bool isPlaying = true;
     private void Start()
     {
-        renderer = GetComponent<SpriteRenderer>();
+        renderSprite = GetComponent<SpriteRenderer>();
         if (frameRate == 0) frameRate++;
         secondsPerFrame = 1f / frameRate;
         nextFrameTime = Time.time + secondsPerFrame;
-        renderer.sprite = sprites[0];
+        renderSprite.sprite = sprites[0];
     }
     private void Update()
     {
@@ -35,8 +35,8 @@ public class SpriteAnimation : MonoBehaviour
                     onComplete?.Invoke();
                     return;
                 } 
-            }  
-            renderer.sprite = sprites[i];
+            }
+            renderSprite.sprite = sprites[i];
             nextFrameTime += secondsPerFrame;
         }         
     }
