@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnterCollisionComponent
   _tag: Player
+  isLooping: 1
   action:
     m_PersistentCalls:
       m_Calls:
@@ -167,7 +168,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  isLooping: 0
 --- !u!114 &5346190020366701495
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7471592735809129057}
   - component: {fileID: 8603816822651279324}
   - component: {fileID: 3134653207225334181}
-  - component: {fileID: 2178704035503042026}
   - component: {fileID: 4990724599152291272}
   m_Layer: 0
   m_Name: GoldenCoin
@@ -113,23 +112,6 @@ MonoBehaviour:
   - {fileID: 8793606821965667882, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
   - {fileID: 3444832735345940322, guid: 3dbf72ecdda251d428b77c971d971ebf, type: 3}
   onComplete:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2178704035503042026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5236262089121195644}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32abfcfb162ca764dae527bd04723ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnterTriggerComponent
-  _tag: 
-  isLooping: 0
-  action:
     m_PersistentCalls:
       m_Calls: []
 --- !u!58 &4990724599152291272
