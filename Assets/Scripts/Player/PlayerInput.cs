@@ -1,13 +1,14 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(PlayerController))]
+[RequireComponent(typeof(EntityController))]
 public class PlayerInput : MonoBehaviour
 {
-    private PlayerController player;
+    private EntityController player;
     private void Start()
     {
-        player = GetComponent<PlayerController>();
+        player = GetComponent<EntityController>();
+        Cursor.visible = false;
     }
     public void InputAD(InputAction.CallbackContext context) 
     {
@@ -20,5 +21,9 @@ public class PlayerInput : MonoBehaviour
     public void Interact(InputAction.CallbackContext context)
     {
         if (context.performed) player.Interact();
+    }
+    public void AttackClick(InputAction.CallbackContext context)
+    {
+        if (context.performed) player.Attack();
     }
 }

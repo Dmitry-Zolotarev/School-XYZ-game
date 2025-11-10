@@ -8,6 +8,7 @@ TagManager:
   - Interactiion
   - GoldenCoin
   - HealPotion
+  - Enemy
   layers:
   - Default
   - TransparentFX
