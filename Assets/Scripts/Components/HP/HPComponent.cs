@@ -4,19 +4,14 @@ using UnityEngine.Events;
 
 public class HPComponent : MonoBehaviour
 {
-    
-    
-    [SerializeField] private TextMeshProUGUI HPLabel;
-    [SerializeField] private UnityEvent onDamage;
-    [SerializeField] private UnityEvent onHeal;
-    [SerializeField] private UnityEvent onDie;
+    public UnityEvent onDamage, onHeal, onDie;
+    [HideInInspector] public int HP;
     private WalletComponent wallet;
     public int maxHP;
-    private int HP;
+    
     private void Start() {
         HP = maxHP;
         wallet = GetComponent<WalletComponent>();
-        UpdateLabel();
     }
     public void ApplyDamage(int damage)
     {
@@ -28,7 +23,6 @@ public class HPComponent : MonoBehaviour
             onDie?.Invoke();
         } 
         if (wallet != null && HP <= maxHP / 2) wallet.DropAllCoins();
-        UpdateLabel();
     }
     public int Heal(int healing)
     {
@@ -36,8 +30,6 @@ public class HPComponent : MonoBehaviour
         HP += healing;
         if (HP > maxHP) HP = maxHP;
         onHeal?.Invoke();
-        UpdateLabel();
         return HP - wasHP;
     }
-    private void UpdateLabel() => HPLabel?.SetText("♥ " + HP);
 }
