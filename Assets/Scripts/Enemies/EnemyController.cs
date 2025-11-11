@@ -1,8 +1,6 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D))]
-[RequireComponent(typeof(EntityController))]
-public class EnemyAI : MonoBehaviour
+public class EnemyController : EntityController
 {
     [Header("AI Settings")]
     [SerializeField] private Transform leftPoint;
@@ -10,16 +8,7 @@ public class EnemyAI : MonoBehaviour
     [SerializeField] private float detectionRange = 5f;
 
     private Transform player;
-    private bool chasing;
-    private bool hitWall;
-
-    private EntityController enemy;
-
-    private void Start()
-    {
-        enemy = GetComponent<EntityController>();
-        enemy.SetDirection(1);
-    }
+    private bool chasing, hitWall;
 
     private void Update()
     {
@@ -38,7 +27,7 @@ public class EnemyAI : MonoBehaviour
         else Patrol();
 
         // Атака
-        if (player && distanceToPlayer < enemy.armRadius) enemy.Attack();
+        if (player && distanceToPlayer < armRadius) Attack();
     }
 
     private void Patrol()
@@ -48,14 +37,14 @@ public class EnemyAI : MonoBehaviour
         if (hitWall)
         {
             hitWall = false;
-            enemy.SetDirection(-enemy.GetDirection());
+            SetDirection(-direction);
             return;
         }
 
         // Правая граница
-        if (transform.position.x >= rightPoint.position.x) enemy.SetDirection(-1);
+        if (transform.position.x >= rightPoint.position.x) SetDirection(-1);
         // Левая граница
-        if (transform.position.x <= leftPoint.position.x) enemy.SetDirection(1);
+        if (transform.position.x <= leftPoint.position.x) SetDirection(1);
     }
 
     private void ChasePlayer()
@@ -66,13 +55,13 @@ public class EnemyAI : MonoBehaviour
         float dir = distance > 0 ? 1 : -1;
 
         // Останавливаемся, если близко к игроку
-        if (Mathf.Abs(distance) < enemy.armRadius || hitWall)
+        if (Mathf.Abs(distance) < armRadius || hitWall)
         {
-            enemy.SetDirection(0);
+            SetDirection(0);
             return;
         }
 
-        enemy.SetDirection(dir);
+        SetDirection(dir);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

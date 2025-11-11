@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-[RequireComponent(typeof(EntityController))]
+[RequireComponent(typeof(PlayerController))]
 public class PlayerInput : MonoBehaviour
 {
-    private EntityController player;
+    private PlayerController player;
     private void Start()
     {
-        player = GetComponent<EntityController>();
+        player = GetComponent<PlayerController>();
         Cursor.visible = false;
     }
     public void InputAD(InputAction.CallbackContext context) 
