@@ -10,6 +10,8 @@ public class ExitLevelComponent : MonoBehaviour
     {
         try
         {
+            var player = entity.GetComponent<PlayerController>();
+            if (player != null) player.SaveSession();
             SceneManager.LoadScene(levelName);
         }
         catch(Exception e){ Debug.Log(e.Message); }
