@@ -1,3 +1,4 @@
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -5,6 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerInput : MonoBehaviour
 {
     private PlayerController player;
+    private Inventory inventory;
     private void Start()
     {
         player = GetComponent<PlayerController>();
@@ -25,5 +27,9 @@ public class PlayerInput : MonoBehaviour
     public void AttackClick(InputAction.CallbackContext context)
     {
         if (context.performed) player.Attack();
+    }
+    public void MouseScroll(InputAction.CallbackContext context)
+    {
+        if (context.performed) inventory.ScrollItem(context.ReadValue<float>());   
     }
 }

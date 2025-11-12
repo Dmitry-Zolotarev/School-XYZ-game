@@ -145,6 +145,8 @@ GameObject:
   - component: {fileID: 8937964369943679714}
   - component: {fileID: 9206138700421647767}
   - component: {fileID: 8132036216841527231}
+  - component: {fileID: 8341137970847974359}
+  - component: {fileID: 870657750649178154}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -375,7 +377,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c04c8f2e52a74896136299e7eaa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPComponent
-  HPLabel: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -397,7 +398,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8341137970847974359}
         m_TargetAssemblyTypeName: RestartLevelComponent, Assembly-CSharp
         m_MethodName: RestartLevel
         m_Mode: 1
@@ -409,6 +410,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  HP: 0
   maxHP: 100
 --- !u!114 &8937964369943679714
 MonoBehaviour:
@@ -437,9 +439,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb219fb90c5ea604a8b9e25479da995a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletComponent
-  coinAmountLabel: {fileID: 0}
   coinParticles: {fileID: 7546759974662920432, guid: a0f5b2923738ece4daedd61c75d261a7, type: 3}
   coinAmount: 0
+  onDrop:
+    m_PersistentCalls:
+      m_Calls: []
+  onGetCoin:
+    m_PersistentCalls:
+      m_Calls: []
   silverCoinValue: 1
   goldenCoinValue: 5
 --- !u!114 &8132036216841527231
@@ -471,8 +478,39 @@ MonoBehaviour:
   facingRight: 1
   didAttack: 0
   damage: 5
+  damageIncrease: 1
   attackCooldown: 0.5
   lastAttackTime: 0
+  armRadiusIncrease: 0
+--- !u!114 &8341137970847974359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12c6b58c732aed54a84c51f148d03bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RestartLevelComponent
+--- !u!114 &870657750649178154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3096a269cbfa8924eafed7bc9dc90e04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Inventory
+  Size: 3
+  selectedSlot: 0
+  itemHand: {fileID: 8592525520638591078}
+  itemOffset: {x: -0.1, y: -0.1}
+  Items: []
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0
@@ -704,6 +742,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 4843985084834002234, guid: a4c31f86dec88274d8c110daf73b8679, type: 3}
+--- !u!4 &8592525520638591078 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1770433945857213737, guid: a4c31f86dec88274d8c110daf73b8679, type: 3}
+  m_PrefabInstance: {fileID: 8047668809097053519}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8683157989456968849 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -7552582706839291426, guid: a4c31f86dec88274d8c110daf73b8679, type: 3}

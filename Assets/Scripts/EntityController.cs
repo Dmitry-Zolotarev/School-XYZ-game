@@ -11,16 +11,16 @@ public class EntityController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
-    [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 1f;
+    [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f;
 
     [SerializeField] private LayerMask groundLayer;
     [HideInInspector]public bool isRunning, isGrounded, isJumping, facingRight = true, didAttack = false;
     private int jumpCount;
     private SpawnComponent spawner;
 
-    public int damage = 5;
+    public int damage = 5, damageIncrease = 1;
     public float attackCooldown = 0.5f;
-    [HideInInspector]public float lastAttackTime = 0;
+    [HideInInspector]public float lastAttackTime = 0, armRadiusIncrease = 0;
 
     private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
@@ -142,11 +142,11 @@ public class EntityController : MonoBehaviour
             spawner.Spawn();
         }
 
-        var hits = Physics2D.OverlapCircleAll(transform.position, armRadius);
+        var hits = Physics2D.OverlapCircleAll(transform.position, armRadius + armRadiusIncrease);
         foreach (var hit in hits)
         {
             var target = hit.GetComponent<HPComponent>();
-            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage);
+            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage * damageIncrease);
         }
 
         animator.SetTrigger(AnimatorMelee);

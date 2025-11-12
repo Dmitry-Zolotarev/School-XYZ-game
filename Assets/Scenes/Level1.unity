@@ -1016,7 +1016,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.5, y: 0.5}
   m_EdgeRadius: 0
 --- !u!114 &300225630
 MonoBehaviour:
@@ -3591,23 +3591,6 @@ Transform:
   - {fileID: 711075650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1045530670 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-  m_PrefabInstance: {fileID: 8525740279241632916}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1045530681
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045530670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c6b58c732aed54a84c51f148d03bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RestartLevelComponent
 --- !u!4 &1111517563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7471592735809129057, guid: 75acec3b1b65589478648cb7f358ead0, type: 3}
@@ -9902,21 +9885,21 @@ PrefabInstance:
       propertyPath: BoundingShape2D
       value: 
       objectReference: {fileID: 152711513}
+    - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: Size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: itemOffset.x
+      value: -0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: itemOffset.y
+      value: -0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 6265524689735574845, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: HPLabel
-      value: 
-      objectReference: {fileID: 264027269}
-    - target: {fileID: 6265524689735574845, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1045530681}
-    - target: {fileID: 6265524689735574845, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: RestartLevel
       objectReference: {fileID: 0}
     - target: {fileID: 6540964184826502354, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9960,19 +9943,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8132036216841527231, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: armRadius
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 9206138700421647767, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: coinAmountLabel
-      value: 
-      objectReference: {fileID: 1187668807}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1045530681}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
