@@ -9,6 +9,8 @@ TagManager:
   - GoldenCoin
   - HealPotion
   - Enemy
+  - Menu
+  - Pause
   layers:
   - Default
   - TransparentFX
