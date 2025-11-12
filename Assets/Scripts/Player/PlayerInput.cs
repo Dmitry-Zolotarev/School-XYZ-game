@@ -7,7 +7,6 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerController player;
     private Inventory inventory;
-    [SerializeField]private GameObject pauseMenu;
     private void Start()
     {
         player = GetComponent<PlayerController>();

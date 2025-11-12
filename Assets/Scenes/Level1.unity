@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8059510020390876107, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
   m_PrefabInstance: {fileID: 8525740279241632916}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1049977104}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 598403af5698c53449d17aa645b8d747, type: 3}
@@ -3603,6 +3603,27 @@ Transform:
   - {fileID: 711075650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1049977104 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+  m_PrefabInstance: {fileID: 8525740279241632916}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1049977117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1049977104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  source: {fileID: 975861664}
+  sounds:
+  - _id: Melee
+    _clip: {fileID: 8300000, guid: c672f482135224a45abd94f4b3c21b03, type: 3}
 --- !u!4 &1111517563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7471592735809129057, guid: 75acec3b1b65589478648cb7f358ead0, type: 3}
@@ -10073,28 +10094,72 @@ PrefabInstance:
       value: 'Player Actions/Pause[/Keyboard/escape]'
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 430715325}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1049977117}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 430715325}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnPausePerformed
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: Play
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Pause
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PauseComponent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: PlaySoundsComponent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: PauseComponent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
+      value: Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_ActionEvents.Array.data[4].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -10103,7 +10168,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1049977117}
   m_SourcePrefab: {fileID: 100100000, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

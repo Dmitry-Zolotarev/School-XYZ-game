@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PauseComponent : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PauseComponent : MonoBehaviour
         pauseMenu = GameObject.FindGameObjectWithTag("Pause");
         if (pauseMenu != null)
             pauseMenu.SetActive(false);
+    }
+    public void OnPausePerformed(InputAction.CallbackContext context)
+    {
+        if(context.performed) Pause();
     }
 
     public void Pause()
