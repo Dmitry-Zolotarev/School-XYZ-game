@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditorInternal.Profiling.Memory.Experimental;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -21,7 +20,7 @@ public class Inventory : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset);     
+        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);     
     }
     public void ScrollItem(float scroll)
     {

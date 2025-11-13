@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -11,15 +12,17 @@ public class EntityController : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
-    [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f;
+    [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f, attackCooldown = 0.5f;
 
     [SerializeField] private LayerMask groundLayer;
+    [SerializeField] private UnityEvent onAttack, onJump;
+
+
     [HideInInspector]public bool isRunning, isGrounded, isJumping, facingRight = true, didAttack = false;
     private int jumpCount;
     private SpawnComponent spawner;
 
     public int damage = 5, damageIncrease = 1;
-    public float attackCooldown = 0.5f;
     [HideInInspector]public float lastAttackTime = 0, armRadiusIncrease = 0;
 
     private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
@@ -61,7 +64,9 @@ public class EntityController : MonoBehaviour
         {
             rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
             jumpCount++;
+            onJump?.Invoke();
         }
+        
     }
 
     private bool CheckGround()
@@ -108,7 +113,6 @@ public class EntityController : MonoBehaviour
             spawner.prefab = hitParticles;
             spawner.Spawn();
         }
-
         if (!didAttack || tag != "Player") animator.SetTrigger(AnimatorHit);
     }
     public void OnDie()
@@ -150,5 +154,6 @@ public class EntityController : MonoBehaviour
         }
 
         animator.SetTrigger(AnimatorMelee);
+        onAttack?.Invoke();
     }
 }

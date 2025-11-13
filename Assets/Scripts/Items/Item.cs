@@ -33,7 +33,7 @@ public class Item : ScriptableObject
         modelInstance = Instantiate(modelPrefab, transform);
         modelInstance.SetActive(true);
     }
-    public virtual void Render(Transform hand, Vector3 offset)
+    public virtual void Render(Transform hand, Vector3 offset, Vector3 localScale)
     {
         if (modelInstance == null && modelPrefab != null)
         {
@@ -46,6 +46,9 @@ public class Item : ScriptableObject
         }
         // Обновляем позицию, если модель уже создана
         if (modelInstance != null) {
+            localScale.y = 0; localScale.z = 0;
+            localScale.Normalize();
+            offset.x *= localScale.x;
             modelInstance.transform.position = hand.position + offset;
         }
         

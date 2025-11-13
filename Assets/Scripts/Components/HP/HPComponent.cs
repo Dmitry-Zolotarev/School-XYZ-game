@@ -18,10 +18,9 @@ public class HPComponent : MonoBehaviour
         HP -= damage;
         HP = Mathf.Max(HP, 0);
         onDamage?.Invoke();
-        if (HP <= 0) {
-            Debug.Log(tag + " died.");
-            onDie?.Invoke();
-        } 
+
+        if (HP <= 0) onDie?.Invoke();
+
         if (wallet != null && HP <= maxHP / 2) wallet.DropAllCoins();
     }
     public int Heal(int healing)

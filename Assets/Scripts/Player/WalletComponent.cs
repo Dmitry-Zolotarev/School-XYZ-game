@@ -5,10 +5,12 @@ using UnityEngine.Events;
 public class WalletComponent : MonoBehaviour
 {
     [SerializeField] private ParticleSystem coinParticles;
-    [HideInInspector] public int coinAmount = 0;
-    [HideInInspector] public UnityEvent onDrop, onGetCoin;
+    
+    
     [SerializeField] private int silverCoinValue = 1, goldenCoinValue = 5;
     
+    [HideInInspector] public int coinAmount = 0;
+    public UnityEvent onDrop, onGetCoin;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "SilverCoin") getCoin(silverCoinValue, collision.gameObject);
