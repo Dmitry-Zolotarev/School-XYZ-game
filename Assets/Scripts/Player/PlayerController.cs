@@ -1,3 +1,4 @@
+using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,6 +11,8 @@ public class PlayerController : EntityController
     private static HPComponent health;
     private static WalletComponent wallet;
     private static PlayerData backup = new PlayerData(0, 0, 0, 0);
+    private static string path => Path.Combine(Application.persistentDataPath, "playerdata.json");
+
     private void Awake()
     {
         health = GetComponent<HPComponent>();
@@ -28,21 +31,15 @@ public class PlayerController : EntityController
     }
     public void SaveSession()
     {
-        backup = new PlayerData
-        {
-            HP = health.HP,
-            maxHP = health.maxHP,
-            coins = wallet.coinAmount,
-            damage = damage
-        };
+        string json = JsonUtility.ToJson(backup, true);
+        File.WriteAllText(path, json);
+        Debug.Log("Saved to: " + path);
     }
+
     public void LoadSession()
     {
-        if (backup.Sum() == 0) return;
-        health.HP = backup.HP;
-        health.maxHP = backup.maxHP;
-        wallet.coinAmount = backup.coins;
-        damage = backup.damage;
+        if (!File.Exists(path)) return;
+        backup = JsonUtility.FromJson<PlayerData>(File.ReadAllText(path));
     }
 }
 
