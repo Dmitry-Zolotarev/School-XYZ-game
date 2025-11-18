@@ -7,9 +7,8 @@ public class HPComponent : MonoBehaviour
     public UnityEvent onDamage, onHeal, onDie;
     [HideInInspector] public int HP;
     private WalletComponent wallet;
-    public int maxHP;
-    
-    private void Start() {
+    public int maxHP = 100;
+    private void Awake() {
         HP = maxHP;
         wallet = GetComponent<WalletComponent>();
     }

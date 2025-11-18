@@ -27,7 +27,7 @@ public class EnemyController : EntityController
         else Patrol();
 
         // Атака
-        if (player && distanceToPlayer < armRadius) Attack();
+        if (player && distanceToPlayer < armRadius * 1.5f) Attack();
     }
 
     private void Patrol()

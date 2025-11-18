@@ -6,11 +6,15 @@ public class PlaySoundsComponent : MonoBehaviour
 {
     [SerializeField] private AudioSource source;
     [SerializeField] private List<AudioData> sounds;
+    [SerializeField] private float playSoundCooldown = 0.2f;
+    private float lastPlayTime;
     public void Play(string id)
     {
         foreach(var audioData in sounds)
         {
-            if (audioData.id == id) {
+            if (audioData.id == id && Time.time > lastPlayTime + playSoundCooldown) 
+            {
+                lastPlayTime = Time.time;
                 source.PlayOneShot(audioData.clip);
                 break;
             }

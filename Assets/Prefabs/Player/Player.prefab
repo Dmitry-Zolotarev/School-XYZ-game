@@ -148,6 +148,8 @@ GameObject:
   - component: {fileID: 8341137970847974359}
   - component: {fileID: 870657750649178154}
   - component: {fileID: 8059510020390876107}
+  - component: {fileID: 2589976012273206197}
+  - component: {fileID: 7266937275027893272}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -213,7 +215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24fa634180633ef41bbbf6fc6d9f6659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
-  pauseMenu: {fileID: 0}
 --- !u!114 &6882356943858714282
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,6 +286,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Melee
+          m_BoolArgument: 0
+        m_CallState: 2
     m_ActionId: a8c6de09-900f-46d3-9e57-b8bb83e8d182
     m_ActionName: 'Player Actions/Attack[/Mouse/leftButton]'
   - m_PersistentCalls:
@@ -307,7 +320,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8059510020390876107}
         m_TargetAssemblyTypeName: PauseComponent, Assembly-CSharp
-        m_MethodName: TogglePause
+        m_MethodName: Pause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -398,16 +411,16 @@ MonoBehaviour:
   onDamage:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: EntityController, Assembly-CSharp
-        m_MethodName: TakeDamage
-        m_Mode: 1
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Hurt
           m_BoolArgument: 0
         m_CallState: 2
   onHeal:
@@ -458,15 +471,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WalletComponent
   coinParticles: {fileID: 7546759974662920432, guid: a0f5b2923738ece4daedd61c75d261a7, type: 3}
+  silverCoinValue: 1
+  goldenCoinValue: 5
   coinAmount: 0
   onDrop:
     m_PersistentCalls:
       m_Calls: []
   onGetCoin:
     m_PersistentCalls:
-      m_Calls: []
-  silverCoinValue: 1
-  goldenCoinValue: 5
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Coin
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8132036216841527231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -487,9 +512,40 @@ MonoBehaviour:
   velocity: 5
   jumpForce: 5.2
   armRadius: 1
+  attackCooldown: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  onAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Melee
+          m_BoolArgument: 0
+        m_CallState: 2
+  onJump:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Jump
+          m_BoolArgument: 0
+        m_CallState: 2
   isRunning: 0
   isGrounded: 0
   isJumping: 0
@@ -497,7 +553,6 @@ MonoBehaviour:
   didAttack: 0
   damage: 5
   damageIncrease: 1
-  attackCooldown: 0.5
   lastAttackTime: 0
   armRadiusIncrease: 0
 --- !u!114 &8341137970847974359
@@ -541,7 +596,125 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598403af5698c53449d17aa645b8d747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseComponent
-  pauseMenu: {fileID: 0}
+--- !u!114 &2589976012273206197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  source: {fileID: 7266937275027893272}
+  sounds:
+  - _id: Melee
+    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
+  - _id: Hurt
+    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
+  - _id: Coin
+    _clip: {fileID: 8300000, guid: e2908e54240409f4784e4caea48499c0, type: 3}
+  - _id: Jump
+    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
+--- !u!82 &7266937275027893272
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.3
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0

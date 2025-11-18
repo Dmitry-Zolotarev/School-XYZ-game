@@ -7,11 +7,10 @@ public class PlayerInput : MonoBehaviour
 {
     private PlayerController player;
     private Inventory inventory;
-    private PauseComponent pauseComponent;
     private void Start()
     {
         player = GetComponent<PlayerController>();
-        pauseComponent = GetComponent<PauseComponent>();
+        Cursor.visible = false;
     }
     public void InputAD(InputAction.CallbackContext context) 
     {
@@ -28,10 +27,6 @@ public class PlayerInput : MonoBehaviour
     public void AttackClick(InputAction.CallbackContext context)
     {
         if (context.performed) player.Attack();
-    }
-    public void Pause(InputAction.CallbackContext context)
-    {
-        if (context.performed) pauseComponent?.Pause();
     }
     public void MouseScroll(InputAction.CallbackContext context)
     {
