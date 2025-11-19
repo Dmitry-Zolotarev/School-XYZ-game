@@ -7,7 +7,7 @@ public class Item : ScriptableObject
     public string Name;
     public bool isStackable = false;
     public int count = 1;
-
+    public Sprite Icon;
     [Header("Model")]
     public GameObject modelPrefab; // <- теперь префаб, а не ссылка на сцену
     protected GameObject modelInstance;

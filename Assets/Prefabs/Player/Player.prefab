@@ -596,6 +596,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 598403af5698c53449d17aa645b8d747, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseComponent
+  pauseMenu: {fileID: 0}
 --- !u!114 &2589976012273206197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -618,6 +619,7 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: e2908e54240409f4784e4caea48499c0, type: 3}
   - _id: Jump
     _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
+  playSoundCooldown: 0.2
 --- !u!82 &7266937275027893272
 AudioSource:
   m_ObjectHideFlags: 0

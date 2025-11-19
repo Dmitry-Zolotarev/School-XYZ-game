@@ -18,16 +18,15 @@ public class EnemyController : EntityController
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
             if (playerObj != null) player = playerObj.transform;
         }
+        Vector2 toPlayer = player.position - transform.position;
+        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, toPlayer.normalized, toPlayer.magnitude, groundLayer);
+        bool isBlocked = rayHit.collider != null && rayHit.distance < toPlayer.magnitude && rayHit.collider.gameObject != gameObject;
 
-        float distanceToPlayer = player ? Vector2.Distance(transform.position, player.position) : Mathf.Infinity;
-
-        // Решаем, преследуем игрока или патрулируем
-        chasing = player != null && distanceToPlayer < detectionRange;
-        if (chasing) ChasePlayer();
+        if (player != null && !isBlocked && toPlayer.magnitude < detectionRange) ChasePlayer();
         else Patrol();
 
         // Атака
-        if (player && distanceToPlayer < armRadius * 1.5f) Attack();
+        if (player && toPlayer.magnitude < armRadius * 1.5f) Attack();
     }
 
     private void Patrol()
@@ -49,7 +48,7 @@ public class EnemyController : EntityController
 
     private void ChasePlayer()
     {
-        if (!player) return;
+        if (player == null) return;
 
         float distance = player.position.x - transform.position.x;
         float dir = distance > 0 ? 1 : -1;
@@ -60,7 +59,6 @@ public class EnemyController : EntityController
             SetDirection(0);
             return;
         }
-
         SetDirection(dir);
     }
 

@@ -374,10 +374,10 @@ MonoBehaviour:
       - m_Target: {fileID: 4455610509485339406}
         m_TargetAssemblyTypeName: ExitLevelComponent, Assembly-CSharp
         m_MethodName: Exit
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 

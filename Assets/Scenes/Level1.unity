@@ -9784,6 +9784,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 853951834}
     m_Modifications:
     - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
+      propertyPath: jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
       propertyPath: attackCooldown
       value: 1
       objectReference: {fileID: 0}
@@ -10017,7 +10021,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8132036216841527231, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: jumpForce
-      value: 5
+      value: 5.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

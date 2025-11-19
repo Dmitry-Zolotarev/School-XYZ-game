@@ -14,7 +14,7 @@ public class EntityController : MonoBehaviour
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
     [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f, attackCooldown = 0.5f;
 
-    [SerializeField] private LayerMask groundLayer;
+    [SerializeField] protected LayerMask groundLayer;
     [SerializeField] private UnityEvent onAttack, onJump;
 
 
@@ -103,7 +103,7 @@ public class EntityController : MonoBehaviour
         else if (isRunning && runParticles != null) spawner.prefab = runParticles;
         else if (isJumping && jumpParticles != null) spawner.prefab = jumpParticles;
 
-        didAttack = Time.time < lastAttackTime + attackCooldown;
+        
     }
 
     public void TakeDamage()
@@ -135,24 +135,35 @@ public class EntityController : MonoBehaviour
 
     public void Attack()
     {
+        didAttack = Time.time < lastAttackTime + attackCooldown;
         if (didAttack) return;
-
-        didAttack = true;
         lastAttackTime = Time.time;
-
         if (attackParticles != null)
         {
             spawner.prefab = attackParticles;
             spawner.Spawn();
         }
-
         var hits = Physics2D.OverlapCircleAll(transform.position, armRadius + armRadiusIncrease);
+        Vector2 facingDirection = facingRight ? Vector2.right : Vector2.left;
         foreach (var hit in hits)
         {
             var target = hit.GetComponent<HPComponent>();
-            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage * damageIncrease);
-        }
+            if (target != null && target.gameObject.tag != tag)
+            {
+                Vector2 toTarget = (Vector2)(hit.transform.position - transform.position);
+                float dot = Vector2.Dot(toTarget.normalized, facingDirection);
+                if (dot <= 0) continue;
 
+                // ѕроверка пр€мой видимости (нет ли стен на пути)
+                float distanceToTarget = toTarget.magnitude;
+                RaycastHit2D rayHit = Physics2D.Raycast(transform.position, toTarget.normalized, distanceToTarget, groundLayer);
+                bool isBlocked = rayHit.collider != null && rayHit.distance < distanceToTarget && rayHit.collider.gameObject != gameObject;
+                if (!isBlocked)
+                {
+                    target.ApplyDamage(damage * damageIncrease);
+                }
+            }
+        }
         animator.SetTrigger(AnimatorMelee);
         onAttack?.Invoke();
     }
