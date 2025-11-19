@@ -3,35 +3,41 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    [SerializeField] private int Size = 10;
+    public int size = 3, hotbarSize = 3;
     [HideInInspector]public int selectedSlot = 0;
     [SerializeField] private Transform itemHand;
     [SerializeField] private Vector2 itemOffset = new Vector2(0, 0.5f);
     private Animator animator;
-    private PlayerController playerController;
+    private EntityController entityController;
     public Item[] Items;
     public Action ItemsChanged;
     private void Start()
     {
-        Items = new Item[Size];
+        if (hotbarSize > size) hotbarSize = size;
+        Items = new Item[size];
         animator = GetComponent<Animator>();
-        playerController = GetComponent<PlayerController>();
+        entityController = GetComponent<EntityController>();
     }
 
     private void FixedUpdate()
     {
         if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);     
     }
-    public void ScrollItem(float scroll)
+    public void SelectItem(int i)
     {
-        if (scroll != 0f)
-        {
-            if (scroll > 0 && selectedSlot < Size) selectedSlot++;
-            if (scroll < 0 && selectedSlot > 0) selectedSlot--;
-            CheckMeleeWeapon(Items[selectedSlot]);
-            Items[selectedSlot].Select();
-            ItemsChanged?.Invoke();
-        }
+        while (i < 0) i += hotbarSize;
+        if (i > hotbarSize) i %= hotbarSize;
+
+        selectedSlot = i;
+        if (Items[i] != null) Items[i].Deselect();
+        CheckWeapon(Items[i]);
+        ItemsChanged?.Invoke();
+        Items[i].Select();
+    }
+    public void ScrollItem(float delta)
+    {
+        if (delta > 0 && selectedSlot < size) SelectItem(selectedSlot + 1);
+        if (delta < 0 && selectedSlot > 0) SelectItem(selectedSlot - 1);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -40,11 +46,7 @@ public class Inventory : MonoBehaviour
         pickup.isPicked = true;
         if (PickItem(pickup.item)) Destroy(other.gameObject);
     }
-    public Item getItem()
-    {
-        return Items[selectedSlot];
-    }
-
+    
     public bool PickItem(Item item)
     {
         if (item == null) return false;
@@ -55,7 +57,7 @@ public class Inventory : MonoBehaviour
         newItem.Attach(itemHand);
 
         // Проверка на стак
-        for (int i = 0; i < Size; i++)
+        for (int i = 0; i < size; i++)
         {
             if (Items[i] != null && Items[i].Name == newItem.Name)
             {
@@ -68,38 +70,37 @@ public class Inventory : MonoBehaviour
                 else return false;
             }
         }
-
         // Ищем пустой слот
-        for (int i = 0; i < Size; i++)
+        for (int i = 0; i < size; i++)
         {
             if (Items[i] == null)
             {
-                Items[i] = newItem;
-
-                CheckMeleeWeapon(newItem);
-                Items[i].Select();
-                selectedSlot = i;
-                ItemsChanged?.Invoke();
+                Items[i] = newItem;      
+                SelectItem(i);
                 return true;
             }
         }
-
-        Debug.Log("📦 Инвентарь полон!");
         return false;
     }
-    private void CheckMeleeWeapon(Item item)
+    private void CheckWeapon(Item item)
     {
+        entityController.damageIncrease = 1;
+        entityController.armRadiusIncrease = 0f;
+        entityController.attackCooldownScale = 1f;
+
         if (item is Melee)
         {
-            Melee weapon = item as Melee;
-            if (Items[selectedSlot] != null) Items[selectedSlot].Deselect();
-            playerController.damageIncrease = weapon.damageIncrease;
-            playerController.armRadiusIncrease = weapon.armRadiusIncrease;
+            Melee meleeWeapon = item as Melee;            
+            entityController.damageIncrease = meleeWeapon.damageIncrease;
+            entityController.armRadiusIncrease = meleeWeapon.armRadiusIncrease;
         }
-        else {
-            playerController.damageIncrease = 1;
-            playerController.armRadiusIncrease = 0f;
-        }
-        
+        else if (item is Range)
+        {
+            Range rangeWeapon = item as Range;
+            entityController.attackMode = 1;
+            entityController.SetProjectile(rangeWeapon.projectile);
+            entityController.attackCooldownScale = rangeWeapon.attackCooldownScale;
+            entityController.spawner.shootForce = rangeWeapon.shootForce;
+        }       
     }
 }

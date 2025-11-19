@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,26 +12,31 @@ public class EntityController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
+    public SpawnComponent spawner;
+    [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles, projectile;
     [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f, attackCooldown = 0.5f;
 
     [SerializeField] protected LayerMask groundLayer;
-    [SerializeField] private UnityEvent onAttack, onJump;
+    [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack, onRayAttack;
 
 
     [HideInInspector]public bool isRunning, isGrounded, isJumping, facingRight = true, didAttack = false;
+    [HideInInspector]public float lastAttackTime = 0, armRadiusIncrease = 0, attackCooldownScale = 1f;
     private int jumpCount;
-    private SpawnComponent spawner;
+    
 
     public int damage = 5, damageIncrease = 1;
-    [HideInInspector]public float lastAttackTime = 0, armRadiusIncrease = 0;
+    
 
     private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
     private static readonly int AnimatorIsRunning = Animator.StringToHash("IsRunning");
     private static readonly int AnimatorHit = Animator.StringToHash("Hit");
     private static readonly int AnimatorMelee = Animator.StringToHash("Melee");
-
+    private static readonly int AnimatorRange = Animator.StringToHash("RangeShot");
+    private static readonly int AnimatorRayShot = Animator.StringToHash("RayShot");
+    public enum AttackModes { Melee, Range, Ray };
+    public int attackMode = (int)AttackModes.Melee;
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -38,6 +44,7 @@ public class EntityController : MonoBehaviour
         spawner = GetComponent<SpawnComponent>();
         if (tag != "Player") SetDirection(1);
     }
+    public void SetProjectile(GameObject _projectile) => projectile = _projectile;
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;
@@ -101,9 +108,7 @@ public class EntityController : MonoBehaviour
             spawner.Spawn();
         }
         else if (isRunning && runParticles != null) spawner.prefab = runParticles;
-        else if (isJumping && jumpParticles != null) spawner.prefab = jumpParticles;
-
-        
+        else if (isJumping && jumpParticles != null) spawner.prefab = jumpParticles;        
     }
 
     public void TakeDamage()
@@ -132,10 +137,9 @@ public class EntityController : MonoBehaviour
             if (interaction != null) interaction.Interact();
         }
     }
-
     public void Attack()
     {
-        didAttack = Time.time < lastAttackTime + attackCooldown;
+        didAttack = Time.time < lastAttackTime + attackCooldown * attackCooldownScale;
         if (didAttack) return;
         lastAttackTime = Time.time;
         if (attackParticles != null)
@@ -143,28 +147,47 @@ public class EntityController : MonoBehaviour
             spawner.prefab = attackParticles;
             spawner.Spawn();
         }
+        switch (attackMode)
+        {
+            case (int)AttackModes.Melee:
+                MeleeAttack();
+                break;
+            case (int)AttackModes.Range:
+                StartCoroutine(RangeAttack());
+                break;
+            case (int)AttackModes.Ray:
+                StartCoroutine(RayAttack());
+                break;
+        }
+    }
+    private void MeleeAttack()
+    {
+        animator.SetTrigger(AnimatorMelee);
+        onMeleeAttack?.Invoke();
+
         var hits = Physics2D.OverlapCircleAll(transform.position, armRadius + armRadiusIncrease);
-        Vector2 facingDirection = facingRight ? Vector2.right : Vector2.left;
         foreach (var hit in hits)
         {
             var target = hit.GetComponent<HPComponent>();
-            if (target != null && target.gameObject.tag != tag)
-            {
-                Vector2 toTarget = (Vector2)(hit.transform.position - transform.position);
-                float dot = Vector2.Dot(toTarget.normalized, facingDirection);
-                if (dot <= 0) continue;
+            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage * damageIncrease);
+        }    
+    }
+    private IEnumerator RangeAttack()
+    {
+        animator.SetTrigger(AnimatorRange);
+        onRangeAttack?.Invoke();
+        yield return new WaitForSeconds(attackCooldown * attackCooldownScale / 2f);
+        if (projectile != null)
+        {  
+            spawner.prefab = projectile;
+            spawner.Spawn();
+        }    
+    }
+    private IEnumerator RayAttack()
+    {
+        yield return new WaitForSeconds(attackCooldown * attackCooldownScale);
 
-                // ѕроверка пр€мой видимости (нет ли стен на пути)
-                float distanceToTarget = toTarget.magnitude;
-                RaycastHit2D rayHit = Physics2D.Raycast(transform.position, toTarget.normalized, distanceToTarget, groundLayer);
-                bool isBlocked = rayHit.collider != null && rayHit.distance < distanceToTarget && rayHit.collider.gameObject != gameObject;
-                if (!isBlocked)
-                {
-                    target.ApplyDamage(damage * damageIncrease);
-                }
-            }
-        }
-        animator.SetTrigger(AnimatorMelee);
-        onAttack?.Invoke();
+        animator.SetTrigger(AnimatorRayShot);
+        onRayAttack?.Invoke();
     }
 }

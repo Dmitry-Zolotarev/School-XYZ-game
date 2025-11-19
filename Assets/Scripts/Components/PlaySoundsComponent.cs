@@ -2,12 +2,17 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlaySoundsComponent : MonoBehaviour
 {
-    [SerializeField] private AudioSource source;
-    [SerializeField] private List<AudioData> sounds;
     [SerializeField] private float playSoundCooldown = 0.2f;
+    [SerializeField] private List<AudioData> sounds;
+    private AudioSource source;
     private float lastPlayTime;
+    private void Start()
+    {
+        source = GetComponent<AudioSource>();
+    }
     public void Play(string id)
     {
         foreach(var audioData in sounds)
@@ -17,8 +22,7 @@ public class PlaySoundsComponent : MonoBehaviour
                 lastPlayTime = Time.time;
                 source.PlayOneShot(audioData.clip);
                 break;
-            }
-            
+            }           
         }
     }
     [Serializable]

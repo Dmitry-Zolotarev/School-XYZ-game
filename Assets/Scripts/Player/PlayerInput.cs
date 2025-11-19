@@ -10,6 +10,7 @@ public class PlayerInput : MonoBehaviour
     private void Start()
     {
         player = GetComponent<PlayerController>();
+        inventory = GetComponent<Inventory>();
         Cursor.visible = false;
     }
     public void InputAD(InputAction.CallbackContext context) 
@@ -30,6 +31,10 @@ public class PlayerInput : MonoBehaviour
     }
     public void MouseScroll(InputAction.CallbackContext context)
     {
-        if (context.performed) inventory.ScrollItem(context.ReadValue<float>());   
+        if (context.performed) inventory.ScrollItem(context.ReadValue<int>());   
+    }
+    public void SelectItem(InputAction.CallbackContext context)
+    {
+        if (context.performed) inventory.SelectItem(context.ReadValue<int>());
     }
 }

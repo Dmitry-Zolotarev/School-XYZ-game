@@ -5,10 +5,12 @@ using System.Collections.Generic;
 [RequireComponent(typeof(GridLayoutGroup))]
 public class InventoryWindow : MonoBehaviour
 {
-    [SerializeField] private Inventory inventory;        // Ссылка на инвентарь (компонент на игроке)
-    [SerializeField] private GameObject itemIconPrefab;  // Префаб иконки (можно без)
-    private GridLayoutGroup grid;
+    
+    [SerializeField] private Inventory inventory;
+    [SerializeField] private GameObject itemIconPrefab; 
     private List<GameObject> drawIcons = new List<GameObject>();
+    private GridLayoutGroup grid;
+    
 
     private void Start()
     {
@@ -25,14 +27,14 @@ public class InventoryWindow : MonoBehaviour
     {
         if (grid == null) return;
 
-        foreach (var icon in drawIcons)
-            Destroy(icon);
+        foreach (var icon in drawIcons) Destroy(icon);
+
         drawIcons.Clear();
 
         int i = 0;
         foreach (var item in inventory.Items)
         {
-            if (item == null) continue;
+            if (i >= inventory.hotbarSize || item == null) break;
 
             GameObject icon = CreateSimpleIcon(item, i == inventory.selectedSlot);
 
@@ -40,8 +42,8 @@ public class InventoryWindow : MonoBehaviour
             if (img != null) img.sprite = item.Icon;          
 
             Text txt = icon.GetComponentInChildren<Text>();
-            if (txt != null)
-                txt.text = (item.isStackable && item.count > 1) ? item.count.ToString() : "";
+
+            if (txt != null) txt.text = (item.isStackable && item.count > 1) ? item.count.ToString() : "";
 
             drawIcons.Add(icon);
             i++;

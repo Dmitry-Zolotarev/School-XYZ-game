@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 4325253223688249018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 25, y: -2.5, z: 0}
+  m_LocalPosition: {x: -2, y: -2.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -82,6 +82,8 @@ GameObject:
   - component: {fileID: 3925749315796207489}
   - component: {fileID: 4849606171689534937}
   - component: {fileID: 147636780597896465}
+  - component: {fileID: 6300771131964585442}
+  - component: {fileID: 8854395553208122573}
   m_Layer: 0
   m_Name: Pirat
   m_TagString: Enemy
@@ -98,7 +100,7 @@ Transform:
   m_GameObject: {fileID: 4711174258340900471}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 26.5, y: -2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,8 +226,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnComponent
   spawnPosition: {fileID: 169475425252795711}
+  controller: {fileID: 0}
   spawnOffset: {x: 0, y: -0.1, z: 0}
   prefab: {fileID: 0}
+  shootForce: 10
 --- !u!70 &6166109296336319690
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -275,7 +279,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c04c8f2e52a74896136299e7eaa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPComponent
-  HPLabel: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -291,12 +294,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hurt
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeal:
     m_PersistentCalls:
       m_Calls: []
   onDie:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Die
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 147636780597896465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
         m_MethodName: OnDie
@@ -321,6 +348,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  HP: 0
   maxHP: 50
 --- !u!114 &4849606171689534937
 MonoBehaviour:
@@ -334,7 +362,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
-  _objectToDestroy: {fileID: 4711174258340900471}
 --- !u!114 &147636780597896465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,28 +374,175 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 088e5f9357667a340a2847d2e737beaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
+  spawner: {fileID: 0}
   runParticles: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
   jumpParticles: {fileID: 445565870571551919, guid: a891b539975f74e4f883811ee6c9ba9d, type: 3}
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 4fa7e3690a2eedc4a860c94e6e250993, type: 3}
+  projectile: {fileID: 0}
   velocity: 3
-  jumpForce: 5
+  jumpForce: 5.2
   armRadius: 1
+  attackCooldown: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  onJump:
+    m_PersistentCalls:
+      m_Calls: []
+  onMeleeAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Melee
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRangeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  onRayAttack:
+    m_PersistentCalls:
+      m_Calls: []
   isRunning: 0
   isGrounded: 0
   isJumping: 0
   facingRight: 1
   didAttack: 0
-  damage: 5
-  attackCooldown: 1
   lastAttackTime: 0
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  damage: 5
+  damageIncrease: 1
+  attackMode: 0
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
   detectionRange: 5
+--- !u!114 &6300771131964585442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711174258340900471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  playSoundCooldown: 0
+  sounds:
+  - _id: Hurt
+    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
+  - _id: Melee
+    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
+  - _id: Die
+    _clip: {fileID: 8300000, guid: 90bb8a3eb5f0c834b94ce6a77c268043, type: 3}
+--- !u!82 &8854395553208122573
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711174258340900471}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 0.2
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7664301588655417999
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,7 +568,7 @@ Transform:
   m_GameObject: {fileID: 7664301588655417999}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 30, y: -2.5, z: 0}
+  m_LocalPosition: {x: 2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

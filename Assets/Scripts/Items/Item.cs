@@ -12,10 +12,6 @@ public class Item : ScriptableObject
     public GameObject modelPrefab; // <- теперь префаб, а не ссылка на сцену
     protected GameObject modelInstance;
 
-    public virtual void Use()
-    {
-        // Действие при использовании (например, съесть или выстрелить)
-    }
 
     public void Select()
     {
@@ -42,7 +38,6 @@ public class Item : ScriptableObject
             modelInstance.name = $"{Name}_InHand";
             modelInstance.transform.SetParent(hand);
             modelInstance.transform.localPosition = Vector3.zero;
-            modelInstance.transform.localRotation = Quaternion.identity;
         }
         // Обновляем позицию, если модель уже создана
         if (modelInstance != null) {
@@ -50,6 +45,7 @@ public class Item : ScriptableObject
             localScale.Normalize();
             offset.x *= localScale.x;
             modelInstance.transform.position = hand.position + offset;
+            modelInstance.transform.rotation = hand.rotation;
         }
         
     }
