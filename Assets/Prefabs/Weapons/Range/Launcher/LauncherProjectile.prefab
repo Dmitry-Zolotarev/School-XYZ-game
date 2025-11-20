@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 290263425227712528}
   - component: {fileID: -4122949604797555446}
   - component: {fileID: -4263759415381829620}
+  - component: {fileID: 7516379287383548443}
   m_Layer: 0
   m_Name: LauncherProjectile
   m_TagString: Untagged
@@ -245,3 +246,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7516379287383548443
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2808415219190108505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbd4b1a2f8aa8264ebfdcbdc9100ae49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ProjectileComponent

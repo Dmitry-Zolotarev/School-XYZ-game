@@ -12,20 +12,17 @@ public class EntityController : MonoBehaviour
 
     private Rigidbody2D rb;
     private Animator animator;
-    public SpawnComponent spawner;
-    [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles, projectile;
+    [HideInInspector] public SpawnComponent spawner;
+    [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
+    private GameObject projectile;
     [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f, attackCooldown = 0.5f;
 
     [SerializeField] protected LayerMask groundLayer;
-    [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack, onRayAttack;
-
+    
 
     [HideInInspector]public bool isRunning, isGrounded, isJumping, facingRight = true, didAttack = false;
     [HideInInspector]public float lastAttackTime = 0, armRadiusIncrease = 0, attackCooldownScale = 1f;
-    private int jumpCount;
-    
-
-    public int damage = 5, damageIncrease = 1;
+    private int jumpCount; 
     
 
     private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
@@ -35,8 +32,13 @@ public class EntityController : MonoBehaviour
     private static readonly int AnimatorMelee = Animator.StringToHash("Melee");
     private static readonly int AnimatorRange = Animator.StringToHash("RangeShot");
     private static readonly int AnimatorRayShot = Animator.StringToHash("RayShot");
-    public enum AttackModes { Melee, Range, Ray };
-    public int attackMode = (int)AttackModes.Melee;
+
+    private enum AttackModes { Melee, Range, Ray };
+    [HideInInspector]public int attackMode = (int)AttackModes.Melee;
+
+    public int damage = 5, damageIncrease = 1;
+    [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack, onRayAttack;
+
     protected void Start()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 4325253223688249018}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: -2.5, z: 0}
+  m_LocalPosition: {x: -2, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -229,7 +229,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spawnOffset: {x: 0, y: -0.1, z: 0}
   prefab: {fileID: 0}
-  shootForce: 10
 --- !u!70 &6166109296336319690
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -380,7 +379,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 4fa7e3690a2eedc4a860c94e6e250993, type: 3}
-  projectile: {fileID: 0}
   velocity: 3
   jumpForce: 5.2
   armRadius: 1
@@ -388,6 +386,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isRunning: 0
+  isGrounded: 0
+  isJumping: 0
+  facingRight: 1
+  didAttack: 0
+  lastAttackTime: 0
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  attackMode: 0
+  damage: 5
+  damageIncrease: 1
   onJump:
     m_PersistentCalls:
       m_Calls: []
@@ -412,17 +421,6 @@ MonoBehaviour:
   onRayAttack:
     m_PersistentCalls:
       m_Calls: []
-  isRunning: 0
-  isGrounded: 0
-  isJumping: 0
-  facingRight: 1
-  didAttack: 0
-  lastAttackTime: 0
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  damage: 5
-  damageIncrease: 1
-  attackMode: 0
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
   detectionRange: 5

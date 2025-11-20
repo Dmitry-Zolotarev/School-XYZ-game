@@ -676,11 +676,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 943df5834d9a63e4caec6841aa3e37b2, type: 3}
---- !u!4 &237583531 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8199040796088032942, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-  m_PrefabInstance: {fileID: 2160062340807170970}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &264027267
 GameObject:
   m_ObjectHideFlags: 0
@@ -1146,7 +1141,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 4fa7e3690a2eedc4a860c94e6e250993, type: 3}
-  projectile: {fileID: 0}
   velocity: 3
   jumpForce: 5.2
   armRadius: 1
@@ -1154,6 +1148,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isRunning: 0
+  isGrounded: 0
+  isJumping: 0
+  facingRight: 1
+  didAttack: 0
+  lastAttackTime: 0
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  attackMode: 0
+  damage: 5
+  damageIncrease: 1
   onJump:
     m_PersistentCalls:
       m_Calls: []
@@ -1178,18 +1183,7 @@ MonoBehaviour:
   onRayAttack:
     m_PersistentCalls:
       m_Calls: []
-  isRunning: 0
-  isGrounded: 0
-  isJumping: 0
-  facingRight: 1
-  didAttack: 0
-  lastAttackTime: 0
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  damage: 5
-  damageIncrease: 1
-  attackMode: 0
-  leftPoint: {fileID: 237583531}
+  leftPoint: {fileID: 8199040795940717065}
   rightPoint: {fileID: 1796623811}
   detectionRange: 5
 --- !u!114 &516271411
@@ -1340,7 +1334,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spawnOffset: {x: 0, y: -0.1, z: 0}
   prefab: {fileID: 0}
-  shootForce: 10
 --- !u!50 &516271415
 Rigidbody2D:
   serializedVersion: 5
@@ -4415,7 +4408,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 4fa7e3690a2eedc4a860c94e6e250993, type: 3}
-  projectile: {fileID: 0}
   velocity: 3
   jumpForce: 5.2
   armRadius: 1
@@ -4423,6 +4415,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isRunning: 0
+  isGrounded: 0
+  isJumping: 0
+  facingRight: 1
+  didAttack: 0
+  lastAttackTime: 0
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  attackMode: 0
+  damage: 5
+  damageIncrease: 1
   onJump:
     m_PersistentCalls:
       m_Calls: []
@@ -4447,19 +4450,8 @@ MonoBehaviour:
   onRayAttack:
     m_PersistentCalls:
       m_Calls: []
-  isRunning: 0
-  isGrounded: 0
-  isJumping: 0
-  facingRight: 1
-  didAttack: 0
-  lastAttackTime: 0
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  damage: 5
-  damageIncrease: 1
-  attackMode: 0
-  leftPoint: {fileID: 237583531}
-  rightPoint: {fileID: 1796623811}
+  leftPoint: {fileID: 8199040795702960287}
+  rightPoint: {fileID: 4393879767510664048}
   detectionRange: 5
 --- !u!114 &2026157043
 MonoBehaviour:
@@ -4609,7 +4601,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spawnOffset: {x: 0, y: -0.1, z: 0}
   prefab: {fileID: 0}
-  shootForce: 10
 --- !u!50 &2026157047
 Rigidbody2D:
   serializedVersion: 5
@@ -9662,39 +9653,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7471592735809129057, guid: 40b971fb8cc057245a3e9928d2c6deec, type: 3}
   m_PrefabInstance: {fileID: 1598619268}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2144682685 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-  m_PrefabInstance: {fileID: 2160062340807170970}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 088e5f9357667a340a2847d2e737beaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyController
---- !u!114 &2144682686 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4849606171689534937, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-  m_PrefabInstance: {fileID: 2160062340807170970}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
---- !u!114 &2144682693 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6300771131964585442, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-  m_PrefabInstance: {fileID: 2160062340807170970}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
 --- !u!1 &637264370305876127
 GameObject:
   m_ObjectHideFlags: 0
@@ -9772,48 +9730,8 @@ PrefabInstance:
     m_TransformParent: {fileID: 853951834}
     m_Modifications:
     - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: jumpForce
-      value: 5.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      propertyPath: detectionRange
       value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2144682693}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlaySoundsComponent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Melee
-      objectReference: {fileID: 0}
-    - target: {fileID: 147636780597896465, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 169475425252795711, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 169475425252795711, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 637264371262725176, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
       propertyPath: m_Name
@@ -9858,110 +9776,6 @@ PrefabInstance:
     - target: {fileID: 1428455411254460405, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 2144682693}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2144682685}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_Target
-      value: 
-      objectReference: {fileID: 2144682686}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Target
-      value: 
-      objectReference: {fileID: 2144682693}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: OnDie
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: DestroyObject
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: Play
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlaySoundsComponent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: EnemyController, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
-      value: DestroyObjectComponent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: PlaySoundsComponent, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: Die
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: Hurt
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDie.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 3925749315796207489, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: onDamage.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
-      value: UnityEngine.Object, UnityEngine
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393879766889086273, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4393879766889086273, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8199040796088032942, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2
       objectReference: {fileID: 0}
     - target: {fileID: 8199040796088032942, guid: d9c35f9651f5e154f8876e835c020af6, type: 3}
       propertyPath: m_LocalPosition.y

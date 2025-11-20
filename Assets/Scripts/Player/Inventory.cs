@@ -98,9 +98,9 @@ public class Inventory : MonoBehaviour
         {
             Range rangeWeapon = item as Range;
             entityController.attackMode = 1;
+            rangeWeapon.chargeProjectile();
             entityController.SetProjectile(rangeWeapon.projectile);
-            entityController.attackCooldownScale = rangeWeapon.attackCooldownScale;
-            entityController.spawner.shootForce = rangeWeapon.shootForce;
+            entityController.attackCooldownScale = 1f / rangeWeapon.fireRate;
         }       
     }
 }
