@@ -8,12 +8,12 @@
             "actions": [
                 {
                     "name": "MoveHorizontal",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "0f355cc7-7796-4e03-8be8-c17016429c03",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Jump",
@@ -130,21 +130,10 @@
                 },
                 {
                     "name": "",
-                    "id": "9830fb27-1035-4266-9698-d8d532679b58",
-                    "path": "<Keyboard>/0",
-                    "interactions": "",
-                    "processors": "Scale(factor=0)",
-                    "groups": "",
-                    "action": "SelectItem",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cb48dde1-3d07-4c4c-99a6-be8199a7ccd7",
                     "path": "<Keyboard>/1",
                     "interactions": "",
-                    "processors": "Scale",
+                    "processors": "Scale(factor=0)",
                     "groups": "",
                     "action": "SelectItem",
                     "isComposite": false,
@@ -155,7 +144,7 @@
                     "id": "e706ed06-b3f2-4b04-a2b0-e00269e87b58",
                     "path": "<Keyboard>/2",
                     "interactions": "",
-                    "processors": "Scale(factor=2)",
+                    "processors": "Scale",
                     "groups": "",
                     "action": "SelectItem",
                     "isComposite": false,
@@ -166,7 +155,7 @@
                     "id": "2fcd6cbf-476f-48df-be01-fce52ffe35d5",
                     "path": "<Keyboard>/3",
                     "interactions": "",
-                    "processors": "Scale(factor=3)",
+                    "processors": "Scale(factor=2)",
                     "groups": "",
                     "action": "SelectItem",
                     "isComposite": false,
@@ -176,6 +165,17 @@
                     "name": "",
                     "id": "374cc4cb-164d-454e-ab2b-107ad7927525",
                     "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "",
+                    "action": "SelectItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "71e6e133-8900-41bb-8285-336102f8f2f7",
+                    "path": "<Keyboard>/5",
                     "interactions": "",
                     "processors": "Scale(factor=4)",
                     "groups": "",

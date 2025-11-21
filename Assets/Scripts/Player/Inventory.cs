@@ -1,4 +1,6 @@
-﻿using System;
+﻿using JetBrains.Annotations;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -17,8 +19,8 @@ public class Inventory : MonoBehaviour
         Items = new Item[size];
         animator = GetComponent<Animator>();
         entityController = GetComponent<EntityController>();
+        SelectItem(0);
     }
-
     private void FixedUpdate()
     {
         if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);     
@@ -28,18 +30,13 @@ public class Inventory : MonoBehaviour
         while (i < 0) i += hotbarSize;
         if (i >= hotbarSize) i %= hotbarSize;
 
-        // СНАЧАЛА выключаем ПРЕДЫДУЩИЙ предмет
         var old = Items[selectedSlot];
         if (old != null) old.Deselect();
 
         selectedSlot = i;
-
         var item = Items[selectedSlot];
-
         CheckWeapon(item);
-
         ItemsChanged?.Invoke();
-
         if (item != null) item.Select();
     }
 
@@ -48,43 +45,24 @@ public class Inventory : MonoBehaviour
         if (delta > 0) SelectItem(selectedSlot + 1);
         if (delta < 0) SelectItem(selectedSlot - 1);
     }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        var pickup = other.GetComponent<ItemPickup>();
-        if (pickup == null || pickup.item == null) return;
-        pickup.isPicked = true;
-        if (PickItem(pickup.item)) Destroy(other.gameObject);
-    }
-    
     public bool PickItem(Item item)
     {
         if (item == null) return false;
 
         Item newItem = Instantiate(item);
-
-        // Привязываем модель к игроку
         newItem.Attach(itemHand);
 
-        // Проверка на стак
         for (int i = 0; i < size; i++)
         {
             if (Items[i] != null && Items[i].Name == newItem.Name)
             {
-                if (Items[i].isStackable)
-                {
-                    Items[i].count += newItem.count;
-                    ItemsChanged?.Invoke();
-                    return true;
-                }
-                else return false;
+                Items[i].count += newItem.count;
+                ItemsChanged?.Invoke();
+                return true;
             }
-        }
-        // Ищем пустой слот
-        for (int i = 0; i < size; i++)
-        {
-            if (Items[i] == null)
+            else if (Items[i] == null)
             {
-                Items[i] = newItem;      
+                Items[i] = newItem;
                 SelectItem(i);
                 return true;
             }
@@ -109,6 +87,13 @@ public class Inventory : MonoBehaviour
             rangeWeapon.chargeProjectile();
             entityController.SetProjectile(rangeWeapon.projectile);
             entityController.attackCooldownScale = 1f / rangeWeapon.fireRate;
+        }
+        else if (item is RayGun rayGun)
+        {
+            entityController.attackMode = 2;
+            entityController.SetRay(rayGun.rayModel);
+            entityController.damageIncrease = rayGun.damageIncrease;
+            entityController.attackCooldownScale = 1f / rayGun.fireRate;
         }
     }
 }

@@ -49,8 +49,8 @@ public class InventoryWindow : MonoBehaviour
                 if (img != null) img.sprite = item.Icon;
 
                 Text txt = icon.GetComponentInChildren<Text>();
-                if (txt != null)
-                    txt.text = (item.isStackable && item.count > 1) ? item.count.ToString() : "";
+                if (txt != null && !item.IsWeapon()) txt.text = item.count.ToString();
+
 
                 drawIcons.Add(icon);
             }
@@ -89,23 +89,26 @@ public class InventoryWindow : MonoBehaviour
             image.sprite = item.Icon;
             image.preserveAspect = true;
 
-            GameObject textGO = new GameObject("CountText", typeof(RectTransform));
-            textGO.transform.SetParent(icon.transform, false);
+            if(item.count > 1)
+            {
+                GameObject textGO = new GameObject("CountText", typeof(RectTransform));
+                textGO.transform.SetParent(icon.transform, false);
 
-            RectTransform textRect = textGO.GetComponent<RectTransform>();
-            textRect.anchorMin = textRect.anchorMax = new Vector2(1f, 0f);
-            textRect.anchoredPosition = new Vector2(-2, 2);
-            textRect.sizeDelta = new Vector2(40, 20);
+                RectTransform textRect = textGO.GetComponent<RectTransform>();
+                textRect.anchorMin = new Vector2(0.5f, 0.5f);
+                textRect.anchorMax = new Vector2(0.5f, 0.5f);
+                textRect.sizeDelta = Vector2.zero;
+                textRect.anchoredPosition = new Vector2(14, -14);
 
-            Text countText = textGO.AddComponent<Text>();
-            countText.alignment = TextAnchor.LowerRight;
-            countText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-            countText.color = Color.black;
-            countText.fontSize = 18;
-            countText.horizontalOverflow = HorizontalWrapMode.Overflow;
-            countText.verticalOverflow = VerticalWrapMode.Overflow;
-
-            if (item.isStackable && item.count > 1) countText.text = item.count.ToString();
+                Text countText = textGO.AddComponent<Text>();
+                countText.alignment = TextAnchor.LowerRight;
+                countText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+                countText.color = Color.black;
+                countText.fontSize = 12;
+                countText.horizontalOverflow = HorizontalWrapMode.Overflow;
+                countText.verticalOverflow = VerticalWrapMode.Overflow;
+                countText.text = item.count.ToString();
+            }
         }       
         return icon;
     }

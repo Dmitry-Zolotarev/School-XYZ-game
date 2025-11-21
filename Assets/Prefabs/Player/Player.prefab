@@ -143,7 +143,6 @@ GameObject:
   - component: {fileID: 4867548481547804224}
   - component: {fileID: 6265524689735574845}
   - component: {fileID: 8937964369943679714}
-  - component: {fileID: 9206138700421647767}
   - component: {fileID: 8132036216841527231}
   - component: {fileID: 8341137970847974359}
   - component: {fileID: 870657750649178154}
@@ -306,10 +305,10 @@ MonoBehaviour:
     m_ActionName: 'Player Actions/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8059510020390876107}
-        m_TargetAssemblyTypeName: PauseComponent, Assembly-CSharp
-        m_MethodName: Pause
-        m_Mode: 1
+      - m_Target: {fileID: 5802485249887677371}
+        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
+        m_MethodName: SelectItem
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -318,10 +317,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 668a4060-7305-4f10-a850-d33b78d5e072
-    m_ActionName: 'Player Actions/Pause[/Keyboard/escape]'
-  - m_PersistentCalls:
-      m_Calls: []
     m_ActionId: f8664dc6-f433-4031-85ee-0d8e8c0bb816
     m_ActionName: 'Player Actions/SelectItem[/Keyboard/0,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]'
   - m_PersistentCalls:
@@ -467,41 +462,6 @@ MonoBehaviour:
   controller: {fileID: 0}
   spawnOffset: {x: 0, y: 0.15, z: 0}
   prefab: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
-  shootForce: 10
---- !u!114 &9206138700421647767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb219fb90c5ea604a8b9e25479da995a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WalletComponent
-  coinParticles: {fileID: 7546759974662920432, guid: a0f5b2923738ece4daedd61c75d261a7, type: 3}
-  silverCoinValue: 1
-  goldenCoinValue: 5
-  coinAmount: 0
-  onDrop:
-    m_PersistentCalls:
-      m_Calls: []
-  onGetCoin:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2589976012273206197}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Coin
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8132036216841527231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,7 +480,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
-  projectile: {fileID: 0}
   velocity: 5
   jumpForce: 5.2
   armRadius: 1
@@ -528,6 +487,17 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  isRunning: 0
+  isGrounded: 0
+  isJumping: 0
+  facingRight: 1
+  didAttack: 0
+  lastAttackTime: 0
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  attackMode: 0
+  damage: 5
+  damageIncrease: 1
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -576,17 +546,6 @@ MonoBehaviour:
   onRayAttack:
     m_PersistentCalls:
       m_Calls: []
-  isRunning: 0
-  isGrounded: 0
-  isJumping: 0
-  facingRight: 1
-  didAttack: 0
-  lastAttackTime: 0
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  damage: 5
-  damageIncrease: 1
-  attackMode: 0
 --- !u!114 &8341137970847974359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -780,7 +739,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22626495, y: 0.23778713, z: -4.8289976}
+  m_LocalPosition: {x: 2.789475, y: 2.2041173, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -1,16 +1,14 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.Events;
 
 public class HPComponent : MonoBehaviour
 {
     public UnityEvent onDamage, onHeal, onDie;
     [HideInInspector] public int HP;
-    private WalletComponent wallet;
     public int maxHP = 100;
     private void Awake() {
         HP = maxHP;
-        wallet = GetComponent<WalletComponent>();
+ 
     }
     public void ApplyDamage(int damage)
     {
@@ -19,8 +17,6 @@ public class HPComponent : MonoBehaviour
         onDamage?.Invoke();
 
         if (HP <= 0) onDie?.Invoke();
-
-        if (wallet != null && HP <= maxHP / 2) wallet.DropAllCoins();
     }
     public int Heal(int healing)
     {

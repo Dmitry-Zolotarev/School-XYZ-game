@@ -5,20 +5,21 @@ public class Item : ScriptableObject
 {
     [Header("Base Info")]
     public string Name;
-    public bool isStackable = false;
     public int count = 1;
     public Sprite Icon;
     [Header("Model")]
     public GameObject modelPrefab; // <- теперь префаб, а не ссылка на сцену
     protected GameObject modelInstance;
 
-
+    public bool IsWeapon()
+    {
+        return this is Melee || this is Range || this is RayGun;
+    }
     public void Select()
     {
         if (modelInstance != null) modelInstance.SetActive(true);
 
     }
-
     public void Deselect()
     {
         if (modelInstance != null) modelInstance.SetActive(false);

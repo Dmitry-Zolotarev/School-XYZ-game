@@ -15,6 +15,7 @@ public class EntityController : MonoBehaviour
     [HideInInspector] public SpawnComponent spawner;
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, attackParticles, hitParticles;
     private GameObject projectile;
+    private LineRenderer laserRay;
     [SerializeField] protected float velocity = 1f, jumpForce = 7f, armRadius = 0.5f, attackCooldown = 0.5f;
 
     [SerializeField] protected LayerMask groundLayer;
@@ -31,13 +32,12 @@ public class EntityController : MonoBehaviour
     private static readonly int AnimatorHit = Animator.StringToHash("Hit");
     private static readonly int AnimatorMelee = Animator.StringToHash("Melee");
     private static readonly int AnimatorRange = Animator.StringToHash("RangeShot");
-    private static readonly int AnimatorRayShot = Animator.StringToHash("RayShot");
 
     private enum AttackModes { Melee, Range, Ray };
     [HideInInspector]public int attackMode = (int)AttackModes.Melee;
 
     public int damage = 5, damageIncrease = 1;
-    [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack, onRayAttack;
+    [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack;
 
     protected void Start()
     {
@@ -47,6 +47,7 @@ public class EntityController : MonoBehaviour
         if (tag != "Player") SetDirection(1);
     }
     public void SetProjectile(GameObject _projectile) => projectile = _projectile;
+    public void SetRay(LineRenderer ray) => laserRay = ray;
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;
@@ -190,7 +191,32 @@ public class EntityController : MonoBehaviour
     {
         yield return new WaitForSeconds(attackCooldown * attackCooldownScale);
 
-        animator.SetTrigger(AnimatorRayShot);
-        onRayAttack?.Invoke();
+        animator.SetTrigger(AnimatorRange);
+        onRangeAttack?.Invoke();
+
+        float maxDistance = 999f;            
+        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
+        Vector2 origin = (Vector2)transform.position + direction + Vector2.up / 2;
+        // Делаем луч
+        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, maxDistance);
+        Debug.Log(laserRay);
+        // Визуализация луча (если есть LineRenderer)
+        if (laserRay != null)
+        {
+            laserRay.positionCount = 2;
+            laserRay.SetPosition(0, origin);
+            laserRay.SetPosition(1, origin + direction * maxDistance);
+            laserRay.enabled = true;
+            yield return new WaitForSeconds(0.5f);   // короткая вспышка
+            laserRay.enabled = false;
+        }
+        // Наносим урон всем врагам
+        foreach (var hit in hits)
+        {
+            if (hit.collider == null) continue;
+            var target = hit.collider.GetComponent<HPComponent>();
+            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage * damageIncrease);
+        }
     }
+
 }

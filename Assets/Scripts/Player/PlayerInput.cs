@@ -42,6 +42,6 @@ public class PlayerInput : MonoBehaviour
 
     public void SelectItem(InputAction.CallbackContext context)
     {
-        if (context.performed) inventory.SelectItem((int)context.ReadValue<float>() - 1);
+        if (context.performed) inventory.SelectItem((int)context.ReadValue<float>());
     }
 }

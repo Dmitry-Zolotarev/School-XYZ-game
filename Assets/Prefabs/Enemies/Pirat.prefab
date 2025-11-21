@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
+  latency: 0.5
 --- !u!114 &147636780597896465
 MonoBehaviour:
   m_ObjectHideFlags: 0
