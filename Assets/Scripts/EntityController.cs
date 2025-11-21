@@ -176,11 +176,12 @@ public class EntityController : MonoBehaviour
     }
     private IEnumerator RangeAttack()
     {
-        animator.SetTrigger(AnimatorRange);
+        animator.SetTrigger(AnimatorRange);   
+        yield return new WaitForSeconds(attackCooldown * attackCooldownScale / 3f);
         onRangeAttack?.Invoke();
-        yield return new WaitForSeconds(attackCooldown * attackCooldownScale / 2f);
         if (projectile != null)
         {  
+            
             spawner.prefab = projectile;
             spawner.Spawn();
         }    

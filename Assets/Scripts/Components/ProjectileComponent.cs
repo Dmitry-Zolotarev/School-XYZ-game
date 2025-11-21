@@ -20,7 +20,7 @@ public class ProjectileComponent : MonoBehaviour
 
             rigidbody.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);
         }
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         var collider = GetComponent<Collider2D>();
         collider.isTrigger = false;
     }

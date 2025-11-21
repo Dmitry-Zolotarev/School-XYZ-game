@@ -1,23 +1,30 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 [RequireComponent(typeof(GridLayoutGroup))]
 public class InventoryWindow : MonoBehaviour
 {
-    
     [SerializeField] private Inventory inventory;
-    [SerializeField] private GameObject itemIconPrefab; 
+    [SerializeField] private GameObject itemIconPrefab;
+
     private List<GameObject> drawIcons = new List<GameObject>();
     private GridLayoutGroup grid;
-    
 
     private void Start()
     {
-        if (inventory == null) inventory = FindAnyObjectByType<Inventory>();
         grid = GetComponent<GridLayoutGroup>();
+        FindInventory();
+        ReDraw();
+    }
+
+    private void FindInventory()
+    {
+        if (inventory == null) inventory = FindAnyObjectByType<Inventory>();
         inventory.ItemsChanged += ReDraw;
     }
+
     private void OnDestroy()
     {
         if (inventory != null) inventory.ItemsChanged -= ReDraw;
@@ -25,85 +32,81 @@ public class InventoryWindow : MonoBehaviour
 
     private void ReDraw()
     {
-        if (grid == null) return;
-
-        foreach (var icon in drawIcons) Destroy(icon);
-
-        drawIcons.Clear();
-
-        int i = 0;
-        foreach (var item in inventory.Items)
+        if (grid != null) 
         {
-            if (i >= inventory.hotbarSize || item == null) break;
+            foreach (var icon in drawIcons) Destroy(icon);
+            drawIcons.Clear();
 
-            GameObject icon = CreateSimpleIcon(item, i == inventory.selectedSlot);
+            int count = Mathf.Min(inventory.hotbarSize, inventory.Items.Length);
 
-            Image img = icon.GetComponent<Image>();
-            if (img != null) img.sprite = item.Icon;          
+            for (int i = 0; i < count; i++)
+            {
+                var item = inventory.Items[i];
 
-            Text txt = icon.GetComponentInChildren<Text>();
+                GameObject icon = GetIcon(item, i == inventory.selectedSlot);
 
-            if (txt != null) txt.text = (item.isStackable && item.count > 1) ? item.count.ToString() : "";
+                Image img = icon.GetComponent<Image>();
+                if (img != null) img.sprite = item.Icon;
 
-            drawIcons.Add(icon);
-            i++;
-        }
+                Text txt = icon.GetComponentInChildren<Text>();
+                if (txt != null)
+                    txt.text = (item.isStackable && item.count > 1) ? item.count.ToString() : "";
+
+                drawIcons.Add(icon);
+            }
+        }    
     }
-
-    private GameObject CreateSimpleIcon(Item item, bool isSelected)
+    private GameObject GetIcon(Item item, bool isSelected)
     {
         GameObject icon = new GameObject("ItemIcon", typeof(RectTransform));
         icon.transform.SetParent(grid.transform, false);
 
         RectTransform iconRect = icon.GetComponent<RectTransform>();
-        iconRect.anchorMin = Vector2.zero;
-        iconRect.anchorMax = Vector2.one;
-        iconRect.offsetMin = Vector2.zero;
-        iconRect.offsetMax = Vector2.zero;
+        iconRect.anchorMin = new Vector2(0.5f, 0.5f);
+        iconRect.anchorMax = new Vector2(0.5f, 0.5f);
+        iconRect.sizeDelta = new Vector2(36, 36);
+        iconRect.anchoredPosition = Vector2.zero;
 
-        // --- Квадрат выделения (если выбран) ---
         if (isSelected)
         {
             GameObject overlayGO = new GameObject("Overlay", typeof(RectTransform));
             overlayGO.transform.SetParent(icon.transform, false);
 
             Image overlay = overlayGO.AddComponent<Image>();
-            overlay.color = new Color(0.3f, 0.3f, 0.1f, 0.2f);  // прозрачный белый
+            overlay.color = new Color(0.3f, 0.3f, 0.1f, 0.3f);
+
             RectTransform overlayRect = overlayGO.GetComponent<RectTransform>();
             overlayRect.anchorMin = Vector2.zero;
             overlayRect.anchorMax = Vector2.one;
             overlayRect.offsetMin = Vector2.zero;
             overlayRect.offsetMax = Vector2.zero;
 
-            // Отправляем overlay на задний план
             overlayGO.transform.SetAsFirstSibling();
         }
+        if(item != null)
+        {
+            Image image = icon.AddComponent<Image>();
+            image.sprite = item.Icon;
+            image.preserveAspect = true;
 
-        // --- Иконка предмета ---Сделай Scale до 48x48 пикселей
-        Image image = icon.AddComponent<Image>();     
-        image.sprite = item.Icon;        
-        image.preserveAspect = true;
+            GameObject textGO = new GameObject("CountText", typeof(RectTransform));
+            textGO.transform.SetParent(icon.transform, false);
 
-        // Текст для количества
-        GameObject textGO = new GameObject("CountText", typeof(RectTransform));
-        textGO.transform.SetParent(icon.transform, false);
+            RectTransform textRect = textGO.GetComponent<RectTransform>();
+            textRect.anchorMin = textRect.anchorMax = new Vector2(1f, 0f);
+            textRect.anchoredPosition = new Vector2(-2, 2);
+            textRect.sizeDelta = new Vector2(40, 20);
 
-        RectTransform textRect = textGO.GetComponent<RectTransform>();
-        textRect.anchorMin = Vector2.zero;
-        textRect.anchorMax = Vector2.one;
-        textRect.offsetMin = Vector2.zero;
-        textRect.offsetMax = Vector2.zero;
+            Text countText = textGO.AddComponent<Text>();
+            countText.alignment = TextAnchor.LowerRight;
+            countText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            countText.color = Color.black;
+            countText.fontSize = 18;
+            countText.horizontalOverflow = HorizontalWrapMode.Overflow;
+            countText.verticalOverflow = VerticalWrapMode.Overflow;
 
-        Text countText = textGO.AddComponent<Text>();
-        countText.alignment = TextAnchor.LowerRight;
-        countText.font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
-        countText.color = Color.black;
-        countText.raycastTarget = false;
-        countText.fontSize = 18;
-        countText.horizontalOverflow = HorizontalWrapMode.Overflow;
-        countText.verticalOverflow = VerticalWrapMode.Overflow;
-        if (item.isStackable && item.count > 1) countText.text = item.count.ToString();
-
+            if (item.isStackable && item.count > 1) countText.text = item.count.ToString();
+        }       
         return icon;
     }
 }

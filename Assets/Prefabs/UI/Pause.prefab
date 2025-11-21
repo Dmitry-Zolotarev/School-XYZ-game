@@ -199,7 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: e82ad4e2f2567f947871a78283de0b2a, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: e37a4f372d748484588fb5dd7c23044f, type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -213,27 +213,11 @@ MonoBehaviour:
       m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 0f355cc7-7796-4e03-8be8-c17016429c03
-    m_ActionName: 'Player Actions/MoveHorizontal[/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: ab4276fd-c486-41ee-bf7a-337a45f29646
-    m_ActionName: 'Player Actions/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a8c6de09-900f-46d3-9e57-b8bb83e8d182
-    m_ActionName: 'Player Actions/Attack[/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: 3810206c-2239-488b-8f70-1e99e458d806
-    m_ActionName: 'Player Actions/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 8329544158505686636}
         m_TargetAssemblyTypeName: PauseComponent, Assembly-CSharp
-        m_MethodName: OnPausePerformed
-        m_Mode: 0
+        m_MethodName: Pause
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -242,11 +226,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 668a4060-7305-4f10-a850-d33b78d5e072
-    m_ActionName: 'Player Actions/Pause[/Keyboard/escape]'
+    m_ActionId: ae07a22d-37a1-42bc-af00-4d21e1a8840a
+    m_ActionName: 'Pause Action/Pause[/Keyboard/escape]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Player Actions
+  m_DefaultActionMap: Pause Action
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!1 &5493517269401414332

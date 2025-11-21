@@ -26,18 +26,27 @@ public class Inventory : MonoBehaviour
     public void SelectItem(int i)
     {
         while (i < 0) i += hotbarSize;
-        if (i > hotbarSize) i %= hotbarSize;
+        if (i >= hotbarSize) i %= hotbarSize;
+
+        // СНАЧАЛА выключаем ПРЕДЫДУЩИЙ предмет
+        var old = Items[selectedSlot];
+        if (old != null) old.Deselect();
 
         selectedSlot = i;
-        if (Items[i] != null) Items[i].Deselect();
-        CheckWeapon(Items[i]);
+
+        var item = Items[selectedSlot];
+
+        CheckWeapon(item);
+
         ItemsChanged?.Invoke();
-        Items[i].Select();
+
+        if (item != null) item.Select();
     }
+
     public void ScrollItem(float delta)
     {
-        if (delta > 0 && selectedSlot < size) SelectItem(selectedSlot + 1);
-        if (delta < 0 && selectedSlot > 0) SelectItem(selectedSlot - 1);
+        if (delta > 0) SelectItem(selectedSlot + 1);
+        if (delta < 0) SelectItem(selectedSlot - 1);
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -84,23 +93,22 @@ public class Inventory : MonoBehaviour
     }
     private void CheckWeapon(Item item)
     {
+        entityController.attackMode = 0;
         entityController.damageIncrease = 1;
         entityController.armRadiusIncrease = 0f;
         entityController.attackCooldownScale = 1f;
 
-        if (item is Melee)
+        if (item is Melee meleeWeapon)
         {
-            Melee meleeWeapon = item as Melee;            
             entityController.damageIncrease = meleeWeapon.damageIncrease;
             entityController.armRadiusIncrease = meleeWeapon.armRadiusIncrease;
         }
-        else if (item is Range)
+        else if (item is Range rangeWeapon)
         {
-            Range rangeWeapon = item as Range;
             entityController.attackMode = 1;
             rangeWeapon.chargeProjectile();
             entityController.SetProjectile(rangeWeapon.projectile);
             entityController.attackCooldownScale = 1f / rangeWeapon.fireRate;
-        }       
+        }
     }
 }
