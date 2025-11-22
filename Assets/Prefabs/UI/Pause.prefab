@@ -501,7 +501,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8329544158505686636}
         m_TargetAssemblyTypeName: PauseComponent, Assembly-CSharp
         m_MethodName: Pause
         m_Mode: 1

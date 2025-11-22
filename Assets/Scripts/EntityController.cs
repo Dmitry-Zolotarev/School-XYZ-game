@@ -6,6 +6,8 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(SpawnComponent))]
+[RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(HPComponent))]
 public class EntityController : MonoBehaviour
 {
     protected float direction = 0;
@@ -29,9 +31,13 @@ public class EntityController : MonoBehaviour
     private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
     private static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
     private static readonly int AnimatorIsRunning = Animator.StringToHash("IsRunning");
-    private static readonly int AnimatorHit = Animator.StringToHash("Hit");
-    private static readonly int AnimatorMelee = Animator.StringToHash("Melee");
+    
+    
     private static readonly int AnimatorRange = Animator.StringToHash("RangeShot");
+    private static readonly int AnimatorMelee = Animator.StringToHash("Melee");
+    
+    private static readonly int AnimatorHit = Animator.StringToHash("Hit");
+    private static readonly int AnimatorDie = Animator.StringToHash("Die");
 
     private enum AttackModes { Melee, Range, Ray };
     [HideInInspector]public int attackMode = (int)AttackModes.Melee;
@@ -39,15 +45,22 @@ public class EntityController : MonoBehaviour
     public int damage = 5, damageIncrease = 1;
     [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack;
 
+    protected static HPComponent health;
+    protected static Inventory inventory;
+
     protected void Start()
     {
+        if (tag != "Player") SetDirection(1);
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spawner = GetComponent<SpawnComponent>();
-        if (tag != "Player") SetDirection(1);
+        laserRay = GetComponent<LineRenderer>();
+        inventory = GetComponent<Inventory>();
+        health = GetComponent<HPComponent>();
+        laserRay.enabled = false;
+        
     }
     public void SetProjectile(GameObject _projectile) => projectile = _projectile;
-    public void SetRay(LineRenderer ray) => laserRay = ray;
     public void SetPosition(Vector3 pos)
     {
         transform.position = pos;
@@ -73,10 +86,9 @@ public class EntityController : MonoBehaviour
         if (jumpCount < 1)
         {
             rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
-            jumpCount++;
             onJump?.Invoke();
-        }
-        
+            jumpCount++;        
+        }     
     }
 
     private bool CheckGround()
@@ -90,6 +102,8 @@ public class EntityController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (health.HP <= 0) return;
+
         bool lastGroundedState = isGrounded;
         isGrounded = CheckGround();
         if (isGrounded) jumpCount = 0;
@@ -100,6 +114,8 @@ public class EntityController : MonoBehaviour
 
         isJumping = !isGrounded && currentVelocity.y > 0;
         isRunning = isGrounded && Mathf.Abs(currentVelocity.x) > 0;
+
+        laserRay.SetPosition(0, transform.position + Vector3.up * 0.4f);
 
         animator.SetBool(AnimatorIsGrounded, isGrounded);
         animator.SetBool(AnimatorIsJumping, isJumping);
@@ -125,6 +141,7 @@ public class EntityController : MonoBehaviour
     }
     public void OnDie()
     {
+        animator.SetTrigger(AnimatorDie);
         if (attackParticles != null)
         {
             spawner.prefab = hitParticles;
@@ -189,25 +206,23 @@ public class EntityController : MonoBehaviour
     }
     private IEnumerator RayAttack()
     {
-        yield return new WaitForSeconds(attackCooldown * attackCooldownScale);
-
         animator.SetTrigger(AnimatorRange);
+        yield return new WaitForSeconds(attackCooldown * attackCooldownScale / 3f);
+
         onRangeAttack?.Invoke();
 
-        float maxDistance = 999f;            
-        Vector2 direction = facingRight ? Vector2.right : Vector2.left;
-        Vector2 origin = (Vector2)transform.position + direction + Vector2.up / 2;
+        Vector3 direction = facingRight ? Vector2.right : Vector2.left;
         // Делаем луч
-        RaycastHit2D[] hits = Physics2D.RaycastAll(origin, direction, maxDistance);
-        Debug.Log(laserRay);
+        RaycastHit2D[] hits = Physics2D.RaycastAll(laserRay.GetPosition(0), direction, armRadiusIncrease);
+        
         // Визуализация луча (если есть LineRenderer)
         if (laserRay != null)
         {
             laserRay.positionCount = 2;
-            laserRay.SetPosition(0, origin);
-            laserRay.SetPosition(1, origin + direction * maxDistance);
+            
+            laserRay.SetPosition(1, laserRay.GetPosition(0) + direction * armRadiusIncrease);
             laserRay.enabled = true;
-            yield return new WaitForSeconds(0.5f);   // короткая вспышка
+            yield return new WaitForSeconds(0.1f);   // короткая вспышка
             laserRay.enabled = false;
         }
         // Наносим урон всем врагам

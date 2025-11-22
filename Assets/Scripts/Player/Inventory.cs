@@ -7,12 +7,14 @@ public class Inventory : MonoBehaviour
 {
     public int size = 3, hotbarSize = 3;
     [HideInInspector]public int selectedSlot = 0;
-    [SerializeField] private Transform itemHand;
+    
     [SerializeField] private Vector2 itemOffset = new Vector2(0, 0.5f);
     private Animator animator;
+    
     private EntityController entityController;
     public Item[] Items;
     public Action ItemsChanged;
+    public Transform itemHand;
     private void Start()
     {
         if (hotbarSize > size) hotbarSize = size;
@@ -91,8 +93,9 @@ public class Inventory : MonoBehaviour
         else if (item is RayGun rayGun)
         {
             entityController.attackMode = 2;
-            entityController.SetRay(rayGun.rayModel);
+
             entityController.damageIncrease = rayGun.damageIncrease;
+            entityController.armRadiusIncrease = rayGun.rangeIncrease;
             entityController.attackCooldownScale = 1f / rayGun.fireRate;
         }
     }

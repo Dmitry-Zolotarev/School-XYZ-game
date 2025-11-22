@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class PlayerController : EntityController
 {
     private static PlayerController instance;
-    private static HPComponent health;
+    
     private static PlayerData backup = new PlayerData(0, 0, 0, 0);
     private void Awake()
     {

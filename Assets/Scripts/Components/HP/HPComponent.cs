@@ -6,6 +6,7 @@ public class HPComponent : MonoBehaviour
     public UnityEvent onDamage, onHeal, onDie;
     [HideInInspector] public int HP;
     public int maxHP = 100;
+    
     private void Awake() {
         HP = maxHP;
  
@@ -14,9 +15,10 @@ public class HPComponent : MonoBehaviour
     {
         HP -= damage;
         HP = Mathf.Max(HP, 0);
-        onDamage?.Invoke();
 
-        if (HP <= 0) onDie?.Invoke();
+
+        if (HP > 0) onDamage?.Invoke();
+        else onDie?.Invoke();
     }
     public int Heal(int healing)
     {
