@@ -8,7 +8,7 @@ public class EnemyController : EntityController
     [SerializeField] private float detectionRange = 5f;
 
     private Transform player;
-    private bool chasing, hitWall;
+    private bool hitWall;
 
     private void Update()
     {

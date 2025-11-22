@@ -45,8 +45,8 @@ public class EntityController : MonoBehaviour
     public int damage = 5, damageIncrease = 1;
     [SerializeField] private UnityEvent onJump, onMeleeAttack, onRangeAttack;
 
-    protected static HPComponent health;
-    protected static Inventory inventory;
+    protected HPComponent health;
+    protected Inventory inventory;
 
     protected void Start()
     {
@@ -104,6 +104,7 @@ public class EntityController : MonoBehaviour
     {
         if (health.HP <= 0) return;
 
+        SetRayStart();
         bool lastGroundedState = isGrounded;
         isGrounded = CheckGround();
         if (isGrounded) jumpCount = 0;
@@ -115,7 +116,7 @@ public class EntityController : MonoBehaviour
         isJumping = !isGrounded && currentVelocity.y > 0;
         isRunning = isGrounded && Mathf.Abs(currentVelocity.x) > 0;
 
-        laserRay.SetPosition(0, transform.position + Vector3.up * 0.4f);
+        
 
         animator.SetBool(AnimatorIsGrounded, isGrounded);
         animator.SetBool(AnimatorIsJumping, isJumping);
@@ -129,7 +130,11 @@ public class EntityController : MonoBehaviour
         else if (isRunning && runParticles != null) spawner.prefab = runParticles;
         else if (isJumping && jumpParticles != null) spawner.prefab = jumpParticles;        
     }
-
+    void SetRayStart()
+    {
+        Vector3 direction = facingRight ? Vector2.right : Vector2.left;
+        laserRay.SetPosition(0, transform.position + direction * 0.25f + Vector3.up * 0.4f);
+    }
     public void TakeDamage()
     {
         if (attackParticles != null)
@@ -213,25 +218,31 @@ public class EntityController : MonoBehaviour
 
         Vector3 direction = facingRight ? Vector2.right : Vector2.left;
         // Делаем луч
-        RaycastHit2D[] hits = Physics2D.RaycastAll(laserRay.GetPosition(0), direction, armRadiusIncrease);
         
+        float distance = armRadiusIncrease;
+        RaycastHit2D[] hits = Physics2D.RaycastAll(laserRay.GetPosition(0), direction, distance);
+        foreach (var hit in hits)
+        {
+            var obj = hit.collider.gameObject;
+            if (obj.tag != tag && obj.tag != "Confiner")
+            {
+                distance = Mathf.Abs(hit.transform.position.x - transform.position.x) - 0.5f;
+                if (distance < 0) yield return null;
+                var target = hit.collider.GetComponent<HPComponent>();
+                if (target != null ) target.ApplyDamage(damage * damageIncrease);
+                break;
+            }           
+        }
         // Визуализация луча (если есть LineRenderer)
         if (laserRay != null)
         {
-            laserRay.positionCount = 2;
-            
-            laserRay.SetPosition(1, laserRay.GetPosition(0) + direction * armRadiusIncrease);
+            laserRay.positionCount = 2;   
+            laserRay.SetPosition(1, laserRay.GetPosition(0) + direction * distance);
             laserRay.enabled = true;
             yield return new WaitForSeconds(0.1f);   // короткая вспышка
             laserRay.enabled = false;
         }
-        // Наносим урон всем врагам
-        foreach (var hit in hits)
-        {
-            if (hit.collider == null) continue;
-            var target = hit.collider.GetComponent<HPComponent>();
-            if (target != null && target.gameObject.tag != tag) target.ApplyDamage(damage * damageIncrease);
-        }
+
     }
 
 }

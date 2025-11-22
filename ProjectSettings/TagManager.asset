@@ -12,6 +12,7 @@ TagManager:
   - Menu
   - Pause
   - LaserGun
+  - Confiner
   layers:
   - Default
   - TransparentFX

@@ -388,6 +388,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
+  backgroundLayer:
+    serializedVersion: 2
+    m_Bits: 64
   isRunning: 0
   isGrounded: 0
   isJumping: 0
