@@ -18,18 +18,20 @@ public class InventoryWindow : MonoBehaviour
         FindInventory();
         ReDraw();
     }
-
+    private void FixedUpdate() => FindInventory();
     private void FindInventory()
     {
-        if (inventory == null) inventory = FindAnyObjectByType<Inventory>();
-        inventory.ItemsChanged += ReDraw;
+        if (inventory == null) 
+        {
+            inventory = FindAnyObjectByType<Inventory>();
+            inventory.ItemsChanged += ReDraw;
+            ReDraw();
+        }      
     }
-
     private void OnDestroy()
     {
         if (inventory != null) inventory.ItemsChanged -= ReDraw;
     }
-
     private void ReDraw()
     {
         if (grid != null) 
@@ -50,7 +52,6 @@ public class InventoryWindow : MonoBehaviour
 
                 Text txt = icon.GetComponentInChildren<Text>();
                 if (txt != null && !item.IsWeapon()) txt.text = item.count.ToString();
-
 
                 drawIcons.Add(icon);
             }

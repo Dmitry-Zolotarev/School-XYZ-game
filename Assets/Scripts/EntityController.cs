@@ -103,7 +103,6 @@ public class EntityController : MonoBehaviour
     private void FixedUpdate()
     {
         if (health.HP <= 0) return;
-
         SetRayStart();
         bool lastGroundedState = isGrounded;
         isGrounded = CheckGround();
@@ -114,9 +113,7 @@ public class EntityController : MonoBehaviour
         rb.linearVelocity = currentVelocity;
 
         isJumping = !isGrounded && currentVelocity.y > 0;
-        isRunning = isGrounded && Mathf.Abs(currentVelocity.x) > 0;
-
-        
+        isRunning = isGrounded && Mathf.Abs(currentVelocity.x) > 0;    
 
         animator.SetBool(AnimatorIsGrounded, isGrounded);
         animator.SetBool(AnimatorIsJumping, isJumping);

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3618458803456776048}
   - component: {fileID: 1849287639938701316}
   - component: {fileID: 749373126426889800}
+  - component: {fileID: 6254966999036826649}
   m_Layer: 3
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -96,6 +97,18 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
+--- !u!114 &6254966999036826649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41921066608500155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc45643ce0b49c429b62ef7d4398285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FindConfinerComponent
 --- !u!1 &789188893339036540
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,9 +501,6 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
-  backgroundLayer:
-    serializedVersion: 2
-    m_Bits: 64
   isRunning: 0
   isGrounded: 0
   isJumping: 0
@@ -571,8 +581,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3096a269cbfa8924eafed7bc9dc90e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  size: 3
-  hotbarSize: 3
+  size: 10
+  hotbarSize: 5
   selectedSlot: 0
   itemOffset: {x: -0.1, y: -0.1}
   Items: []
@@ -608,8 +618,6 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
   - _id: Hurt
     _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
-  - _id: Coin
-    _clip: {fileID: 8300000, guid: e2908e54240409f4784e4caea48499c0, type: 3}
   - _id: Jump
     _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
   - _id: Range
@@ -719,7 +727,7 @@ LineRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -737,7 +745,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -761,10 +769,10 @@ LineRenderer:
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
-  - {x: 0, y: 0, z: 1}
+  - {x: 2, y: 0, z: 0}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 0.03
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -782,8 +790,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -807,7 +815,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
@@ -850,7 +858,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.789475, y: 2.2041173, z: -4.8289976}
+  m_LocalPosition: {x: 2.9858835, y: 2.28765, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

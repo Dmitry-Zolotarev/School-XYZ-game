@@ -7,23 +7,28 @@ public class EnterCollisionComponent : MonoBehaviour
 {
     [SerializeField] private string targetTag;
     [SerializeField] private bool isLooping;
-    [SerializeField] private EventAction action = new EventAction();  
-    private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag(targetTag)) action?.Invoke(other.gameObject);
-    }
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag(targetTag)) action?.Invoke(other.gameObject);
-    }
+    [SerializeField] private float loopDelay;
+    [SerializeField] private EventAction action = new EventAction();
+    private float lastActionTime;
+    private void OnCollisionEnter2D(Collision2D other) => Enter(other.gameObject);
+    private void OnTriggerEnter2D(Collider2D other) => Enter(other.gameObject);
 
-    private void OnCollisionStay2D(Collision2D other)
+    private void OnCollisionStay2D(Collision2D other) => Stay(other.gameObject);
+    private void OnTriggerStay2D(Collider2D other) => Stay(other.gameObject);
+    private void Enter(GameObject obj) 
     {
-        if (isLooping && other.gameObject.CompareTag(targetTag)) action?.Invoke(other.gameObject);
+        if (obj.CompareTag(targetTag)) {
+            action?.Invoke(obj);
+            lastActionTime = Time.time;
+        }
     }
-    private void OnTriggerStay2D(Collider2D other)
+    private void Stay(GameObject obj)
     {
-        if (isLooping && other.gameObject.CompareTag(targetTag)) action?.Invoke(other.gameObject);
+        if (isLooping && Time.time > lastActionTime + loopDelay && obj.CompareTag(targetTag)) 
+        {
+            lastActionTime = Time.time;
+            action?.Invoke(obj);
+        }
     }
     [System.Serializable]
     public class EventAction : UnityEvent<GameObject> { }

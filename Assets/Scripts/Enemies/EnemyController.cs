@@ -12,6 +12,7 @@ public class EnemyController : EntityController
 
     private void Update()
     {
+        if (health.HP <= 0) return;
         // Поиск игрока
         if (player == null)
         {
