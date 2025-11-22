@@ -3,9 +3,8 @@ using UnityEngine;
 public class SpawnComponent : MonoBehaviour
 {
     public Transform spawnPosition;
-    public EntityController controller;
     public Vector3 spawnOffset = Vector3.zero;
-    public GameObject prefab;
+    [HideInInspector]public GameObject prefab;
     
     public void Spawn()
     {

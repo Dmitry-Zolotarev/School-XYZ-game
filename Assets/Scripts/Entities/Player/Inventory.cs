@@ -11,7 +11,7 @@ public class Inventory : MonoBehaviour
     [SerializeField] private Vector2 itemOffset = new Vector2(0, 0.5f);
     private Animator animator;
     
-    private EntityController entityController;
+    private AttackComponent attack;
     public Item[] Items;
     public Action ItemsChanged;
     public Transform itemHand;
@@ -20,7 +20,7 @@ public class Inventory : MonoBehaviour
         if (hotbarSize > size) hotbarSize = size;
         Items = new Item[size];
         animator = GetComponent<Animator>();
-        entityController = GetComponent<EntityController>();
+        attack = GetComponent<AttackComponent>();
         SelectItem(0);
     }
     private void FixedUpdate()
@@ -73,30 +73,29 @@ public class Inventory : MonoBehaviour
     }
     private void CheckWeapon(Item item)
     {
-        entityController.attackMode = 0;
-        entityController.damageIncrease = 1;
-        entityController.armRadiusIncrease = 0f;
-        entityController.attackCooldownScale = 1f;
+        attack.attackMode = 0;
+        attack.damageIncrease = 1;
+        attack.armRadiusIncrease = 0f;
+        attack.attackCooldownScale = 1f;
 
         if (item is Melee meleeWeapon)
         {
-            entityController.damageIncrease = meleeWeapon.damageIncrease;
-            entityController.armRadiusIncrease = meleeWeapon.armRadiusIncrease;
+            attack.damageIncrease = meleeWeapon.damageIncrease;
+            attack.armRadiusIncrease = meleeWeapon.armRadiusIncrease;
         }
         else if (item is Range rangeWeapon)
         {
-            entityController.attackMode = 1;
+            attack.attackMode = 1;
             rangeWeapon.chargeProjectile();
-            entityController.SetProjectile(rangeWeapon.projectile);
-            entityController.attackCooldownScale = 1f / rangeWeapon.fireRate;
+            attack.SetProjectile(rangeWeapon.projectile);
+            attack.attackCooldownScale = 1f / rangeWeapon.fireRate;
         }
         else if (item is RayGun rayGun)
         {
-            entityController.attackMode = 2;
-
-            entityController.damageIncrease = rayGun.damageIncrease;
-            entityController.armRadiusIncrease = rayGun.rangeIncrease;
-            entityController.attackCooldownScale = 1f / rayGun.fireRate;
+            attack.attackMode = 2;
+            attack.damageIncrease = rayGun.damageIncrease;
+            attack.armRadiusIncrease = rayGun.rangeIncrease;
+            attack.attackCooldownScale = 1f / rayGun.fireRate;
         }
     }
 }

@@ -6,7 +6,7 @@ public class EnemyController : EntityController
     [SerializeField] private Transform leftPoint;
     [SerializeField] private Transform rightPoint;
     [SerializeField] private float detectionRange = 5f;
-
+    public int XPforMurder = 100;
     private Transform player;
     private bool hitWall;
 
@@ -27,7 +27,7 @@ public class EnemyController : EntityController
         else Patrol();
 
         // Атака
-        if (player && toPlayer.magnitude < armRadius * 1.5f) Attack();
+        if (player && toPlayer.magnitude < attackComponent.armRadius * 1.5f) Attack();
     }
 
     private void Patrol()
@@ -55,7 +55,7 @@ public class EnemyController : EntityController
         float dir = distance > 0 ? 1 : -1;
 
         // Останавливаемся, если близко к игроку
-        if (Mathf.Abs(distance) < armRadius || hitWall)
+        if (Mathf.Abs(distance) < attackComponent.armRadius || hitWall)
         {
             SetDirection(0);
             return;

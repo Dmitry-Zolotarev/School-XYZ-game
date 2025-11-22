@@ -1,0 +1,75 @@
+{
+    "version": 1,
+    "name": "UI Actions",
+    "maps": [
+        {
+            "name": "UI Actions",
+            "id": "cf172916-0b46-459f-bd03-5ec90f1e9aa3",
+            "actions": [
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "ae07a22d-37a1-42bc-af00-4d21e1a8840a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenStatsWindow",
+                    "type": "Button",
+                    "id": "3b10a8ea-c70e-4a46-9a26-95b0d1d37988",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CloseStatsWindow",
+                    "type": "Button",
+                    "id": "22c16e5b-8526-4be6-941e-d2af6efe9589",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9abd3aed-32fe-438b-8e58-1e1e3afa7acd",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c5788fc-83cb-43d4-82b0-8a361993ff7e",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenStatsWindow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ab1d9966-0e08-46c7-aa07-98d517c3200d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CloseStatsWindow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

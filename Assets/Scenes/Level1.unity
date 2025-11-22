@@ -946,6 +946,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnterCollisionComponent
   targetTag: Player
   isLooping: 0
+  loopDelay: 0
   action:
     m_PersistentCalls:
       m_Calls:
@@ -3473,6 +3474,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40b971fb8cc057245a3e9928d2c6deec, type: 3}
+--- !u!114 &984774029 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+  m_PrefabInstance: {fileID: 1654921966}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
 --- !u!1 &1002837005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4336,6 +4348,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6882356943858714282, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: m_DeviceLostEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.6314423
@@ -4343,6 +4367,50 @@ PrefabInstance:
     - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.69376004
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: attackParticles
+      value: 
+      objectReference: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onRangeAttack.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 984774029}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onRangeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Play
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlaySoundsComponent, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: Melee
+      objectReference: {fileID: 0}
+    - target: {fileID: 7839044549799861229, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: onMeleeAttack.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -8,8 +8,9 @@ public class PlayerController : EntityController
     private static PlayerController instance;
     
     private static PlayerData backup = new PlayerData(0, 0, 0, 0);
-    private void Awake()
+    private new void Awake()
     {
+        base.Awake();  
         health = GetComponent<HPComponent>();
         if (instance != null && instance != this)
         {
@@ -29,7 +30,7 @@ public class PlayerController : EntityController
         {
             HP = health.HP,
             maxHP = health.maxHP,
-            damage = damage
+            damage = attackComponent.damage
         };
     }
     public void LoadSession()
@@ -37,6 +38,6 @@ public class PlayerController : EntityController
         if (backup.Sum() == 0) return;
         health.HP = backup.HP;
         health.maxHP = backup.maxHP;
-        damage = backup.damage;
+        attackComponent.damage = backup.damage;
     }
 }

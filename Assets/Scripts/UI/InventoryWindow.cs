@@ -18,14 +18,18 @@ public class InventoryWindow : MonoBehaviour
         FindInventory();
         ReDraw();
     }
-    private void FixedUpdate() => FindInventory();
+    private void Update() => FindInventory();
     private void FindInventory()
     {
         if (inventory == null) 
         {
-            inventory = FindAnyObjectByType<Inventory>();
-            inventory.ItemsChanged += ReDraw;
-            ReDraw();
+            var player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null) inventory = player.GetComponent<Inventory>();
+            if (inventory != null) 
+            {
+                inventory.ItemsChanged += ReDraw;
+                ReDraw();
+            }          
         }      
     }
     private void OnDestroy()

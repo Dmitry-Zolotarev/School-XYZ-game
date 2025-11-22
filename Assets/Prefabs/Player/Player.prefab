@@ -160,9 +160,11 @@ GameObject:
   - component: {fileID: 8341137970847974359}
   - component: {fileID: 870657750649178154}
   - component: {fileID: 8059510020390876107}
-  - component: {fileID: 2589976012273206197}
   - component: {fileID: 7266937275027893272}
   - component: {fileID: 5112658772029575687}
+  - component: {fileID: 2589976012273206197}
+  - component: {fileID: 7839044549799861229}
+  - component: {fileID: 6638442978522306828}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -473,7 +475,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpawnComponent
   spawnPosition: {fileID: 8683157989456968849}
-  controller: {fileID: 0}
   spawnOffset: {x: 0, y: 0.15, z: 0}
   prefab: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
 --- !u!114 &8132036216841527231
@@ -492,12 +493,9 @@ MonoBehaviour:
   runParticles: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
   jumpParticles: {fileID: 445565870571551919, guid: a891b539975f74e4f883811ee6c9ba9d, type: 3}
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
-  attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   velocity: 5
   jumpForce: 5.2
-  armRadius: 1
-  attackCooldown: 0.5
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -505,13 +503,6 @@ MonoBehaviour:
   isGrounded: 0
   isJumping: 0
   facingRight: 1
-  didAttack: 0
-  lastAttackTime: 0
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  attackMode: 0
-  damage: 5
-  damageIncrease: 1
   onJump:
     m_PersistentCalls:
       m_Calls:
@@ -525,36 +516,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: Jump
-          m_BoolArgument: 0
-        m_CallState: 2
-  onMeleeAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2589976012273206197}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Melee
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRangeAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2589976012273206197}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Range
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &8341137970847974359
@@ -600,28 +561,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PauseComponent
   pauseMenu: {fileID: 0}
---- !u!114 &2589976012273206197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
-  playSoundCooldown: 0.2
-  sounds:
-  - _id: Melee
-    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
-  - _id: Hurt
-    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
-  - _id: Jump
-    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
-  - _id: Range
-    _clip: {fileID: 8300000, guid: 8396c6a99db83394f89f83326ceaeb71, type: 3}
 --- !u!82 &7266937275027893272
 AudioSource:
   m_ObjectHideFlags: 0
@@ -829,6 +768,99 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2589976012273206197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
+  playSoundCooldown: 0.2
+  sounds:
+  - _id: Melee
+    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
+  - _id: Hurt
+    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
+  - _id: Jump
+    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
+  - _id: Range
+    _clip: {fileID: 8300000, guid: 8396c6a99db83394f89f83326ceaeb71, type: 3}
+--- !u!114 &7839044549799861229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9285f4c78c8292549a9b4bcaa2206d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
+  attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
+  attackCooldown: 0.5
+  spawner: {fileID: 0}
+  damage: 5
+  damageIncrease: 1
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  armRadius: 0.5
+  attackMode: 0
+  onMeleeAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Melee
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRangeAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Range
+          m_BoolArgument: 0
+        m_CallState: 2
+  onKill:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &6638442978522306828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70b27ec8a223f2641ba7bc506304d180, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
+  XP: 0
+  level: 1
+  xp_forLevelUP: 1000
+  HPIncrease: 10
+  damageIncrease: 1
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0
@@ -858,7 +890,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.9858835, y: 2.28765, z: -4.8289976}
+  m_LocalPosition: {x: 2.6314423, y: 1.48765, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

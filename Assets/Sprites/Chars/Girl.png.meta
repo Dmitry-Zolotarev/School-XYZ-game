@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: d0848ba3c9f6ff948812cf74d92cac99
+guid: b14fa6fdecbbde848aef374cff66471f
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 8071387748666688230
-    second: green-box-large_0
+      213: -7777177641172106769
+    second: Girl_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: green-box-large_0
+      name: Girl_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 94
-        height: 90
+        width: 81
+        height: 106
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 6e2c7b3b464530070800000000000000
-      internalID: 8071387748666688230
+      spriteID: fe183def32ae11490800000000000000
+      internalID: -7777177641172106769
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      green-box-large_0: 8071387748666688230
+      Girl_0: -7777177641172106769
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

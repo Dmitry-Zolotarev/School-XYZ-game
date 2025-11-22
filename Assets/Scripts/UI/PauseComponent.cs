@@ -3,8 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PauseComponent : MonoBehaviour
 {
-    [SerializeField]private GameObject pauseMenu;
-
+    [SerializeField] private GameObject pauseMenu;
     void Start()
     {
         if (pauseMenu != null) pauseMenu.SetActive(false);
@@ -18,14 +17,14 @@ public class PauseComponent : MonoBehaviour
     {
         if (pauseMenu == null) return;
         
-        if (pauseMenu.activeSelf)
+        if (pauseMenu.activeSelf && Time.timeScale == 0f)
         {
             pauseMenu.SetActive(false);
             Cursor.visible = false;
             Time.timeScale = 1f;
             
         }
-        else
+        else if(Time.timeScale == 1f)
         {
             pauseMenu.SetActive(true);
             Cursor.visible = true;
