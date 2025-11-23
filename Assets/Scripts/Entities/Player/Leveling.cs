@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Leveling : MonoBehaviour
 {
@@ -6,7 +7,7 @@ public class Leveling : MonoBehaviour
     [SerializeField] private int xp_forLevelUP = 1000, HPIncrease = 10, damageIncrease = 1;
     private AttackComponent attack;
     private HPComponent health;
-    
+    public UnityEvent OnLevelUP;
     void Start()
     {       
         currentXPforLevelUP = xp_forLevelUP;
@@ -23,8 +24,9 @@ public class Leveling : MonoBehaviour
     {
         level++;
         XP %= currentXPforLevelUP;
-        if(health != null) health.maxHP += HPIncrease;
+        if (health != null) health.UpdateMaxHP(HPIncrease);
         if (attack != null) attack.damage += damageIncrease;
-        currentXPforLevelUP = (int)(xp_forLevelUP * Mathf.Sqrt(level));
+        currentXPforLevelUP = xp_forLevelUP * level;
+        OnLevelUP?.Invoke();
     }
 }

@@ -14,7 +14,7 @@ public class EntityController : MonoBehaviour
     protected float direction = 0;
 
     private Rigidbody2D rb;
-    private Animator animator;
+    protected Animator animator;
     private LineRenderer laserRay;
     [HideInInspector] public SpawnComponent spawner;
 
@@ -26,11 +26,11 @@ public class EntityController : MonoBehaviour
     public bool isRunning, isGrounded, isJumping, facingRight = true;
     private int jumpCount;
 
-    private static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
-    private static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
-    private static readonly int AnimatorIsRunning = Animator.StringToHash("IsRunning");
-    private static readonly int AnimatorHit = Animator.StringToHash("Hit");
-    private static readonly int AnimatorDie = Animator.StringToHash("Die");
+    protected static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
+    protected static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
+    protected static readonly int AnimatorIsRunning = Animator.StringToHash("IsRunning");
+    protected static readonly int AnimatorHit = Animator.StringToHash("Hit");
+    protected static readonly int AnimatorDie = Animator.StringToHash("Die");
 
     protected HPComponent health;
     protected Inventory inventory;
@@ -147,9 +147,9 @@ public class EntityController : MonoBehaviour
             if (interaction) interaction.Interact();
         }
     }
-
     public void Attack()
     {
+        if (health.HP <= 0) attackComponent = null;
         if (!attackComponent) return;
         attackComponent.CurrentDirection = facingRight ? Vector2.right : Vector2.left;
         attackComponent.Attack();

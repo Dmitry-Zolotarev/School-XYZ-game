@@ -13,10 +13,11 @@ public class AttackComponent : MonoBehaviour
     private LineRenderer laserRay;
     private Leveling leveling;
 
+    
+    [HideInInspector] public float armRadiusIncrease = 0, attackCooldownScale = 1f;
+    [HideInInspector] public Vector2 CurrentDirection;
     public int damage = 5, damageIncrease = 1;
-    public float armRadiusIncrease = 0, attackCooldownScale = 1f, armRadius = 0.5f;
-    public Vector2 CurrentDirection { get; set; }
-
+    public float armRadius = 0.5f;
     private float lastAttackTime;
 
     private enum AttackModes { Melee, Range, Ray }
@@ -65,8 +66,7 @@ public class AttackComponent : MonoBehaviour
         foreach (var hit in hits)
         {
             var target = hit.GetComponent<HPComponent>();
-            if (target != null && target.gameObject.tag != gameObject.tag)
-                SetDamage(target);
+            if (target != null && target.gameObject.tag != gameObject.tag) target.ApplyDamage(damage * damageIncrease);
         }
     }
 
@@ -102,7 +102,7 @@ public class AttackComponent : MonoBehaviour
             {
                 distance = Vector2.Distance(origin, hit.point);
                 var target = hit.collider.GetComponent<HPComponent>();
-                if (target != null) SetDamage(target);
+                if (target != null) target.ApplyDamage(damage * damageIncrease);
                 break;
             }
         }
@@ -124,16 +124,5 @@ public class AttackComponent : MonoBehaviour
         }
 
         laserRay.enabled = false;
-    }
-
-    public void SetDamage(HPComponent target)
-    {
-        var finalDamage = damage * damageIncrease;
-        if (target.HP <= finalDamage && leveling != null)
-        {
-            var enemy = target.gameObject.GetComponent<EnemyController>();
-            if (enemy != null) leveling.GetXP(enemy.XPforMurder);
-        }
-        target.ApplyDamage(finalDamage);
     }
 }

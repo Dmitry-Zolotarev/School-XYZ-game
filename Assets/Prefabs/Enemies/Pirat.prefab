@@ -82,10 +82,10 @@ GameObject:
   - component: {fileID: 3925749315796207489}
   - component: {fileID: 4849606171689534937}
   - component: {fileID: 147636780597896465}
+  - component: {fileID: 8483175614344643848}
   - component: {fileID: 6300771131964585442}
   - component: {fileID: 8854395553208122573}
   - component: {fileID: 8852881551852660834}
-  - component: {fileID: 8483175614344643848}
   m_Layer: 0
   m_Name: Pirat
   m_TagString: Enemy
@@ -395,6 +395,74 @@ MonoBehaviour:
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
   detectionRange: 5
+  XP_for_murder: 50
+  onBeginChasing:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Chase
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8483175614344643848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4711174258340900471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9285f4c78c8292549a9b4bcaa2206d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
+  attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
+  attackCooldown: 1
+  spawner: {fileID: 0}
+  armRadiusIncrease: 0
+  attackCooldownScale: 1
+  CurrentDirection: {x: 0, y: 0}
+  damage: 5
+  damageIncrease: 1
+  armRadius: 1
+  attackMode: 0
+  onMeleeAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Melee
+          m_BoolArgument: 0
+        m_CallState: 2
+  onRangeAttack:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6300771131964585442}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Range
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6300771131964585442
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +483,8 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
   - _id: Die
     _clip: {fileID: 8300000, guid: 90bb8a3eb5f0c834b94ce6a77c268043, type: 3}
+  - _id: Chase
+    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
 --- !u!82 &8854395553208122573
 AudioSource:
   m_ObjectHideFlags: 0
@@ -622,57 +692,6 @@ LineRenderer:
   m_UseWorldSpace: 1
   m_Loop: 0
   m_ApplyActiveColorSpace: 1
---- !u!114 &8483175614344643848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4711174258340900471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9285f4c78c8292549a9b4bcaa2206d13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
-  attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
-  attackCooldown: 0.5
-  spawner: {fileID: 0}
-  damage: 5
-  damageIncrease: 1
-  armRadiusIncrease: 0
-  attackCooldownScale: 1
-  armRadius: 0.5
-  attackMode: 0
-  onMeleeAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6300771131964585442}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Melee
-          m_BoolArgument: 0
-        m_CallState: 2
-  onRangeAttack:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6300771131964585442}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Range
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &7664301588655417999
 GameObject:
   m_ObjectHideFlags: 0

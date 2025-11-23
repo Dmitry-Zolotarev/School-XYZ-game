@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
@@ -56,6 +57,8 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
+            if(Items[i] != null && item.IsWeapon() && Items[i].name == item.name) return false;
+
             if (Items[i] != null && Items[i].Name == newItem.Name)
             {
                 Items[i].count += newItem.count;

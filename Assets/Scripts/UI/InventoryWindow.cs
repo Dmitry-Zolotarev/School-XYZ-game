@@ -94,7 +94,7 @@ public class InventoryWindow : MonoBehaviour
             image.sprite = item.Icon;
             image.preserveAspect = true;
 
-            if(item.count > 1)
+            if(item.count > 1 && !item.IsWeapon())
             {
                 GameObject textGO = new GameObject("CountText", typeof(RectTransform));
                 textGO.transform.SetParent(icon.transform, false);

@@ -1,60 +1,56 @@
-using UnityEngine;
+п»їusing UnityEngine;
+using UnityEngine.Events;
 
 public class EnemyController : EntityController
 {
     [Header("AI Settings")]
-    [SerializeField] private Transform leftPoint;
-    [SerializeField] private Transform rightPoint;
+    [SerializeField] private Transform leftPoint, rightPoint;
     [SerializeField] private float detectionRange = 5f;
-    public int XPforMurder = 100;
-    private Transform player;
-    private bool hitWall;
 
+    
+    private bool chasing, hitWall;
+    private Transform player;
+    public int XP_for_murder = 50;
+    [SerializeField] private UnityEvent onBeginChasing;
     private void Update()
     {
-        if (health.HP <= 0) return;
-        // Поиск игрока
-        if (player == null)
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-            if (playerObj != null) player = playerObj.transform;
-        }
-        Vector2 toPlayer = player.position - transform.position;
-        RaycastHit2D rayHit = Physics2D.Raycast(transform.position, toPlayer.normalized, toPlayer.magnitude, groundLayer);
-        bool isBlocked = rayHit.collider != null && rayHit.distance < toPlayer.magnitude && rayHit.collider.gameObject != gameObject;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        if (player == null || attackComponent == null) return;
 
-        if (player != null && !isBlocked && toPlayer.magnitude < detectionRange) ChasePlayer();
+        float distanceToPlayerX = Mathf.Abs(transform.position.x - player.position.x);
+        float distanceToPlayerY = Mathf.Abs(transform.position.y - player.position.y);
+
+        bool lastChaseState = chasing;
+        
+        chasing = distanceToPlayerX < detectionRange && distanceToPlayerY < 1f;
+        
+        if (chasing) {
+            if (chasing != lastChaseState) {
+                animator.SetTrigger(AnimatorHit);
+                onBeginChasing?.Invoke();
+            } 
+            ChasePlayer();
+        } 
         else Patrol();
-
-        // Атака
-        if (player && toPlayer.magnitude < attackComponent.armRadius * 1.5f) Attack();
+        if (distanceToPlayerX < attackComponent.armRadius && distanceToPlayerY < 1f) Attack();
     }
 
     private void Patrol()
     {
-
-        // Проверяем столкновение со стеной
         if (hitWall)
         {
             hitWall = false;
             SetDirection(-direction);
             return;
         }
-
-        // Правая граница
         if (transform.position.x >= rightPoint.position.x) SetDirection(-1);
-        // Левая граница
         if (transform.position.x <= leftPoint.position.x) SetDirection(1);
     }
 
     private void ChasePlayer()
     {
-        if (player == null) return;
+        float distance = player.position.x - transform.position.x, dir = distance > 0 ? 1 : -1;
 
-        float distance = player.position.x - transform.position.x;
-        float dir = distance > 0 ? 1 : -1;
-
-        // Останавливаемся, если близко к игроку
         if (Mathf.Abs(distance) < attackComponent.armRadius || hitWall)
         {
             SetDirection(0);

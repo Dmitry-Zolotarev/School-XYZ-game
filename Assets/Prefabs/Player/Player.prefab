@@ -841,9 +841,6 @@ MonoBehaviour:
           m_StringArgument: Range
           m_BoolArgument: 0
         m_CallState: 2
-  onKill:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6638442978522306828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,7 +855,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::NewMonoBehaviourScript
   XP: 0
   level: 1
-  xp_forLevelUP: 1000
+  currentXPforLevelUP: 0
+  xp_forLevelUP: 100
   HPIncrease: 10
   damageIncrease: 1
 --- !u!1 &4109953042621755463
