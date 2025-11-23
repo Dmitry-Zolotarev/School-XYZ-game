@@ -6,19 +6,18 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
-    public int size = 3, hotbarSize = 3;
-    [HideInInspector]public int selectedSlot = 0;
-    
+    public int size = 15;
+    [HideInInspector] public int selectedSlot = 0;
+
     [SerializeField] private Vector2 itemOffset = new Vector2(0, 0.5f);
     private Animator animator;
-    
+
     private AttackComponent attack;
     public Item[] Items;
     public Action ItemsChanged;
     public Transform itemHand;
     private void Start()
     {
-        if (hotbarSize > size) hotbarSize = size;
         Items = new Item[size];
         animator = GetComponent<Animator>();
         attack = GetComponent<AttackComponent>();
@@ -26,12 +25,12 @@ public class Inventory : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);     
+        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
     }
     public void SelectItem(int i)
     {
-        while (i < 0) i += hotbarSize;
-        if (i >= hotbarSize) i %= hotbarSize;
+        while (i < 0) i += size;
+        if (i >= size) i %= size;
 
         var old = Items[selectedSlot];
         if (old != null) old.Deselect();
@@ -57,7 +56,7 @@ public class Inventory : MonoBehaviour
 
         for (int i = 0; i < size; i++)
         {
-            if(Items[i] != null && item.IsWeapon() && Items[i].name == item.name) return false;
+            if (Items[i] != null && item.IsWeapon() && Items[i].name == item.name) return false;
 
             if (Items[i] != null && Items[i].Name == newItem.Name)
             {

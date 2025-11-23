@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,60 +6,76 @@ using UnityEngine.UI;
 public class InventoryWindow : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
+    [SerializeField] private int hotbarSize = 5;
     [SerializeField] private GameObject itemIconPrefab;
 
-    private List<GameObject> drawIcons = new List<GameObject>();
     private GridLayoutGroup grid;
+    private List<GameObject> drawIcons = new List<GameObject>();
+    private bool subscribed = false;
 
     private void Start()
     {
         grid = GetComponent<GridLayoutGroup>();
-        FindInventory();
-        ReDraw();
+        TryBindInventory();
     }
-    private void Update() => FindInventory();
-    private void FindInventory()
+
+    private void Update()
     {
-        if (inventory == null) 
-        {
-            var player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null) inventory = player.GetComponent<Inventory>();
-            if (inventory != null) 
-            {
-                inventory.ItemsChanged += ReDraw;
-                ReDraw();
-            }          
-        }      
+        if (inventory == null) TryBindInventory();
+
     }
+
+    private void TryBindInventory()
+    {
+        if (inventory != null) return;
+
+        var player = GameObject.FindGameObjectWithTag("Player");
+        if (player == null) return;
+
+        inventory = player.GetComponent<Inventory>();
+        if (inventory == null) return;
+
+        hotbarSize = Mathf.Min(hotbarSize, inventory.size);
+
+        if (!subscribed)
+        {
+            inventory.ItemsChanged += ReDraw;
+            subscribed = true;
+        }
+
+        if (inventory.Items != null && inventory.Items.Length == inventory.size) ReDraw();
+
+    }
+
     private void OnDestroy()
     {
-        if (inventory != null) inventory.ItemsChanged -= ReDraw;
+        if (inventory != null && subscribed)
+            inventory.ItemsChanged -= ReDraw;
     }
+
     private void ReDraw()
     {
-        if (grid != null) 
+        if (inventory == null || inventory.Items == null) return;
+
+        foreach (var icon in drawIcons)
+            Destroy(icon);
+        drawIcons.Clear();
+
+        // Вычисляем стартовый индекс для хотбара с учётом выбранного слота
+        int startIndex = 0;
+        if (inventory.selectedSlot >= hotbarSize)
+            startIndex = inventory.selectedSlot - hotbarSize + 1;
+
+        int endIndex = Mathf.Min(startIndex + hotbarSize, inventory.size);
+
+        for (int i = startIndex; i < endIndex; i++)
         {
-            foreach (var icon in drawIcons) Destroy(icon);
-            drawIcons.Clear();
-
-            int count = Mathf.Min(inventory.hotbarSize, inventory.Items.Length);
-
-            for (int i = 0; i < count; i++)
-            {
-                var item = inventory.Items[i];
-
-                GameObject icon = GetIcon(item, i == inventory.selectedSlot);
-
-                Image img = icon.GetComponent<Image>();
-                if (img != null) img.sprite = item.Icon;
-
-                Text txt = icon.GetComponentInChildren<Text>();
-                if (txt != null && !item.IsWeapon()) txt.text = item.count.ToString();
-
-                drawIcons.Add(icon);
-            }
-        }    
+            Item item = inventory.Items[i];
+            GameObject icon = GetIcon(item, i == inventory.selectedSlot);
+            drawIcons.Add(icon);
+        }
     }
+
     private GameObject GetIcon(Item item, bool isSelected)
     {
         GameObject icon = new GameObject("ItemIcon", typeof(RectTransform));
@@ -88,13 +103,14 @@ public class InventoryWindow : MonoBehaviour
 
             overlayGO.transform.SetAsFirstSibling();
         }
-        if(item != null)
+
+        if (item != null)
         {
             Image image = icon.AddComponent<Image>();
             image.sprite = item.Icon;
             image.preserveAspect = true;
 
-            if(item.count > 1 && !item.IsWeapon())
+            if (item.count > 1 && !item.IsWeapon())
             {
                 GameObject textGO = new GameObject("CountText", typeof(RectTransform));
                 textGO.transform.SetParent(icon.transform, false);
@@ -114,7 +130,8 @@ public class InventoryWindow : MonoBehaviour
                 countText.verticalOverflow = VerticalWrapMode.Overflow;
                 countText.text = item.count.ToString();
             }
-        }       
+        }
+
         return icon;
     }
 }

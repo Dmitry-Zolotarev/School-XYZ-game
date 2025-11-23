@@ -25,9 +25,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseStatsWindow",
+                    "name": "CloseWindow",
                     "type": "Button",
                     "id": "22c16e5b-8526-4be6-941e-d2af6efe9589",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenInventoryWindow",
+                    "type": "Button",
+                    "id": "e7644670-e2d3-4cbb-ac03-25f115b105cd",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -64,7 +73,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CloseStatsWindow",
+                    "action": "CloseWindow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f816156-5a7c-469c-ab98-90abd84efe1c",
+                    "path": "<Keyboard>/i",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenInventoryWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6848226226299290242
+--- !u!1 &546323144350932205
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,25 +8,25 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4902400929692710546}
-  - component: {fileID: 3404214135794234796}
-  - component: {fileID: 6771127270687693098}
-  - component: {fileID: 7834458132648350599}
-  - component: {fileID: 6213508994375079910}
+  - component: {fileID: 5867525861837058236}
+  - component: {fileID: 4920504634083610592}
+  - component: {fileID: 3673570955619291489}
+  - component: {fileID: 1657941300554032475}
+  - component: {fileID: 5639215932933455859}
   m_Layer: 5
-  m_Name: InventoryBar
+  m_Name: InventoryMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &4902400929692710546
+--- !u!224 &5867525861837058236
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848226226299290242}
+  m_GameObject: {fileID: 546323144350932205}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -36,48 +36,48 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -30}
+  m_AnchoredPosition: {x: -75.971405, y: -65.05588}
   m_SizeDelta: {x: 200, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &3404214135794234796
+--- !u!222 &4920504634083610592
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848226226299290242}
+  m_GameObject: {fileID: 546323144350932205}
   m_CullTransparentMesh: 1
---- !u!114 &6771127270687693098
+--- !u!114 &3673570955619291489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848226226299290242}
+  m_GameObject: {fileID: 546323144350932205}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a8695521f0d02e499659fee002a26c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GridLayoutGroup
   m_Padding:
-    m_Left: 10
+    m_Left: 9
     m_Right: 0
-    m_Top: 10
+    m_Top: 9
     m_Bottom: 0
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 24, y: 24}
-  m_Spacing: {x: 14, y: 14}
+  m_CellSize: {x: 22, y: 22}
+  m_Spacing: {x: 18, y: 18}
   m_Constraint: 0
   m_ConstraintCount: 2
---- !u!114 &7834458132648350599
+--- !u!114 &1657941300554032475
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848226226299290242}
+  m_GameObject: {fileID: 546323144350932205}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
@@ -100,19 +100,19 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!114 &6213508994375079910
+  m_PixelsPerUnitMultiplier: 0.9
+--- !u!114 &5639215932933455859
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6848226226299290242}
+  m_GameObject: {fileID: 546323144350932205}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69401859e857cb640a56690718d90105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryWindow
-  itemIconPrefab: {fileID: 0}
   inventory: {fileID: 0}
-  hotbarSize: 5
+  itemIconPrefab: {fileID: 0}
+  hotBarSize: 15

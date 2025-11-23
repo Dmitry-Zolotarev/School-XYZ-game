@@ -10,8 +10,8 @@ public class EnemyController : EntityController
     
     private bool chasing, hitWall;
     private Transform player;
-    public int XP_for_murder = 50;
     [SerializeField] private UnityEvent onBeginChasing;
+
     private void Update()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;

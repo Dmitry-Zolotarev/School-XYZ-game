@@ -3157,30 +3157,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_Spacing.x
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_Spacing.y
-      value: 18
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_CellSize.x
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_CellSize.y
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_Padding.m_Top
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 8821371270763986006, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 14
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3278,7 +3254,7 @@ PrefabInstance:
       objectReference: {fileID: 152711513}
     - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: size
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: hotbarSize
@@ -3390,7 +3366,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.955893
+      value: 3.223509
       objectReference: {fileID: 0}
     - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9097,41 +9073,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6213508994375079910, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: hotbarSize
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_Spacing.x
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_Spacing.y
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_CellSize.x
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_CellSize.y
-      value: 24
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_Padding.m_Top
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6771127270687693098, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_Padding.m_Left
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 6848226226299290242, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
       propertyPath: m_Name
       value: InventoryBar
-      objectReference: {fileID: 0}
-    - target: {fileID: 6848226226299290242, guid: 5c60eaea91be4ce448a7cdcfc92ce5aa, type: 3}
-      propertyPath: m_TagString
-      value: InventoryHotBar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
