@@ -220,7 +220,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &118891241
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3284,6 +3284,22 @@ PrefabInstance:
       propertyPath: size
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: playSoundCooldown
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: sounds.Array.data[4]._id
+      value: LevelUP
+      objectReference: {fileID: 0}
+    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: sounds.Array.data[4]._clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d5b81d4bb065fd4ba63b03bb5ddb52d, type: 3}
     - target: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3335,6 +3351,10 @@ PrefabInstance:
     - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.28765
+      objectReference: {fileID: 0}
+    - target: {fileID: 7266937275027893272, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+      propertyPath: Priority
+      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

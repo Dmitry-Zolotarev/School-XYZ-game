@@ -13,5 +13,4 @@ public class SpawnComponent : MonoBehaviour
         spawnedObject.transform.position += spawnOffset;
         spawnedObject.SetActive(true);
     }
-    
 }

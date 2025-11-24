@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class InventoryWindow : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
-    [SerializeField] private int hotbarSize = 15;
+    [SerializeField] public int hotbarSize = 15;
 
     private GridLayoutGroup grid;
     private List<GameObject> drawIcons = new List<GameObject>();
@@ -53,22 +53,24 @@ public class InventoryWindow : MonoBehaviour
 
     public void ReDraw()
     {
-        if (inventory == null || inventory.Items == null || !gameObject.activeSelf) return;
-
-        foreach (var icon in drawIcons) Destroy(icon);
-        drawIcons.Clear();
-
-        int count = Mathf.Min(hotbarSize, inventory.size);
-
-        int selectedSlotInUI = Mathf.Clamp(inventory.selectedSlot, 0, count - 1);
-
-        for (int i = 0; i < count; i++)
+        try
         {
-            int slot = i;
-            GameObject icon = CreateSlot(inventory.Items[i], slot == selectedSlotInUI);
-            AddPointerEvents(icon, slot);
-            drawIcons.Add(icon);
+            foreach (var icon in drawIcons) Destroy(icon);
+            drawIcons.Clear();
+
+            int count = Mathf.Min(hotbarSize, inventory.size);
+
+            int selectedSlotInUI = Mathf.Clamp(inventory.selectedSlot, 0, count - 1);
+
+            for (int i = 0; i < count; i++)
+            {
+                int slot = i;
+                GameObject icon = CreateSlot(inventory.Items[i], slot == selectedSlotInUI);
+                AddPointerEvents(icon, slot);
+                drawIcons.Add(icon);
+            }
         }
+        catch { }      
     }
 
     private GameObject CreateSlot(Item item, bool selected)

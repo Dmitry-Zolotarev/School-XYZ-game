@@ -322,7 +322,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   HP: 0
-  XP_for_murder: 50
+  XP_for_murder: 0
   maxHP: 100
 --- !u!114 &8937964369943679714
 MonoBehaviour:
@@ -651,6 +651,8 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 95a45e811ed73fb42a45f179ac9f779a, type: 3}
   - _id: Range
     _clip: {fileID: 8300000, guid: 663a18639e919ca47b66c7e67dffc19a, type: 3}
+  - _id: LevelUP
+    _clip: {fileID: 8300000, guid: 4d5b81d4bb065fd4ba63b03bb5ddb52d, type: 3}
 --- !u!114 &7839044549799861229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -721,9 +723,22 @@ MonoBehaviour:
   xp_forLevelUP: 100
   HPIncrease: 10
   damageIncrease: 1
+  levelUPLabel: {fileID: 4644701666891489830, guid: 19994c10b2274cf4e84ce8d68c4ecb86, type: 3}
   OnLevelUP:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: LevelUP
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2200605101564558785
 MonoBehaviour:
   m_ObjectHideFlags: 0

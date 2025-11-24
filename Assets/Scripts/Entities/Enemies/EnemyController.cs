@@ -6,12 +6,11 @@ public class EnemyController : EntityController
     [Header("AI Settings")]
     [SerializeField] private Transform leftPoint, rightPoint;
     [SerializeField] private float detectionRange = 5f;
-    [SerializeField] private float moveSpeed = 2f;
 
     private bool chasing, hitWall;
     private Transform player;
     [SerializeField] private UnityEvent onBeginChasing;
-
+    private static readonly int AnimatorChase = Animator.StringToHash("Chase");
     private void Update()
     {
         if (player == null)
@@ -34,7 +33,7 @@ public class EnemyController : EntityController
         {
             if (chasing != lastChaseState)
             {
-                animator.SetTrigger(AnimatorHit);
+                animator.SetTrigger(AnimatorChase);
                 onBeginChasing?.Invoke();
             }
             ChasePlayer();
@@ -54,8 +53,6 @@ public class EnemyController : EntityController
 
         if (transform.position.x >= rightPoint.position.x) SetDirection(-1);
         if (transform.position.x <= leftPoint.position.x) SetDirection(1);
-
-        MoveHorizontally(direction);
     }
 
     private void ChasePlayer()
@@ -65,16 +62,7 @@ public class EnemyController : EntityController
 
         if (Mathf.Abs(distance) < attackComponent.armRadius || hitWall) dir = 0;
 
-        MoveHorizontally(dir);
         SetDirection(dir);
-    }
-    private void MoveHorizontally(float dir)
-    {
-        if (rb != null && dir != 0)
-        {
-            Vector2 newPos = rb.position + Vector2.right * dir * moveSpeed * Time.deltaTime;
-            rb.MovePosition(newPos);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

@@ -18,7 +18,6 @@ public class Item : ScriptableObject
     public void Select()
     {
         if (modelInstance != null) modelInstance.SetActive(true);
-
     }
     public void Deselect()
     {

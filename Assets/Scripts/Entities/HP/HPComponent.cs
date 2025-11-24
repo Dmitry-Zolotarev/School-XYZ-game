@@ -7,7 +7,7 @@ public class HPComponent : MonoBehaviour
     [HideInInspector] public int HP;
     public int XP_for_murder = 50;
     public int maxHP = 100;
-    
+    private bool isDead;
     private void Awake() {
         HP = maxHP;
  
@@ -23,11 +23,12 @@ public class HPComponent : MonoBehaviour
     }
     public void Die()
     {
-        if(tag == "Enemy")
+        if(tag == "Enemy" && !isDead)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             var leveling = player.GetComponent<Leveling>();
             leveling.GetXP(XP_for_murder);
+            isDead = true;
         }   
         onDie?.Invoke();
     }

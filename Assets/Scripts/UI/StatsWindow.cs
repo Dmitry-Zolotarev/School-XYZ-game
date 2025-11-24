@@ -76,7 +76,9 @@ public class StatsWindow : MonoBehaviour
             var hotBarScript = hotBar?.GetComponent<InventoryWindow>();
             if (hotBarScript != null) inventory.ItemsChanged += hotBarScript.ReDraw;
             hotBar?.SetActive(true);
-            inventory.SelectItem(inventory.selectedSlot);
+
+            inventory.SelectItem(inventory.selectedSlot % hotBarScript.hotbarSize);
+
             statsWindow?.SetActive(false);
             Cursor.visible = false;
             Time.timeScale = 1f;

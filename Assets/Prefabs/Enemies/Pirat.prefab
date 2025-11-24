@@ -484,7 +484,7 @@ MonoBehaviour:
   - _id: Die
     _clip: {fileID: 8300000, guid: f2637c8834bbefb4caea32ee979e0f8b, type: 3}
   - _id: Chase
-    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
+    _clip: {fileID: 8300000, guid: 8b9569f14337a6e40bda43a6ace411b7, type: 3}
 --- !u!82 &8854395553208122573
 AudioSource:
   m_ObjectHideFlags: 0

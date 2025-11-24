@@ -1,7 +1,5 @@
 ﻿using JetBrains.Annotations;
 using System;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour
@@ -16,6 +14,7 @@ public class Inventory : MonoBehaviour
     public Item[] Items;
     public Action ItemsChanged;
     public Transform itemHand;
+
     private void Start()
     {
         Items = new Item[size];
@@ -23,33 +22,52 @@ public class Inventory : MonoBehaviour
         attack = GetComponent<AttackComponent>();
         SelectItem(0);
     }
+
     private void FixedUpdate()
     {
-        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
+        if (Items[selectedSlot] != null && animator != null)
+            Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
     }
+
     public void SelectItemWithoutInvoke(int i)
     {
+        // Сначала снимаем старый предмет
+        if (Items[selectedSlot] != null)
+            Items[selectedSlot].Deselect();
+
+        // Удаляем все старые объекты из руки
+        foreach (Transform child in itemHand)
+        {
+            Destroy(child.gameObject);
+        }
+
+        // Обеспечиваем корректный индекс
         while (i < 0) i += size;
         if (i >= size) i %= size;
 
-        var old = Items[selectedSlot];
-        if (old != null) old.Deselect();
-
         selectedSlot = i;
-        var item = Items[selectedSlot];
-        CheckWeapon(item);
-        if (item != null) item.Select();
+
+        // Выбираем новый предмет
+        if (Items[selectedSlot] != null)
+        {
+            CheckWeapon(Items[selectedSlot]);
+            Items[selectedSlot].Select();
+            Items[selectedSlot].Attach(itemHand);
+        }
     }
+
     public void SelectItem(int i)
     {
         SelectItemWithoutInvoke(i);
         ItemsChanged?.Invoke();
     }
+
     public void ScrollItem(float delta)
     {
         if (delta > 0) SelectItem(selectedSlot + 1);
         if (delta < 0) SelectItem(selectedSlot - 1);
     }
+
     public bool PickItem(Item item)
     {
         if (item == null) return false;
@@ -76,6 +94,7 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
     private void CheckWeapon(Item item)
     {
         attack.attackMode = 0;
