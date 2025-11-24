@@ -150,8 +150,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6540964184826502354}
   - component: {fileID: 4707227803602533953}
-  - component: {fileID: 5802485249887677371}
-  - component: {fileID: 6882356943858714282}
   - component: {fileID: 8956083027961755729}
   - component: {fileID: 4867548481547804224}
   - component: {fileID: 6265524689735574845}
@@ -165,6 +163,7 @@ GameObject:
   - component: {fileID: 2589976012273206197}
   - component: {fileID: 7839044549799861229}
   - component: {fileID: 6638442978522306828}
+  - component: {fileID: 2200605101564558785}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -218,144 +217,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &5802485249887677371
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24fa634180633ef41bbbf6fc6d9f6659, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerInput
---- !u!114 &6882356943858714282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: e82ad4e2f2567f947871a78283de0b2a, type: 3}
-  m_NotificationBehavior: 2
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents:
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: InputAD
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 0f355cc7-7796-4e03-8be8-c17016429c03
-    m_ActionName: 'Player Actions/MoveHorizontal[/Keyboard/a,/Keyboard/d]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: InputJump
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: ab4276fd-c486-41ee-bf7a-337a45f29646
-    m_ActionName: 'Player Actions/Jump[/Keyboard/space]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: AttackClick
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: a8c6de09-900f-46d3-9e57-b8bb83e8d182
-    m_ActionName: 'Player Actions/Attack[/Mouse/leftButton]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: Interact
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 3810206c-2239-488b-8f70-1e99e458d806
-    m_ActionName: 'Player Actions/Interact[/Keyboard/e]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: SelectItem
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: f8664dc6-f433-4031-85ee-0d8e8c0bb816
-    m_ActionName: 'Player Actions/SelectItem[/Keyboard/0,/Keyboard/1,/Keyboard/2,/Keyboard/3,/Keyboard/4]'
-  - m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 5802485249887677371}
-        m_TargetAssemblyTypeName: PlayerInput, Assembly-CSharp
-        m_MethodName: MouseScroll
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-    m_ActionId: 7d8c6c62-796c-4619-ba21-10173a599bf5
-    m_ActionName: 'Player Actions/ItemScroll[/Mouse/scroll/up,/Mouse/scroll/down]'
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Player Actions
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
 --- !u!70 &8956083027961755729
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -461,6 +322,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   HP: 0
+  XP_for_murder: 50
   maxHP: 100
 --- !u!114 &8937964369943679714
 MonoBehaviour:
@@ -542,8 +404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3096a269cbfa8924eafed7bc9dc90e04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Inventory
-  size: 10
-  hotbarSize: 5
+  size: 15
   selectedSlot: 0
   itemOffset: {x: -0.1, y: -0.1}
   Items: []
@@ -782,14 +643,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
   playSoundCooldown: 0.2
   sounds:
-  - _id: Melee
-    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
   - _id: Hurt
-    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
+    _clip: {fileID: 8300000, guid: 390c682175a8e3648ba579f5e5a9ae83, type: 3}
+  - _id: Melee
+    _clip: {fileID: 8300000, guid: 621f650d9dd5c3543a050def2f5ee9c3, type: 3}
   - _id: Jump
-    _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
+    _clip: {fileID: 8300000, guid: 95a45e811ed73fb42a45f179ac9f779a, type: 3}
   - _id: Range
-    _clip: {fileID: 8300000, guid: 8396c6a99db83394f89f83326ceaeb71, type: 3}
+    _clip: {fileID: 8300000, guid: 663a18639e919ca47b66c7e67dffc19a, type: 3}
 --- !u!114 &7839044549799861229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -805,10 +666,11 @@ MonoBehaviour:
   attackParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   attackCooldown: 0.5
   spawner: {fileID: 0}
-  damage: 5
-  damageIncrease: 1
   armRadiusIncrease: 0
   attackCooldownScale: 1
+  CurrentDirection: {x: 0, y: 0}
+  damage: 5
+  damageIncrease: 1
   armRadius: 0.5
   attackMode: 0
   onMeleeAttack:
@@ -859,6 +721,21 @@ MonoBehaviour:
   xp_forLevelUP: 100
   HPIncrease: 10
   damageIncrease: 1
+  OnLevelUP:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &2200605101564558785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6d295b83dec2124aacb90482421e960, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInputLegacy
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0
@@ -888,7 +765,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.6314423, y: 1.48765, z: -4.8289976}
+  m_LocalPosition: {x: 2.455893, y: 1.4876502, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

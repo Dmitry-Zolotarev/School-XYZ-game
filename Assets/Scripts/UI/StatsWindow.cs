@@ -7,7 +7,7 @@ public class StatsWindow : MonoBehaviour
     private Leveling leveling;
     private HPComponent health;
     private AttackComponent attack;
-
+    private Inventory inventory;
     [SerializeField] private TextMeshProUGUI levelLabel, XPLabel, HPLabel, damageLabel;
     [SerializeField] private GameObject statsWindow, statsMenu, inventoryMenu;
     private GameObject player, hotBar;
@@ -20,12 +20,14 @@ public class StatsWindow : MonoBehaviour
             leveling = player.GetComponent<Leveling>();
             health = player.GetComponent<HPComponent>();
             attack = player.GetComponent<AttackComponent>();
+            inventory = player.GetComponent<Inventory>();
         }      
     }
     public void SelectInventory()
     {
         statsMenu?.SetActive(false);      
         inventoryMenu?.SetActive(true);
+
         Cursor.visible = true;
     }
     public void SelectStats()
@@ -42,7 +44,10 @@ public class StatsWindow : MonoBehaviour
     {
         if (context.performed && statsWindow != null && !statsWindow.activeSelf && Time.timeScale == 1f)
         {
-            hotBar?.SetActive(false);
+            var hotBarScript = hotBar?.GetComponent<InventoryWindow>();
+            if (hotBarScript != null) inventory.ItemsChanged -= hotBarScript.ReDraw;
+
+            hotBar?.SetActive(false);          
             statsWindow?.SetActive(true);
             
             SelectStats();
@@ -55,6 +60,8 @@ public class StatsWindow : MonoBehaviour
     {
         if (context.performed && statsWindow != null && !statsWindow.activeSelf && Time.timeScale == 1f)
         {
+            var hotBarScript = hotBar?.GetComponent<InventoryWindow>();
+            if (hotBarScript != null) inventory.ItemsChanged -= hotBarScript.ReDraw;
             hotBar?.SetActive(false);
             statsWindow?.SetActive(true);
             SelectInventory();
@@ -66,7 +73,10 @@ public class StatsWindow : MonoBehaviour
     {
         if (context.performed && statsWindow != null && statsWindow.activeSelf && Time.timeScale == 0f)
         {
+            var hotBarScript = hotBar?.GetComponent<InventoryWindow>();
+            if (hotBarScript != null) inventory.ItemsChanged += hotBarScript.ReDraw;
             hotBar?.SetActive(true);
+            inventory.SelectItem(inventory.selectedSlot);
             statsWindow?.SetActive(false);
             Cursor.visible = false;
             Time.timeScale = 1f;

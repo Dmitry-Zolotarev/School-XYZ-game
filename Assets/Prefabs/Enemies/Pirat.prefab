@@ -349,6 +349,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   HP: 0
+  XP_for_murder: 50
   maxHP: 50
 --- !u!114 &4849606171689534937
 MonoBehaviour:
@@ -395,7 +396,6 @@ MonoBehaviour:
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
   detectionRange: 5
-  XP_for_murder: 50
   onBeginChasing:
     m_PersistentCalls:
       m_Calls:
@@ -478,11 +478,11 @@ MonoBehaviour:
   playSoundCooldown: 0
   sounds:
   - _id: Hurt
-    _clip: {fileID: 8300000, guid: a685049dfcdf6f548bf5120cfdeea517, type: 3}
+    _clip: {fileID: 8300000, guid: 390c682175a8e3648ba579f5e5a9ae83, type: 3}
   - _id: Melee
-    _clip: {fileID: 8300000, guid: d490fd48eee17694bbd5ae5657b34552, type: 3}
+    _clip: {fileID: 8300000, guid: 621f650d9dd5c3543a050def2f5ee9c3, type: 3}
   - _id: Die
-    _clip: {fileID: 8300000, guid: 90bb8a3eb5f0c834b94ce6a77c268043, type: 3}
+    _clip: {fileID: 8300000, guid: f2637c8834bbefb4caea32ee979e0f8b, type: 3}
   - _id: Chase
     _clip: {fileID: 8300000, guid: 09cbd5084207ad74e86806d2f7bbffd1, type: 3}
 --- !u!82 &8854395553208122573

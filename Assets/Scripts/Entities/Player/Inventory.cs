@@ -27,7 +27,7 @@ public class Inventory : MonoBehaviour
     {
         if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
     }
-    public void SelectItem(int i)
+    public void SelectItemWithoutInvoke(int i)
     {
         while (i < 0) i += size;
         if (i >= size) i %= size;
@@ -38,10 +38,13 @@ public class Inventory : MonoBehaviour
         selectedSlot = i;
         var item = Items[selectedSlot];
         CheckWeapon(item);
-        ItemsChanged?.Invoke();
         if (item != null) item.Select();
     }
-
+    public void SelectItem(int i)
+    {
+        SelectItemWithoutInvoke(i);
+        ItemsChanged?.Invoke();
+    }
     public void ScrollItem(float delta)
     {
         if (delta > 0) SelectItem(selectedSlot + 1);

@@ -4,7 +4,7 @@ using UnityEngine;
 public class ProjectileComponent : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public float shootForce = 10f, shootAngle = 15f;
+    public float shootForce = 10f, shootAngle = 15f, collisionDelay = 0.05f;
     void Start()
     {
         StartCoroutine(Launch());
@@ -20,7 +20,7 @@ public class ProjectileComponent : MonoBehaviour
 
             rigidbody.AddForce(shootDirection * shootForce, ForceMode2D.Impulse);
         }
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(collisionDelay);
         var collider = GetComponent<Collider2D>();
         collider.isTrigger = false;
     }

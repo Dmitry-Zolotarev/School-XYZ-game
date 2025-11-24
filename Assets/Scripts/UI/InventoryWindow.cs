@@ -1,34 +1,35 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(GridLayoutGroup))]
 public class InventoryWindow : MonoBehaviour
 {
     [SerializeField] private Inventory inventory;
-    [SerializeField] private int hotbarSize = 5;
-    [SerializeField] private GameObject itemIconPrefab;
+    [SerializeField] private int hotbarSize = 15;
 
     private GridLayoutGroup grid;
     private List<GameObject> drawIcons = new List<GameObject>();
     private bool subscribed = false;
 
+    private int? draggingIndex = null;
+    private int lastDragSlot = -1;
+    private bool isMouseDown = false;
+
     private void Start()
     {
         grid = GetComponent<GridLayoutGroup>();
-        TryBindInventory();
+        if (inventory == null) TryBindInventory();
     }
-
     private void Update()
     {
         if (inventory == null) TryBindInventory();
-
+        if (isMouseDown && !Mouse.current.leftButton.isPressed) EndDrag();
     }
-
     private void TryBindInventory()
     {
-        if (inventory != null) return;
-
         var player = GameObject.FindGameObjectWithTag("Player");
         if (player == null) return;
 
@@ -42,78 +43,51 @@ public class InventoryWindow : MonoBehaviour
             inventory.ItemsChanged += ReDraw;
             subscribed = true;
         }
-
-        if (inventory.Items != null && inventory.Items.Length == inventory.size) ReDraw();
-
+        ReDraw();
     }
 
     private void OnDestroy()
     {
-        if (inventory != null && subscribed)
-            inventory.ItemsChanged -= ReDraw;
+        if (inventory != null && subscribed) inventory.ItemsChanged -= ReDraw;
     }
 
-    private void ReDraw()
+    public void ReDraw()
     {
-        if (inventory == null || inventory.Items == null) return;
+        if (inventory == null || inventory.Items == null || !gameObject.activeSelf) return;
 
-        foreach (var icon in drawIcons)
-            Destroy(icon);
+        foreach (var icon in drawIcons) Destroy(icon);
         drawIcons.Clear();
 
-        // Вычисляем стартовый индекс для хотбара с учётом выбранного слота
-        int startIndex = 0;
-        if (inventory.selectedSlot >= hotbarSize)
-            startIndex = inventory.selectedSlot - hotbarSize + 1;
+        int count = Mathf.Min(hotbarSize, inventory.size);
 
-        int endIndex = Mathf.Min(startIndex + hotbarSize, inventory.size);
+        int selectedSlotInUI = Mathf.Clamp(inventory.selectedSlot, 0, count - 1);
 
-        for (int i = startIndex; i < endIndex; i++)
+        for (int i = 0; i < count; i++)
         {
-            Item item = inventory.Items[i];
-            GameObject icon = GetIcon(item, i == inventory.selectedSlot);
+            int slot = i;
+            GameObject icon = CreateSlot(inventory.Items[i], slot == selectedSlotInUI);
+            AddPointerEvents(icon, slot);
             drawIcons.Add(icon);
         }
     }
 
-    private GameObject GetIcon(Item item, bool isSelected)
+    private GameObject CreateSlot(Item item, bool selected)
     {
-        GameObject icon = new GameObject("ItemIcon", typeof(RectTransform));
-        icon.transform.SetParent(grid.transform, false);
+        GameObject obj = new GameObject("Slot", typeof(RectTransform), typeof(Image));
+        obj.transform.SetParent(grid.transform, false);
 
-        RectTransform iconRect = icon.GetComponent<RectTransform>();
-        iconRect.anchorMin = new Vector2(0.5f, 0.5f);
-        iconRect.anchorMax = new Vector2(0.5f, 0.5f);
-        iconRect.sizeDelta = new Vector2(36, 36);
-        iconRect.anchoredPosition = Vector2.zero;
-
-        if (isSelected)
-        {
-            GameObject overlayGO = new GameObject("Overlay", typeof(RectTransform));
-            overlayGO.transform.SetParent(icon.transform, false);
-
-            Image overlay = overlayGO.AddComponent<Image>();
-            overlay.color = new Color(0.3f, 0.3f, 0.1f, 0.3f);
-
-            RectTransform overlayRect = overlayGO.GetComponent<RectTransform>();
-            overlayRect.anchorMin = Vector2.zero;
-            overlayRect.anchorMax = Vector2.one;
-            overlayRect.offsetMin = Vector2.zero;
-            overlayRect.offsetMax = Vector2.zero;
-
-            overlayGO.transform.SetAsFirstSibling();
-        }
+        Image img = obj.GetComponent<Image>();
+        img.raycastTarget = true;
 
         if (item != null)
         {
-            Image image = icon.AddComponent<Image>();
-            image.sprite = item.Icon;
-            image.preserveAspect = true;
+            img.sprite = item.Icon;
+            img.color = Color.white;
 
             if (item.count > 1 && !item.IsWeapon())
             {
                 GameObject textGO = new GameObject("CountText", typeof(RectTransform));
-                textGO.transform.SetParent(icon.transform, false);
+                textGO.transform.SetParent(obj.transform, false);
 
                 RectTransform textRect = textGO.GetComponent<RectTransform>();
                 textRect.anchorMin = new Vector2(0.5f, 0.5f);
@@ -131,7 +105,78 @@ public class InventoryWindow : MonoBehaviour
                 countText.text = item.count.ToString();
             }
         }
+        else img.color = new Color(0, 0, 0, 0.1f);
 
-        return icon;
+        if (selected)
+        {
+            GameObject overlay = new GameObject("Selected", typeof(RectTransform), typeof(Image));
+            overlay.transform.SetParent(obj.transform, false);
+
+            var overlayImage = overlay.GetComponent<Image>();
+            overlayImage.color = new Color(0.3f, 0.3f, 0.1f, 0.3f);
+
+            RectTransform overlayRect = overlay.GetComponent<RectTransform>();
+            overlayRect.anchorMin = Vector2.zero;
+            overlayRect.anchorMax = Vector2.one;
+            overlayRect.offsetMin = overlayRect.offsetMax = Vector2.zero;
+        }
+        return obj;
+    }
+
+    private void AddPointerEvents(GameObject icon, int slotIndex)
+    {
+        EventTrigger trigger = icon.AddComponent<EventTrigger>();
+
+        var down = new EventTrigger.Entry { eventID = EventTriggerType.PointerDown };
+        down.callback.AddListener((_) => OnPointerDown(slotIndex));
+        trigger.triggers.Add(down);
+
+        var enter = new EventTrigger.Entry { eventID = EventTriggerType.PointerEnter };
+        enter.callback.AddListener((_) => OnEnter(slotIndex));
+        trigger.triggers.Add(enter);
+
+        var up = new EventTrigger.Entry { eventID = EventTriggerType.PointerUp };
+        up.callback.AddListener((_) => EndDrag());
+        trigger.triggers.Add(up);
+    }
+
+    private void OnPointerDown(int slot)
+    {
+        if (inventory == null) return;
+
+        isMouseDown = true;
+        inventory.SelectItem(slot);
+
+        if (inventory.Items[slot] == null)
+        {
+            draggingIndex = null;
+            lastDragSlot = -1;
+            return;
+        }
+        draggingIndex = slot;
+        lastDragSlot = slot;
+    }
+    private void OnEnter(int targetSlot)
+    {
+        if (isMouseDown && draggingIndex != null && inventory != null && targetSlot != lastDragSlot)
+        {
+            SwapSlots(targetSlot);
+            lastDragSlot = targetSlot;
+            inventory.SelectItemWithoutInvoke(targetSlot);
+            inventory.ItemsChanged?.Invoke();
+        }     
+    }
+    private void SwapSlots(int targetSlot)
+    {
+        Item t = inventory.Items[targetSlot];
+        inventory.Items[targetSlot] = inventory.Items[lastDragSlot];
+        inventory.Items[lastDragSlot] = t;
+    }
+    private void EndDrag()
+    {
+        isMouseDown = false;
+        draggingIndex = null;
+        lastDragSlot = -1;
+        if (inventory != null) inventory.SelectItemWithoutInvoke(inventory.selectedSlot);
     }
 }

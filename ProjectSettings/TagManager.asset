@@ -14,6 +14,7 @@ TagManager:
   - LaserGun
   - Confiner
   - InventoryHotBar
+  - Projectile
   layers:
   - Default
   - TransparentFX

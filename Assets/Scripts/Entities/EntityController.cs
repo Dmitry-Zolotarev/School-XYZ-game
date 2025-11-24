@@ -13,7 +13,7 @@ public class EntityController : MonoBehaviour
 {
     protected float direction = 0;
 
-    private Rigidbody2D rb;
+    protected Rigidbody2D rb;
     protected Animator animator;
     private LineRenderer laserRay;
     [HideInInspector] public SpawnComponent spawner;

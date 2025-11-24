@@ -1285,6 +1285,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: e7644670-e2d3-4cbb-ac03-25f115b105cd
     m_ActionName: 'UI Actions/OpenInventoryWindow[/Keyboard/i]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 491576528973386436}
+        m_TargetAssemblyTypeName: InventoryWindow, Assembly-CSharp
+        m_MethodName: LeftClick
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 5cf41c54-768a-43df-90f2-3b73d2ebb070
+    m_ActionName: 'UI Actions/InventoryClick[/Mouse/leftButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: UI Actions
@@ -2203,6 +2219,14 @@ PrefabInstance:
       propertyPath: m_PixelsPerUnitMultiplier
       value: 0.9
       objectReference: {fileID: 0}
+    - target: {fileID: 3673570955619291489, guid: 299721127d736a44d92af56e120c317d, type: 3}
+      propertyPath: m_Padding.m_Top
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673570955619291489, guid: 299721127d736a44d92af56e120c317d, type: 3}
+      propertyPath: m_Padding.m_Left
+      value: 14
+      objectReference: {fileID: 0}
     - target: {fileID: 5639215932933455859, guid: 299721127d736a44d92af56e120c317d, type: 3}
       propertyPath: hotbarSize
       value: 15
@@ -2292,6 +2316,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 299721127d736a44d92af56e120c317d, type: 3}
+--- !u!114 &491576528973386436 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5639215932933455859, guid: 299721127d736a44d92af56e120c317d, type: 3}
+  m_PrefabInstance: {fileID: 5228937814524587319}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5693681591352881626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69401859e857cb640a56690718d90105, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::InventoryWindow
 --- !u!224 &1872732820186553739 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5867525861837058236, guid: 299721127d736a44d92af56e120c317d, type: 3}

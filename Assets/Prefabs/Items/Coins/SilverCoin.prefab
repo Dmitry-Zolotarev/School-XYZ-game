@@ -175,6 +175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnterCollisionComponent
   targetTag: Player
   isLooping: 0
+  loopDelay: 0
   action:
     m_PersistentCalls:
       m_Calls:
@@ -327,4 +328,4 @@ MonoBehaviour:
   playSoundCooldown: 0.2
   sounds:
   - _id: Coin
-    _clip: {fileID: 8300000, guid: e2908e54240409f4784e4caea48499c0, type: 3}
+    _clip: {fileID: 8300000, guid: 84d8c81351dc9b8408a61e5449eb0168, type: 3}
