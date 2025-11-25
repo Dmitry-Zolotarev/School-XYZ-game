@@ -382,7 +382,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 4fa7e3690a2eedc4a860c94e6e250993, type: 3}
   velocity: 3
-  jumpForce: 5.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -390,9 +389,6 @@ MonoBehaviour:
   isGrounded: 0
   isJumping: 0
   facingRight: 1
-  onJump:
-    m_PersistentCalls:
-      m_Calls: []
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
   detectionRange: 5
@@ -478,13 +474,13 @@ MonoBehaviour:
   playSoundCooldown: 0
   sounds:
   - _id: Hurt
-    _clip: {fileID: 8300000, guid: 390c682175a8e3648ba579f5e5a9ae83, type: 3}
+    _clip: {fileID: 8300000, guid: b960333c0516e3f489ae2fa023865f61, type: 3}
   - _id: Melee
-    _clip: {fileID: 8300000, guid: 621f650d9dd5c3543a050def2f5ee9c3, type: 3}
+    _clip: {fileID: 8300000, guid: d770a97613cef8c4594edd8725e8dfcc, type: 3}
   - _id: Die
-    _clip: {fileID: 8300000, guid: f2637c8834bbefb4caea32ee979e0f8b, type: 3}
+    _clip: {fileID: 8300000, guid: 3af88f1e81410424d858874d29738c0a, type: 3}
   - _id: Chase
-    _clip: {fileID: 8300000, guid: 8b9569f14337a6e40bda43a6ace411b7, type: 3}
+    _clip: {fileID: 8300000, guid: 7d701dbabbf5b1a40976d24c1adc797c, type: 3}
 --- !u!82 &8854395553208122573
 AudioSource:
   m_ObjectHideFlags: 0

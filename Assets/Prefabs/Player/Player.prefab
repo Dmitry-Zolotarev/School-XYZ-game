@@ -648,15 +648,15 @@ MonoBehaviour:
   playSoundCooldown: 0
   sounds:
   - _id: Hurt
-    _clip: {fileID: 8300000, guid: 390c682175a8e3648ba579f5e5a9ae83, type: 3}
+    _clip: {fileID: 8300000, guid: b960333c0516e3f489ae2fa023865f61, type: 3}
   - _id: Melee
-    _clip: {fileID: 8300000, guid: 621f650d9dd5c3543a050def2f5ee9c3, type: 3}
+    _clip: {fileID: 8300000, guid: d770a97613cef8c4594edd8725e8dfcc, type: 3}
   - _id: Jump
-    _clip: {fileID: 8300000, guid: 95a45e811ed73fb42a45f179ac9f779a, type: 3}
+    _clip: {fileID: 8300000, guid: 165a70272ac02794a91ecbf2f89f19e3, type: 3}
   - _id: Range
-    _clip: {fileID: 8300000, guid: 663a18639e919ca47b66c7e67dffc19a, type: 3}
+    _clip: {fileID: 8300000, guid: a442bbe4d1040924b833220ebce0634c, type: 3}
   - _id: LevelUP
-    _clip: {fileID: 8300000, guid: 4d5b81d4bb065fd4ba63b03bb5ddb52d, type: 3}
+    _clip: {fileID: 8300000, guid: b280f6de42d3143469e70e11a726c689, type: 3}
 --- !u!114 &7839044549799861229
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -804,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.8880105, y: 2.28765, z: -4.8289976}
+  m_LocalPosition: {x: 2.3880105, y: 1.4876502, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

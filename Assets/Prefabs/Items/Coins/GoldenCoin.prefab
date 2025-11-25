@@ -231,7 +231,7 @@ MonoBehaviour:
   playSoundCooldown: 0.2
   sounds:
   - _id: Coin
-    _clip: {fileID: 8300000, guid: 84d8c81351dc9b8408a61e5449eb0168, type: 3}
+    _clip: {fileID: 8300000, guid: ba308bf6a66da484781422ea40ff0019, type: 3}
 --- !u!82 &5262368138210816422
 AudioSource:
   m_ObjectHideFlags: 0
