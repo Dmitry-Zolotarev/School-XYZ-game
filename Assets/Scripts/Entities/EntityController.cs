@@ -32,7 +32,7 @@ public class EntityController : MonoBehaviour
 
     protected HPComponent health;
     protected AttackComponent attackComponent;
-    protected int jumpCount;
+    protected int jumpCount = 0, dashCount = 0;
     
 
     protected void Awake()
@@ -69,23 +69,30 @@ public class EntityController : MonoBehaviour
     private bool CheckGround()
     {
         Collider2D collider = GetComponent<Collider2D>();
-        Vector2 origin = (Vector2)collider.bounds.center +
-                         Vector2.down * (collider.bounds.extents.y + 0.05f);
-
+        Vector2 origin = (Vector2)collider.bounds.center + Vector2.down * (collider.bounds.extents.y + 0.05f);
         return Physics2D.Raycast(origin, Vector2.down, 0.1f, groundLayer);
     }
 
     private void FixedUpdate()
     {
-        if (health.HP <= 0) return;
-
-        bool lastGrounded = isGrounded;
+        if (health.HP <= 0 && tag != "Player") return;
+            bool lastGrounded = isGrounded;
         isGrounded = CheckGround();
-        if (isGrounded) jumpCount = 0;
-
         Vector2 vel = rb.linearVelocity;
-        vel.x = direction * velocity;
-        rb.linearVelocity = vel;
+        if (dashCount == 0)
+        {
+            
+            vel.x = direction * velocity;
+            rb.linearVelocity = vel;
+        }      
+
+        if (isGrounded) 
+        {
+            jumpCount = 0;
+            dashCount = 0;
+        }
+        
+        
 
         isJumping = !isGrounded && vel.y > 0;
         isRunning = isGrounded && Mathf.Abs(vel.x) > 0;
@@ -116,7 +123,7 @@ public class EntityController : MonoBehaviour
     }
 
     public void OnDie()
-    {
+    {      
         animator.SetTrigger(AnimatorDie);
         if (hitParticles)
         {

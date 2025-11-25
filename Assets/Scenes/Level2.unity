@@ -607,7 +607,7 @@ GameObject:
   - component: {fileID: 191102422}
   - component: {fileID: 191102425}
   - component: {fileID: 191102424}
-  - component: {fileID: 191102423}
+  - component: {fileID: 191102426}
   m_Layer: 0
   m_Name: OutOfLevel
   m_TagString: Untagged
@@ -630,18 +630,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &191102423
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 191102421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c6b58c732aed54a84c51f148d03bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RestartLevelComponent
 --- !u!114 &191102424
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,9 +648,9 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 191102423}
-        m_TargetAssemblyTypeName: RestartLevelComponent, Assembly-CSharp
-        m_MethodName: RestartLevel
+      - m_Target: {fileID: 191102426}
+        m_TargetAssemblyTypeName: GameOverComponent, Assembly-CSharp
+        m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -718,6 +706,19 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &191102426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191102421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e4700387107fc4881fec6861900a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverComponent
+  gameOverWindow: {fileID: 1076468853}
 --- !u!1001 &231599214
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2908,6 +2909,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a673bbd37cd126e45a7188b870bf4722, type: 3}
+--- !u!1 &1076468853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4932741552853240503, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
+  m_PrefabInstance: {fileID: 1262287392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1111517563 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7471592735809129057, guid: 75acec3b1b65589478648cb7f358ead0, type: 3}
@@ -3152,6 +3158,10 @@ PrefabInstance:
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ToggleStatsWindow
       objectReference: {fileID: 0}
+    - target: {fileID: 4932741552853240503, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
+      propertyPath: m_Name
+      value: GameOverWindow
+      objectReference: {fileID: 0}
     - target: {fileID: 5282245838395282731, guid: 3a792958b775a1d4896825b02ce8a81c, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -3359,58 +3369,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[0].name
-      value: Double jump
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[1].name
-      value: Dash
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[2].name
-      value: Jump attack
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[0].description
-      value: Allows to stomp on enemies.
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[1].description
-      value: Double jump.
-      objectReference: {fileID: 0}
-    - target: {fileID: -1815043366553193085, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: perks.Array.data[2].description
-      value: Allows to stomp on enemies
-      objectReference: {fileID: 0}
     - target: {fileID: 749373126426889800, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: BoundingShape2D
       value: 
       objectReference: {fileID: 152711513}
-    - target: {fileID: 870657750649178154, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: size
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: playSoundCooldown
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: sounds.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: sounds.Array.data[4]._id
-      value: LevelUP
-      objectReference: {fileID: 0}
-    - target: {fileID: 2589976012273206197, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: sounds.Array.data[4]._clip
-      value: 
-      objectReference: {fileID: 8300000, guid: 4d5b81d4bb065fd4ba63b03bb5ddb52d, type: 3}
     - target: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_Name
       value: Player
@@ -3454,18 +3416,6 @@ PrefabInstance:
     - target: {fileID: 6540964184826502354, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 2.895352
-      objectReference: {fileID: 0}
-    - target: {fileID: 6887372237857860021, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.28765
-      objectReference: {fileID: 0}
-    - target: {fileID: 7266937275027893272, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
-      propertyPath: Priority
-      value: 64
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

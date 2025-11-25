@@ -15,6 +15,7 @@ TagManager:
   - Confiner
   - InventoryHotBar
   - Projectile
+  - GameOver
   layers:
   - Default
   - TransparentFX

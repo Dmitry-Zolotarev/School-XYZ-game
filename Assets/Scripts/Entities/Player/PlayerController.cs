@@ -4,14 +4,14 @@ using UnityEngine.Events;
 [RequireComponent(typeof(HPComponent))]
 public class PlayerController : EntityController
 {
-    
-    [SerializeField] private UnityEvent onJump;
+
+    [SerializeField] private UnityEvent onJump, onDash;
     [SerializeField] private float jumpForce = 5.5f, dashForce = 3f;
     private static PlayerController instance;
     private PerksComponent perks;
     private new void Awake()
     {
-        base.Awake();  
+        base.Awake();
         perks = GetComponent<PerksComponent>();
         if (instance != null && instance != this)
         {
@@ -24,6 +24,13 @@ public class PlayerController : EntityController
             DontDestroyOnLoad(gameObject);
         }
     }
+    public new void OnDie()
+    {
+        base.OnDie();
+        var gameOverWindow = GameObject.FindGameObjectWithTag("GameOver");
+
+        gameOverWindow?.GetComponent<GameOverComponent>()?.GameOver();
+    }
     public void Jump()
     {
         if (isGrounded || (perks.IsUnlocked("Double jump") && jumpCount < 1))
@@ -35,11 +42,19 @@ public class PlayerController : EntityController
     }
     public void Dash()
     {
-        if (perks.IsUnlocked("Dash"))
+        if (perks.IsUnlocked("Dash") && dashCount == 0)
         {
-            onJump?.Invoke(); 
-            rb.AddForce(Vector2.right * direction * jumpForce, ForceMode2D.Impulse);
-            jumpCount++;
+            onDash?.Invoke();
+            float dir = facingRight ? 1 : -1;
+
+            rb.AddForce(dashForce * Vector2.right * dir, ForceMode2D.Impulse);
+            dashCount++;
         }
+    }
+    public void SaveSceneToFile()
+    {
+    }
+    public void LoadSceneFromFile()
+    {
     }
 }

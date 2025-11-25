@@ -155,7 +155,6 @@ GameObject:
   - component: {fileID: 6265524689735574845}
   - component: {fileID: 8937964369943679714}
   - component: {fileID: 8132036216841527231}
-  - component: {fileID: 8341137970847974359}
   - component: {fileID: 870657750649178154}
   - component: {fileID: 8059510020390876107}
   - component: {fileID: 7266937275027893272}
@@ -310,7 +309,7 @@ MonoBehaviour:
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8341137970847974359}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: RestartLevelComponent, Assembly-CSharp
         m_MethodName: RestartLevel
         m_Mode: 1
@@ -380,20 +379,23 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
+  onDash:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2589976012273206197}
+        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Jump
+          m_BoolArgument: 0
+        m_CallState: 2
   jumpForce: 5.2
-  dashForce: 3
---- !u!114 &8341137970847974359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3546267150103402514}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12c6b58c732aed54a84c51f148d03bd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RestartLevelComponent
+  dashForce: 4
 --- !u!114 &870657750649178154
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,7 +445,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 64
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -643,7 +645,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54dbd09e6b5700c41902312fe1b259db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlaySoundsComponent
-  playSoundCooldown: 0.2
+  playSoundCooldown: 0
   sounds:
   - _id: Hurt
     _clip: {fileID: 8300000, guid: 390c682175a8e3648ba579f5e5a9ae83, type: 3}
@@ -766,6 +768,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PerksComponent
   perks:
+  - name: Double jump
+    unlocked: 0
+  - name: Dash
+    unlocked: 0
   - name: Jump attack
     unlocked: 0
   perkScore: 0
@@ -798,7 +804,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22626501, y: 0.23778713, z: -4.8289976}
+  m_LocalPosition: {x: 2.8880105, y: 2.28765, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
