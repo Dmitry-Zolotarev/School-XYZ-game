@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 7839044549799861229}
   - component: {fileID: 6638442978522306828}
   - component: {fileID: 2200605101564558785}
+  - component: {fileID: -1815043366553193085}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -357,7 +358,6 @@ MonoBehaviour:
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   velocity: 5
-  jumpForce: 5.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
@@ -380,6 +380,8 @@ MonoBehaviour:
           m_StringArgument: Jump
           m_BoolArgument: 0
         m_CallState: 2
+  jumpForce: 5.2
+  dashForce: 3
 --- !u!114 &8341137970847974359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -751,6 +753,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d295b83dec2124aacb90482421e960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInputLegacy
+--- !u!114 &-1815043366553193085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be6da2bc6ee3b594f8ed5f3736802b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PerksComponent
+  perks:
+  - name: Jump attack
+    unlocked: 0
+  perkScore: 0
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.455893, y: 1.4876502, z: -4.8289976}
+  m_LocalPosition: {x: -0.22626501, y: 0.23778713, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

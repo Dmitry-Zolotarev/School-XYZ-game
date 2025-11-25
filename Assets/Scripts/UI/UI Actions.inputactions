@@ -43,9 +43,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "InventoryClick",
+                    "name": "OpenPerksWindow",
                     "type": "Button",
-                    "id": "5cf41c54-768a-43df-90f2-3b73d2ebb070",
+                    "id": "dfd28ab7-d0e7-487f-9b55-15771028658b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -99,12 +99,12 @@
                 },
                 {
                     "name": "",
-                    "id": "5574221b-d119-489c-9d65-c2dbf54e6958",
-                    "path": "<Mouse>/leftButton",
+                    "id": "81d4faed-b6d5-4338-b414-47eedab07cbb",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "InventoryClick",
+                    "action": "OpenPerksWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

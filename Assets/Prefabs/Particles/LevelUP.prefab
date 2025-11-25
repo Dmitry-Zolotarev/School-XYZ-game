@@ -103,4 +103,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfb7452fcee03f046ad692461af31ef7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LevelUPLabelComponent
-  lifeTime: 1.5
+  lifeTime: 1.4

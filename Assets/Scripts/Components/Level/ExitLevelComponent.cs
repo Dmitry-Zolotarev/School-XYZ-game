@@ -8,10 +8,6 @@ public class ExitLevelComponent : MonoBehaviour
     public void Exit()
     {
         var player = FindAnyObjectByType<PlayerController>();
-
-        if (player != null) player.SaveSession();
-
-
         SceneManager.LoadScene(levelName);
     }
 }

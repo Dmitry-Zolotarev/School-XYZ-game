@@ -7,7 +7,6 @@ public class RestartLevelComponent : MonoBehaviour
     {
         var scene = SceneManager.GetActiveScene().name;
         var player = FindAnyObjectByType<PlayerController>();
-        player.LoadSession();
         SceneManager.LoadScene(scene);
     }
 }

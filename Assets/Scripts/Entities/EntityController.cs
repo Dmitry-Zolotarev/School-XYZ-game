@@ -1,6 +1,5 @@
-﻿using System.Collections;
+﻿
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(Collider2D))]
@@ -20,11 +19,10 @@ public class EntityController : MonoBehaviour
 
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, hitParticles;
 
-    [SerializeField] protected float velocity = 1f, jumpForce = 7f;
+    [SerializeField] protected float velocity = 1f;
     [SerializeField] protected LayerMask groundLayer;
 
     public bool isRunning, isGrounded, isJumping, facingRight = true;
-    private int jumpCount;
 
     protected static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
     protected static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
@@ -33,9 +31,9 @@ public class EntityController : MonoBehaviour
     protected static readonly int AnimatorDie = Animator.StringToHash("Die");
 
     protected HPComponent health;
-    protected Inventory inventory;
     protected AttackComponent attackComponent;
-    [SerializeField] private UnityEvent onJump;
+    protected int jumpCount;
+    
 
     protected void Awake()
     {
@@ -44,7 +42,6 @@ public class EntityController : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spawner = GetComponent<SpawnComponent>();
-        inventory = GetComponent<Inventory>();
         health = GetComponent<HPComponent>();
         attackComponent = GetComponent<AttackComponent>();
         laserRay = GetComponent<LineRenderer>();
@@ -67,16 +64,6 @@ public class EntityController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
-    }
-
-    public void Jump()
-    {
-        if (jumpCount < 1)
-        {
-            onJump?.Invoke();
-            rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
-            jumpCount++;
-        }
     }
 
     private bool CheckGround()

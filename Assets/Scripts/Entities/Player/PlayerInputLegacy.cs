@@ -17,14 +17,15 @@ public class PlayerInputLegacy : MonoBehaviour
     {
         player.SetDirection(Input.GetAxisRaw("Horizontal"));
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            player.Jump();
+        if (Input.GetKeyDown(KeyCode.Space)) player.Jump();
 
-        if (Input.GetKeyDown(KeyCode.E))
-            player.Interact();
+        if (Input.GetKeyDown(KeyCode.LeftShift)) player.Dash();
 
-        if (Input.GetMouseButtonDown(0))
-            player.Attack();
+        if (Input.GetKeyDown(KeyCode.E)) player.Interact();
+
+
+        if (Input.GetMouseButtonDown(0)) player.Attack();
+
 
         float scroll = Input.mouseScrollDelta.y;
 

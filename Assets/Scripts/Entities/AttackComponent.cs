@@ -97,8 +97,8 @@ public class AttackComponent : MonoBehaviour
         RaycastHit2D[] hits = Physics2D.RaycastAll(origin, dir, distance);
         foreach (var hit in hits)
         {
-            if (hit.collider.gameObject.tag != gameObject.tag &&
-                hit.collider.gameObject.tag != "Confiner")
+            if (hit.collider.gameObject.tag != gameObject.tag && hit.collider.gameObject.tag != "Confiner" && !hit.collider.isTrigger)
+
             {
                 distance = Vector2.Distance(origin, hit.point);
                 var target = hit.collider.GetComponent<HPComponent>();

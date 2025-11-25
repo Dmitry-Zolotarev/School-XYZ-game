@@ -36,11 +36,16 @@ public class EnemyController : EntityController
                 animator.SetTrigger(AnimatorChase);
                 onBeginChasing?.Invoke();
             }
-            ChasePlayer();
+            if (distanceToPlayerX < attackComponent.armRadius && distanceToPlayerY < 0.5f)
+            {
+                SetDirection(0);
+                Attack();
+            } 
+            else ChasePlayer();
         }
         else Patrol();
 
-        if (distanceToPlayerX < attackComponent.armRadius && distanceToPlayerY < 1f) Attack();
+        
     }
 
     private void Patrol()

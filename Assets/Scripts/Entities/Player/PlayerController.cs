@@ -1,17 +1,18 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(HPComponent))]
 public class PlayerController : EntityController
 {
-    private static PlayerController instance;
     
-    private static PlayerData backup = new PlayerData(0, 0, 0, 0);
+    [SerializeField] private UnityEvent onJump;
+    [SerializeField] private float jumpForce = 5.5f, dashForce = 3f;
+    private static PlayerController instance;
+    private PerksComponent perks;
     private new void Awake()
     {
         base.Awake();  
-        health = GetComponent<HPComponent>();
+        perks = GetComponent<PerksComponent>();
         if (instance != null && instance != this)
         {
             instance.SetPosition(transform.position);
@@ -20,24 +21,25 @@ public class PlayerController : EntityController
         else
         {
             instance = this;
-            if (backup.Sum() == 0) SaveSession();
             DontDestroyOnLoad(gameObject);
         }
     }
-    public void SaveSession()
+    public void Jump()
     {
-        backup = new PlayerData
+        if (isGrounded || (perks.IsUnlocked("Double jump") && jumpCount < 1))
         {
-            HP = health.HP,
-            maxHP = health.maxHP,
-            damage = attackComponent.damage
-        };
+            onJump?.Invoke();
+            rb.AddForce(jumpForce * Vector2.up, ForceMode2D.Impulse);
+            jumpCount++;
+        }
     }
-    public void LoadSession()
+    public void Dash()
     {
-        if (backup.Sum() == 0) return;
-        health.HP = backup.HP;
-        health.maxHP = backup.maxHP;
-        attackComponent.damage = backup.damage;
+        if (perks.IsUnlocked("Dash"))
+        {
+            onJump?.Invoke(); 
+            rb.AddForce(Vector2.right * direction * jumpForce, ForceMode2D.Impulse);
+            jumpCount++;
+        }
     }
 }
