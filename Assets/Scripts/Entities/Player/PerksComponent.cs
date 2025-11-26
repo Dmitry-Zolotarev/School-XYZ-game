@@ -13,26 +13,22 @@ public class PerksComponent : MonoBehaviour
     [SerializeField] private List<Perk> perks;
     public int perkScore = 0;
 
-    public void BuyPerk(string name)
+    public bool BuyPerk(string name)
     {
         int i = GetIndex(name);
-
         if (i >= 0 && perkScore > 0 && !perks[i].unlocked)
         {
             perkScore--;
             perks[i].unlocked = true;
-            Debug.Log($"[Perks] Перк \"{name}\" куплен.");
-        }       
+            return perks[i].unlocked;
+        }
+        return false;
     }
 
     public bool IsUnlocked(string name)
     {
         int i = GetIndex(name);
-        if (i == -1)
-        {
-            Debug.LogError($"[Perks] IsUnlocked: не найден перк \"{name}\"");
-            return false;
-        }
+        if (i == -1) return false;
         return perks[i].unlocked;
     }
 
@@ -50,11 +46,9 @@ public class PerksComponent : MonoBehaviour
     {
         for (int i = 0; i < perks.Count; i++)
         {
-            if (perks[i].name == name)
-                return i;
-        }
+            if (perks[i].name == name) return i;
 
-        Debug.LogWarning($"[Perks] GetIndex: нет перка с именем \"{name}\"");
+        }
         return -1;
     }
 }

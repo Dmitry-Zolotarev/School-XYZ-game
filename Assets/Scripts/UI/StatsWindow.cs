@@ -9,15 +9,13 @@ public class StatsWindow : MonoBehaviour
     private Leveling leveling;
     private HPComponent health;
     private AttackComponent attack;
-    private PerksComponent perks;
     private Inventory inventory;
 
-    [SerializeField] private TextMeshProUGUI levelLabel, XPLabel, HPLabel, damageLabel, perkScoreLabel;
+    [SerializeField] private TextMeshProUGUI levelLabel, XPLabel, HPLabel, damageLabel;
     [SerializeField] private GameObject statsWindow, statsMenu, inventoryMenu, perksMenu;
-    [SerializeField] private List<Button> perkButtons;
-
+    
     private GameObject player, hotBar;
-    private string selectedPerkName = "";
+    
 
     void Awake()
     {
@@ -28,32 +26,11 @@ public class StatsWindow : MonoBehaviour
             leveling = player.GetComponent<Leveling>();
             health = player.GetComponent<HPComponent>();
             attack = player.GetComponent<AttackComponent>();
-            perks = player.GetComponent<PerksComponent>();
             inventory = player.GetComponent<Inventory>();
         }
     }
-
     void Start() => statsWindow.SetActive(false);
-
-    public void SelectPerkButton(string name)
-    {
-        if (perks == null) return;
-
-        selectedPerkName = name;
-
-        for (int i = 0; i < perkButtons.Count; i++)
-        {
-            var image = perkButtons[i].targetGraphic as Image;
-            if (image == null) continue;
-
-            // Получаем имя перка, привязанное к этой кнопке
-            string perkName = perks.GetName(i);
-
-            var state = perkButtons[i].spriteState;
-
-            image.sprite = (perkName == name) ? state.selectedSprite : perkButtons[i].image.sprite;
-        }
-    }
+    
     public void SelectStatsMenu()
     {
         statsMenu?.SetActive(true);
@@ -78,41 +55,15 @@ public class StatsWindow : MonoBehaviour
 
         Cursor.visible = true;
     }
-    private void UpdatePerkScoreLabel()
-    {
-        int perkScore = perks != null ? perks.perkScore : 0;
-        perkScoreLabel.SetText("Perk score: " + perkScore);
-    }
     public void SelectPerksMenu()
     {
         statsMenu?.SetActive(false);
         inventoryMenu?.SetActive(false);
         perksMenu?.SetActive(true);
-        UpdatePerkScoreLabel();
-
+        perksMenu.GetComponent<PerksMenu>()?.UpdatePerkScoreLabel();
         Cursor.visible = true;
     }
-    public void CancelSelection()
-    {
-        selectedPerkName = "";
-
-        foreach (var button in perkButtons)
-        {
-            var image = button.targetGraphic as Image;
-            if (image == null) continue;
-
-            image.sprite = button.image.sprite;
-        }
-    }
-    public void BuySelectedPerk()
-    {
-        if (perks != null && !string.IsNullOrEmpty(selectedPerkName))
-        {
-            perks.BuyPerk(selectedPerkName);
-            UpdatePerkScoreLabel();
-        }
-  
-    }
+    
 
     private void OpenWindow(GameObject menu)
     {
