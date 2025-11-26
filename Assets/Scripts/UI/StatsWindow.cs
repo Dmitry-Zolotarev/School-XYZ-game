@@ -1,8 +1,9 @@
 using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-using UnityEngine;
-using TMPro;
 
 public class StatsWindow : MonoBehaviour
 {
@@ -60,7 +61,6 @@ public class StatsWindow : MonoBehaviour
         statsMenu?.SetActive(false);
         inventoryMenu?.SetActive(false);
         perksMenu?.SetActive(true);
-        perksMenu.GetComponent<PerksMenu>()?.UpdatePerkScoreLabel();
         Cursor.visible = true;
     }
     
@@ -84,7 +84,9 @@ public class StatsWindow : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void CloseWindow(InputAction.CallbackContext context)
+    public void CloseWindow(InputAction.CallbackContext context) => Close();
+
+    private void Close()
     {
         if (statsWindow == null || !statsWindow.activeSelf) return;
 
@@ -94,8 +96,10 @@ public class StatsWindow : MonoBehaviour
         hotBar?.SetActive(true);
 
         if (inventory != null && hotBarScript != null)
+        {
             inventory.SelectItem(inventory.selectedSlot % hotBarScript.hotbarSize);
-
+        }
+          
         statsWindow.SetActive(false);
         Cursor.visible = false;
         Time.timeScale = 1f;
@@ -106,27 +110,31 @@ public class StatsWindow : MonoBehaviour
         if (!context.performed) return;
 
         if (statsWindow != null && !statsWindow.activeSelf)
+        {
             OpenWindow(statsMenu);
-        else
-            CloseWindow(context);
+        }   
+        else Close();
     }
-
     public void ToggleInventoryWindow(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-
-        if (statsWindow != null && !statsWindow.activeSelf)
-            OpenWindow(inventoryMenu);
-        else
-            CloseWindow(context);
+        if (context.performed)
+        {
+            if (statsWindow != null && !statsWindow.activeSelf)
+            {
+                OpenWindow(inventoryMenu);
+            }
+            else CloseWindow(context);
+        }
     }
     public void TogglePerksWindow(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-
-        if (statsWindow != null && !statsWindow.activeSelf)
-            OpenWindow(perksMenu);
-        else
-            CloseWindow(context);
+        if (context.performed)
+        {
+            if (statsWindow != null && !statsWindow.activeSelf)
+            {
+                OpenWindow(perksMenu);
+            }
+            else Close();
+        }    
     }
 }

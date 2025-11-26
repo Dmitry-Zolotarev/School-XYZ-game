@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class ExitLevelComponent : MonoBehaviour
+public class LoadSceneComponent : MonoBehaviour
 {
     [SerializeField] private string levelName;
-
-    public void Exit()
+    public void LoadScene()
     {
+        Time.timeScale = 1f;
         var player = FindAnyObjectByType<PlayerController>();
         SceneManager.LoadScene(levelName);
     }

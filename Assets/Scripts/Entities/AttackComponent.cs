@@ -56,7 +56,16 @@ public class AttackComponent : MonoBehaviour
             case (int)AttackModes.Ray: StartCoroutine(Ray()); break;
         }
     }
+    public void Stomp()
+    {
 
+        var hits = Physics2D.OverlapCircleAll(transform.position + Vector3.down, armRadius);
+        foreach (var hit in hits)
+        {
+            var target = hit.GetComponent<HPComponent>();
+            if (target != null && target.gameObject.tag != gameObject.tag) target.ApplyDamage(damage);
+        }
+    }
     private void Melee()
     {
         animator.SetTrigger(AnimatorMelee);

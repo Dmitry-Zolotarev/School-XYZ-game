@@ -15,9 +15,10 @@ public class EntityController : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
     private LineRenderer laserRay;
-    [HideInInspector] public SpawnComponent spawner;
-
+    
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, hitParticles;
+    [HideInInspector] public SpawnComponent spawner;
+    protected PerksComponent perks;
 
     [SerializeField] protected float velocity = 1f;
     [SerializeField] protected LayerMask groundLayer;
@@ -35,17 +36,19 @@ public class EntityController : MonoBehaviour
     protected int jumpCount = 0, dashCount = 0;
     
 
-    protected void Awake()
+    protected void Start()
     {
-        if (tag != "Player") SetDirection(1);
-
+        
+        if (tag != "Player") SetDirection(1);     
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spawner = GetComponent<SpawnComponent>();
         health = GetComponent<HPComponent>();
         attackComponent = GetComponent<AttackComponent>();
+        perks = GetComponent<PerksComponent>();
         laserRay = GetComponent<LineRenderer>();
         laserRay.enabled = false;
+        
     }
 
     public void SetPosition(Vector3 pos) => transform.position = pos;
@@ -69,31 +72,29 @@ public class EntityController : MonoBehaviour
     private bool CheckGround()
     {
         Collider2D collider = GetComponent<Collider2D>();
+        
         Vector2 origin = (Vector2)collider.bounds.center + Vector2.down * (collider.bounds.extents.y + 0.05f);
-        return Physics2D.Raycast(origin, Vector2.down, 0.1f, groundLayer);
+        var hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, groundLayer);
+        if (perks != null && perks.IsUnlocked("Jump attack") && !isGrounded && hit) attackComponent.Stomp();
+        return hit;
     }
 
     private void FixedUpdate()
     {
         if (health.HP <= 0 && tag != "Player") return;
-            bool lastGrounded = isGrounded;
+        bool lastGrounded = isGrounded;
         isGrounded = CheckGround();
         Vector2 vel = rb.linearVelocity;
         if (dashCount == 0)
-        {
-            
+        {          
             vel.x = direction * velocity;
             rb.linearVelocity = vel;
         }      
-
         if (isGrounded) 
         {
             jumpCount = 0;
             dashCount = 0;
-        }
-        
-        
-
+        }     
         isJumping = !isGrounded && vel.y > 0;
         isRunning = isGrounded && Mathf.Abs(vel.x) > 0;
 

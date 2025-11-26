@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1428455411254460405}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pirat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8199040796088032942}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   - component: {fileID: 6300771131964585442}
   - component: {fileID: 8854395553208122573}
   - component: {fileID: 8852881551852660834}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Pirat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4393879766889086273}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
