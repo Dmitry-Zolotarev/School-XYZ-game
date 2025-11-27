@@ -6,7 +6,7 @@ public class PlayerController : EntityController
 {
     [SerializeField] private UnityEvent onJump, onDash;
     [SerializeField] private float jumpForce = 5.5f, dashForce = 3f;
-    
+
     public new void OnDie()
     {
         base.OnDie();

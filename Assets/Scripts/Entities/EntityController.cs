@@ -44,7 +44,7 @@ public class EntityController : MonoBehaviour
         spawner = GetComponent<SpawnComponent>();
         health = GetComponent<HPComponent>();
         attackComponent = GetComponent<AttackComponent>();
-        perks = GetComponent<PerksComponent>();      
+        perks = GetComponent<PerksComponent>();
     }
 
     public void SetPosition(Vector3 pos) => transform.position = pos;
@@ -108,7 +108,7 @@ public class EntityController : MonoBehaviour
         else if (isJumping && jumpParticles != null)
             spawner.prefab = jumpParticles;
     }
-    public void TakeDamage()
+    public void OnDamage()
     {
         if (hitParticles)
         {

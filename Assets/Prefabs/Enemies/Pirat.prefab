@@ -279,12 +279,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c04c8f2e52a74896136299e7eaa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPComponent
+  HP: 0
+  XP_for_murder: 50
+  maxHP: 50
+  HPLabel: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 147636780597896465}
         m_TargetAssemblyTypeName: EnemyController, Assembly-CSharp
-        m_MethodName: TakeDamage
+        m_MethodName: OnDamage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -348,9 +352,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  HP: 0
-  XP_for_murder: 50
-  maxHP: 50
 --- !u!114 &4849606171689534937
 MonoBehaviour:
   m_ObjectHideFlags: 0

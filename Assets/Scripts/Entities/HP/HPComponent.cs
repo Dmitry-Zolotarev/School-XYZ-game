@@ -10,9 +10,9 @@ public class HPComponent : MonoBehaviour
     public int maxHP = 100;
     
     private bool isDead;
-    
     [SerializeField] private TextMeshProUGUI HPLabel;
     public UnityEvent onDamage, onHeal, onDie;
+    
     private void Start()
     {
         HP = maxHP;

@@ -12,14 +12,6 @@ public class EnemyController : EntityController
 
     private static readonly int AnimatorChase = Animator.StringToHash("Chase");
     [SerializeField] private UnityEvent onBeginChasing;
-    private void Start()
-    {
-        try {
-            var projectile = attackComponent.projectile.GetComponent<EnterCollisionComponent>();
-            projectile.targetTag = "Player"; 
-        }
-        catch { }      
-    }
     private void Update()
     {
         if (player == null)

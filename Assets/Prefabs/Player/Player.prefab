@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3618458803456776048}
   - component: {fileID: 1849287639938701316}
   - component: {fileID: 749373126426889800}
-  - component: {fileID: 6254966999036826649}
   m_Layer: 3
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -58,7 +57,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 60.714077
+    FieldOfView: 71.67189
     OrthographicSize: 1
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -97,18 +96,6 @@ MonoBehaviour:
     MaxWindowSize: 0
     Padding: 0
   m_LegacyMaxWindowSize: -2
---- !u!114 &6254966999036826649
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 41921066608500155}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cc45643ce0b49c429b62ef7d4398285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::FindConfinerComponent
 --- !u!1 &789188893339036540
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,6 +151,7 @@ GameObject:
   - component: {fileID: 6638442978522306828}
   - component: {fileID: 2200605101564558785}
   - component: {fileID: -1815043366553193085}
+  - component: {fileID: 3890826539861814689}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -291,6 +279,7 @@ MonoBehaviour:
   HP: 0
   XP_for_murder: 0
   maxHP: 50
+  HPLabel: {fileID: 0}
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -306,15 +295,39 @@ MonoBehaviour:
           m_StringArgument: Hurt
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 8132036216841527231}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDamage
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Hurt
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeal:
     m_PersistentCalls:
       m_Calls: []
   onDie:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RestartLevelComponent, Assembly-CSharp
-        m_MethodName: RestartLevel
+      - m_Target: {fileID: 8132036216841527231}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: OnDie
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3890826539861814689}
+        m_TargetAssemblyTypeName: GameOverComponent, Assembly-CSharp
+        m_MethodName: GameOver
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -776,6 +789,20 @@ MonoBehaviour:
   - name: Jump attack
     unlocked: 0
   perkScore: 0
+--- !u!114 &3890826539861814689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3546267150103402514}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0e4700387107fc4881fec6861900a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameOverComponent
+  gameOverWindow: {fileID: 0}
+  gameOverLatency: 0.5
 --- !u!1 &4109953042621755463
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,7 +832,7 @@ Transform:
   m_GameObject: {fileID: 4109953042621755463}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3880105, y: 1.4876502, z: -4.8289976}
+  m_LocalPosition: {x: 3.314364, y: 2.12741, z: -4.8289976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -844,7 +871,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60.714077
+  field of view: 71.67189
   orthographic: 0
   orthographic size: 1
   m_Depth: -1
