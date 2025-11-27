@@ -1,15 +1,19 @@
+using System.Collections;
 using UnityEngine;
 
 public class GameOverComponent : MonoBehaviour
 {
     [SerializeField] private GameObject gameOverWindow;
-    public void GameOver()
+    [SerializeField] private float gameOverLatency = 0.5f;
+    public void GameOver() => StartCoroutine(OpenMenu());
+    private IEnumerator OpenMenu()
     {
+        yield return new WaitForSeconds(gameOverLatency);
         if (gameOverWindow != null)
         {
             gameOverWindow.SetActive(true);
             Cursor.visible = true;
             Time.timeScale = 0f;
-        }       
+        }
     }
 }

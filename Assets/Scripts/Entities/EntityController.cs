@@ -14,7 +14,6 @@ public class EntityController : MonoBehaviour
 
     protected Rigidbody2D rb;
     protected Animator animator;
-    private LineRenderer laserRay;
     
     [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, hitParticles;
     [HideInInspector] public SpawnComponent spawner;
@@ -36,7 +35,7 @@ public class EntityController : MonoBehaviour
     protected int jumpCount = 0, dashCount = 0;
     
 
-    protected void Start()
+    protected void Awake()
     {
         
         if (tag != "Player") SetDirection(1);     
@@ -45,10 +44,7 @@ public class EntityController : MonoBehaviour
         spawner = GetComponent<SpawnComponent>();
         health = GetComponent<HPComponent>();
         attackComponent = GetComponent<AttackComponent>();
-        perks = GetComponent<PerksComponent>();
-        laserRay = GetComponent<LineRenderer>();
-        laserRay.enabled = false;
-        
+        perks = GetComponent<PerksComponent>();      
     }
 
     public void SetPosition(Vector3 pos) => transform.position = pos;
@@ -112,7 +108,6 @@ public class EntityController : MonoBehaviour
         else if (isJumping && jumpParticles != null)
             spawner.prefab = jumpParticles;
     }
-
     public void TakeDamage()
     {
         if (hitParticles)
@@ -144,9 +139,11 @@ public class EntityController : MonoBehaviour
     }
     public void Attack()
     {
-        if (health.HP <= 0) attackComponent = null;
-        if (!attackComponent) return;
-        attackComponent.CurrentDirection = facingRight ? Vector2.right : Vector2.left;
-        attackComponent.Attack();
+        if (attackComponent != null && health.HP > 0)
+        {
+            attackComponent.CurrentDirection = facingRight ? Vector2.right : Vector2.left;
+            attackComponent.Attack();
+        }
+        
     }
 }

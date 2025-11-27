@@ -111,7 +111,7 @@ public class Inventory : MonoBehaviour
         {
             attack.attackMode = 1;
             rangeWeapon.chargeProjectile();
-            attack.SetProjectile(rangeWeapon.projectile);
+            attack.projectile = rangeWeapon.projectile;
             attack.attackCooldownScale = 1f / rangeWeapon.fireRate;
         }
         else if (item is RayGun rayGun)

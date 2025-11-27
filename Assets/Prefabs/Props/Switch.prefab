@@ -83,7 +83,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 5774581190672780694, guid: a47fdec7fd1be0f41b3da12b89bef4b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwitchComponent
   animationKey: IsOpened
   state: 0
-  animator: {fileID: 0}
 --- !u!95 &1299635162178089890
 Animator:
   serializedVersion: 7
@@ -221,4 +220,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwitchComponent
   animationKey: TurnedOn
   state: 0
-  animator: {fileID: 1299635162178089890}

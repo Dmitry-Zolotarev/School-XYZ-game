@@ -288,6 +288,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c04c8f2e52a74896136299e7eaa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPComponent
+  HP: 0
+  XP_for_murder: 0
+  maxHP: 50
   onDamage:
     m_PersistentCalls:
       m_Calls:
@@ -321,9 +324,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  HP: 0
-  XP_for_murder: 0
-  maxHP: 100
 --- !u!114 &8937964369943679714
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,11 +351,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66cb43cdfa706bf4fbe286ec6e184c12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  spawner: {fileID: 0}
   runParticles: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
   jumpParticles: {fileID: 445565870571551919, guid: a891b539975f74e4f883811ee6c9ba9d, type: 3}
   fallParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   hitParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
+  spawner: {fileID: 0}
   velocity: 5
   groundLayer:
     serializedVersion: 2
@@ -674,11 +674,12 @@ MonoBehaviour:
   spawner: {fileID: 0}
   armRadiusIncrease: 0
   attackCooldownScale: 1
-  CurrentDirection: {x: 0, y: 0}
+  CurrentDirection: {x: 0, y: 0, z: 0}
   damage: 5
   damageIncrease: 1
-  armRadius: 0.5
+  attackRadius: 0.5
   attackMode: 0
+  projectile: {fileID: 0}
   onMeleeAttack:
     m_PersistentCalls:
       m_Calls:

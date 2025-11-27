@@ -9,8 +9,17 @@ public class EnemyController : EntityController
 
     private bool chasing, hitWall;
     private Transform player;
-    [SerializeField] private UnityEvent onBeginChasing;
+
     private static readonly int AnimatorChase = Animator.StringToHash("Chase");
+    [SerializeField] private UnityEvent onBeginChasing;
+    private void Start()
+    {
+        try {
+            var projectile = attackComponent.projectile.GetComponent<EnterCollisionComponent>();
+            projectile.targetTag = "Player"; 
+        }
+        catch { }      
+    }
     private void Update()
     {
         if (player == null)
@@ -36,16 +45,15 @@ public class EnemyController : EntityController
                 animator.SetTrigger(AnimatorChase);
                 onBeginChasing?.Invoke();
             }
-            if (distanceToPlayerX < attackComponent.armRadius && distanceToPlayerY < 0.5f)
+            if (distanceToPlayerX < attackComponent.attackRadius && distanceToPlayerY < 0.5f)
             {
                 SetDirection(0);
                 Attack();
-            } 
+            }
             else ChasePlayer();
         }
         else Patrol();
 
-        
     }
 
     private void Patrol()
@@ -65,7 +73,7 @@ public class EnemyController : EntityController
         float distance = player.position.x - transform.position.x;
         float dir = distance > 0 ? 1 : -1;
 
-        if (Mathf.Abs(distance) < attackComponent.armRadius || hitWall) dir = 0;
+        if (Mathf.Abs(distance) < attackComponent.attackRadius || hitWall) dir = 0;
 
         SetDirection(dir);
     }

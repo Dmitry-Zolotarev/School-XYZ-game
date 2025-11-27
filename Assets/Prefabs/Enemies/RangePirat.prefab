@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1428455411254460405}
   m_Layer: 3
-  m_Name: Pirat
+  m_Name: RangePirat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 8854395553208122573}
   - component: {fileID: 8852881551852660834}
   m_Layer: 3
-  m_Name: Pirat
+  m_Name: RangePirat
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -391,7 +391,7 @@ MonoBehaviour:
   facingRight: 1
   leftPoint: {fileID: 8199040796088032942}
   rightPoint: {fileID: 4393879766889086273}
-  detectionRange: 5
+  detectionRange: 10
   onBeginChasing:
     m_PersistentCalls:
       m_Calls:
@@ -427,24 +427,12 @@ MonoBehaviour:
   CurrentDirection: {x: 0, y: 0, z: 0}
   damage: 5
   damageIncrease: 1
-  attackRadius: 1
-  attackMode: 0
-  projectile: {fileID: 0}
+  attackRadius: 5
+  attackMode: 1
+  projectile: {fileID: 2808415219190108505, guid: 17a27a475b5218345a3bb78ce6e85e98, type: 3}
   onMeleeAttack:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6300771131964585442}
-        m_TargetAssemblyTypeName: PlaySoundsComponent, Assembly-CSharp
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Melee
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   onRangeAttack:
     m_PersistentCalls:
       m_Calls:
@@ -476,8 +464,8 @@ MonoBehaviour:
   sounds:
   - _id: Hurt
     _clip: {fileID: 8300000, guid: b960333c0516e3f489ae2fa023865f61, type: 3}
-  - _id: Melee
-    _clip: {fileID: 8300000, guid: d770a97613cef8c4594edd8725e8dfcc, type: 3}
+  - _id: Range
+    _clip: {fileID: 8300000, guid: a442bbe4d1040924b833220ebce0634c, type: 3}
   - _id: Die
     _clip: {fileID: 8300000, guid: 3af88f1e81410424d858874d29738c0a, type: 3}
   - _id: Chase
