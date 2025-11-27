@@ -2438,7 +2438,8 @@ GameObject:
   - component: {fileID: 1429272350471511001}
   - component: {fileID: 2286381083159377817}
   - component: {fileID: 3276213541899168322}
-  - component: {fileID: 4298419595373456974}
+  - component: {fileID: 7775584782125258333}
+  - component: {fileID: 6581269500421162066}
   m_Layer: 5
   m_Name: GameMenus
   m_TagString: Untagged
@@ -2539,7 +2540,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &4298419595373456974
+--- !u!114 &7775584782125258333
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2548,10 +2549,103 @@ MonoBehaviour:
   m_GameObject: {fileID: 5318894758626864771}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4234f78edbb953d44a832f23e26112c4, type: 3}
+  m_Script: {fileID: 11500000, guid: e11c4b3bc3891e44eb730e5dab890057, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UI_InputLegacy
-  pauseMenu: {fileID: 0}
+  m_EditorClassIdentifier: Assembly-CSharp::UI_Input
+--- !u!114 &6581269500421162066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318894758626864771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
+  m_Actions: {fileID: -944628639613478452, guid: e37a4f372d748484588fb5dd7c23044f, type: 3}
+  m_NotificationBehavior: 2
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7775584782125258333}
+        m_TargetAssemblyTypeName: UI_Input, Assembly-CSharp
+        m_MethodName: ToggleEscape
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: ae07a22d-37a1-42bc-af00-4d21e1a8840a
+    m_ActionName: 'UI Actions/Pause[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7775584782125258333}
+        m_TargetAssemblyTypeName: UI_Input, Assembly-CSharp
+        m_MethodName: ToggleStatsWindow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3b10a8ea-c70e-4a46-9a26-95b0d1d37988
+    m_ActionName: 'UI Actions/OpenStatsWindow[/Keyboard/k]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7775584782125258333}
+        m_TargetAssemblyTypeName: UI_Input, Assembly-CSharp
+        m_MethodName: ToggleInventoryWindow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: e7644670-e2d3-4cbb-ac03-25f115b105cd
+    m_ActionName: 'UI Actions/OpenInventoryWindow[/Keyboard/i]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7775584782125258333}
+        m_TargetAssemblyTypeName: UI_Input, Assembly-CSharp
+        m_MethodName: TogglePerksWindow
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: dfd28ab7-d0e7-487f-9b55-15771028658b
+    m_ActionName: 'UI Actions/OpenPerksWindow[/Keyboard/p]'
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: UI Actions
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &5493517269401414332
 GameObject:
   m_ObjectHideFlags: 0

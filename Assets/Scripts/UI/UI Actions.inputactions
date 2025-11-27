@@ -7,7 +7,7 @@
             "id": "cf172916-0b46-459f-bd03-5ec90f1e9aa3",
             "actions": [
                 {
-                    "name": "Pause",
+                    "name": "ToggleEscape",
                     "type": "Button",
                     "id": "ae07a22d-37a1-42bc-af00-4d21e1a8840a",
                     "expectedControlType": "",
@@ -16,7 +16,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenStatsWindow",
+                    "name": "ToggleStatsWindow",
                     "type": "Button",
                     "id": "3b10a8ea-c70e-4a46-9a26-95b0d1d37988",
                     "expectedControlType": "",
@@ -25,16 +25,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "CloseWindow",
-                    "type": "Button",
-                    "id": "22c16e5b-8526-4be6-941e-d2af6efe9589",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "OpenInventoryWindow",
+                    "name": "ToggleInventoryWindow",
                     "type": "Button",
                     "id": "e7644670-e2d3-4cbb-ac03-25f115b105cd",
                     "expectedControlType": "",
@@ -43,7 +34,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "OpenPerksWindow",
+                    "name": "TogglePerksWindow",
                     "type": "Button",
                     "id": "dfd28ab7-d0e7-487f-9b55-15771028658b",
                     "expectedControlType": "",
@@ -60,7 +51,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Pause",
+                    "action": "ToggleEscape",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -71,18 +62,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenStatsWindow",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "ab1d9966-0e08-46c7-aa07-98d517c3200d",
-                    "path": "<Keyboard>/escape",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "CloseWindow",
+                    "action": "ToggleStatsWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -93,7 +73,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenInventoryWindow",
+                    "action": "ToggleInventoryWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -104,7 +84,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "OpenPerksWindow",
+                    "action": "TogglePerksWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

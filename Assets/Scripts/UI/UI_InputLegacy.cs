@@ -10,7 +10,6 @@ public class UI_InputLegacy : MonoBehaviour
     {
         pauseComponent = GetComponent<PauseComponent>();
         statsWindow = GetComponent<StatsWindow>();
-        Cursor.visible = false;
     }
     private void Update()
     {
@@ -20,7 +19,7 @@ public class UI_InputLegacy : MonoBehaviour
             {
                 statsWindow.CloseWindow();
             }
-            else pauseComponent.Pause();
+            else pauseComponent?.Pause();
         }
         if (Input.GetKeyDown(KeyCode.K)) statsWindow.ToggleStatsWindow();
         if (Input.GetKeyDown(KeyCode.I)) statsWindow.ToggleInventoryWindow();

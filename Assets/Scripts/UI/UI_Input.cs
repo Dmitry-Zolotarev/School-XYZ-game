@@ -8,11 +8,7 @@ public class UI_Input : MonoBehaviour
     private void Start()
     {
         statsWindow = GetComponent<StatsWindow>();
-        PauseComponent pause = GetComponent<PauseComponent>();
-    }
-    public void CloseWindow(InputAction.CallbackContext context)
-    {
-        if (context.performed) statsWindow.CloseWindow();
+        pauseComponent = GetComponent<PauseComponent>();
     }
     public void ToggleStatsWindow(InputAction.CallbackContext context)
     {
@@ -26,8 +22,15 @@ public class UI_Input : MonoBehaviour
     {
         if (context.performed) statsWindow.TogglePerksWindow();
     }
-    public void TogglePause(InputAction.CallbackContext context)
+    public void ToggleEscape(InputAction.CallbackContext context)
     {
-        if (context.performed) pauseComponent.Pause();
+        if (context.performed) 
+        {
+            if (statsWindow != null && statsWindow.statsWindow.gameObject.activeSelf)
+            {
+                statsWindow.CloseWindow();
+            }
+            else pauseComponent?.Pause();
+        } 
     }
 }
