@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class StatsWindow : MonoBehaviour
 {
@@ -11,13 +8,11 @@ public class StatsWindow : MonoBehaviour
     private HPComponent health;
     private AttackComponent attack;
     private Inventory inventory;
+    private GameObject player, hotBar;
 
     [SerializeField] private TextMeshProUGUI levelLabel, XPLabel, HPLabel, damageLabel;
-    [SerializeField] private GameObject statsWindow, statsMenu, inventoryMenu, perksMenu;
+    public GameObject statsWindow, statsMenu, inventoryMenu, perksMenu;
     
-    private GameObject player, hotBar;
-    
-
     void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -30,8 +25,7 @@ public class StatsWindow : MonoBehaviour
             inventory = player.GetComponent<Inventory>();
         }
     }
-    void Start() => statsWindow.SetActive(false);
-    
+    void Start() => statsWindow.SetActive(false); 
     public void SelectStatsMenu()
     {
         statsMenu?.SetActive(true);
@@ -82,11 +76,9 @@ public class StatsWindow : MonoBehaviour
 
         Cursor.visible = true;
         Time.timeScale = 0f;
-    }
+    }   
 
-    public void CloseWindow(InputAction.CallbackContext context) => Close();
-
-    private void Close()
+    public void CloseWindow()
     {
         if (statsWindow == null || !statsWindow.activeSelf) return;
 
@@ -104,37 +96,45 @@ public class StatsWindow : MonoBehaviour
         Cursor.visible = false;
         Time.timeScale = 1f;
     }
-
+    public void CloseWindow(InputAction.CallbackContext context)
+    {
+        if (context.performed) CloseWindow();
+    }
     public void ToggleStatsWindow(InputAction.CallbackContext context)
     {
-        if (!context.performed) return;
-
+        if (context.performed) ToggleStatsWindow();
+    }
+    public void ToggleInventoryWindow(InputAction.CallbackContext context)
+    {
+        if (context.performed) ToggleInventoryWindow();
+    }
+    public void TogglePerksWindow(InputAction.CallbackContext context)
+    {
+        if (context.performed) TogglePerksWindow();
+    }
+    public void ToggleStatsWindow()
+    {
         if (statsWindow != null && !statsWindow.activeSelf)
         {
             OpenWindow(statsMenu);
         }   
-        else Close();
-    }
-    public void ToggleInventoryWindow(InputAction.CallbackContext context)
+        else CloseWindow();
+    }  
+    public void ToggleInventoryWindow()
     {
-        if (context.performed)
+        if (statsWindow != null && !statsWindow.activeSelf)
         {
-            if (statsWindow != null && !statsWindow.activeSelf)
-            {
-                OpenWindow(inventoryMenu);
-            }
-            else CloseWindow(context);
+            OpenWindow(inventoryMenu);
         }
+        else CloseWindow();
     }
-    public void TogglePerksWindow(InputAction.CallbackContext context)
+    
+    public void TogglePerksWindow()
     {
-        if (context.performed)
+        if (statsWindow != null && !statsWindow.activeSelf)
         {
-            if (statsWindow != null && !statsWindow.activeSelf)
-            {
-                OpenWindow(perksMenu);
-            }
-            else Close();
-        }    
+            OpenWindow(perksMenu);
+        }
+        else CloseWindow();
     }
 }

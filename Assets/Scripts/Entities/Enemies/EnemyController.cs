@@ -63,11 +63,13 @@ public class EnemyController : EntityController
     private void ChasePlayer()
     {
         float distance = player.position.x - transform.position.x;
-        float dir = distance > 0 ? 1 : -1;
+        SetDirection(distance > 0 ? 1 : -1);
 
-        if (Mathf.Abs(distance) < attackComponent.attackRadius || hitWall) dir = 0;
-
-        SetDirection(dir);
+        if (Mathf.Abs(distance) < attackComponent.attackRadius || hitWall)
+        {
+            velocityModifier = 0;
+        } 
+        else velocityModifier = 1;      
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

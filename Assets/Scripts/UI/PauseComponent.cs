@@ -8,10 +8,6 @@ public class PauseComponent : MonoBehaviour
     {
         if (pauseMenu != null) pauseMenu.SetActive(false);
     }
-    public void OnPausePerformed(InputAction.CallbackContext context)
-    {
-        if(context.performed) Pause();
-    }
 
     public void Pause()
     {

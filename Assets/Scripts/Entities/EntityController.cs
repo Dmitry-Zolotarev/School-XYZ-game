@@ -32,7 +32,7 @@ public class EntityController : MonoBehaviour
 
     protected HPComponent health;
     protected AttackComponent attackComponent;
-    protected int jumpCount = 0, dashCount = 0;
+    protected int jumpCount = 0, dashCount = 0, velocityModifier = 1;
     
 
     protected void Awake()
@@ -83,7 +83,7 @@ public class EntityController : MonoBehaviour
         Vector2 vel = rb.linearVelocity;
         if (dashCount == 0)
         {          
-            vel.x = direction * velocity;
+            vel.x = direction * velocity * velocityModifier;
             rb.linearVelocity = vel;
         }      
         if (isGrounded) 
