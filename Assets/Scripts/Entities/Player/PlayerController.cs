@@ -6,12 +6,16 @@ public class PlayerController : EntityController
 {
     [SerializeField] private UnityEvent onJump, onDash;
     [SerializeField] private float jumpForce = 5.5f, dashForce = 3f;
-
+    [HideInInspector] public Vector3 checkPoint;
+    private void Start()
+    {
+        checkPoint = transform.position;
+    }
     public new void OnDie()
     {
         base.OnDie();
-        var gameOverWindow = GameObject.FindGameObjectWithTag("GameOver");
-        gameOverWindow?.GetComponent<GameOverComponent>()?.GameOver();
+        transform.position = checkPoint + Vector3.up;
+        health.UpdateMaxHP(0);
     }
     public void Jump()
     {

@@ -5,7 +5,7 @@ public class EnemyController : EntityController
 {
     [Header("AI Settings")]
     [SerializeField] private Transform leftPoint, rightPoint;
-    [SerializeField] private float detectionRange = 5f;
+    [SerializeField] private Vector2 detectionRange = new Vector2(5f, 1f);
 
     private bool chasing, hitWall;
     private Transform player;
@@ -28,7 +28,7 @@ public class EnemyController : EntityController
 
         bool lastChaseState = chasing;
 
-        chasing = distanceToPlayerX < detectionRange && distanceToPlayerY < 1f;
+        chasing = distanceToPlayerX < detectionRange.x && distanceToPlayerY < detectionRange.y;
 
         if (chasing)
         {
@@ -37,12 +37,7 @@ public class EnemyController : EntityController
                 animator.SetTrigger(AnimatorChase);
                 onBeginChasing?.Invoke();
             }
-            if (distanceToPlayerX < attackComponent.attackRadius && distanceToPlayerY < 0.5f)
-            {
-                SetDirection(0);
-                Attack();
-            }
-            else ChasePlayer();
+            ChasePlayer();
         }
         else Patrol();
 
@@ -68,6 +63,7 @@ public class EnemyController : EntityController
         if (Mathf.Abs(distance) < attackComponent.attackRadius || hitWall)
         {
             velocityModifier = 0;
+            Attack();
         } 
         else velocityModifier = 1;      
     }

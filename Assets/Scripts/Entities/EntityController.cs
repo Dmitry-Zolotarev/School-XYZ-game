@@ -37,7 +37,6 @@ public class EntityController : MonoBehaviour
 
     protected void Awake()
     {
-        
         if (tag != "Player") SetDirection(1);     
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
