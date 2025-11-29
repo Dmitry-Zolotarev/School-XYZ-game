@@ -20,8 +20,9 @@ public class PlayerController : EntityController
     }
     private IEnumerator Revive()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
         transform.position = checkPoint + Vector3.up;
+        transform.rotation = Quaternion.identity;
         health.UpdateMaxHP(0);
     }
     public void Jump()

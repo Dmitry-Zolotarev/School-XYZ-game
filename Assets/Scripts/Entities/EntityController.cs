@@ -30,7 +30,7 @@ public class EntityController : MonoBehaviour
     protected static readonly int AnimatorHit = Animator.StringToHash("Hit");
     protected static readonly int AnimatorDie = Animator.StringToHash("Die");
 
-    protected HPComponent health;
+    public HPComponent health;
     protected AttackComponent attackComponent;
     protected int jumpCount = 0, dashCount = 0, velocityModifier = 1;
     
@@ -65,14 +65,20 @@ public class EntityController : MonoBehaviour
 
     private bool CheckGround()
     {
-        Collider2D collider = GetComponent<Collider2D>();
-        
+        Collider2D collider = GetComponent<Collider2D>();       
         Vector2 origin = (Vector2)collider.bounds.center + Vector2.down * (collider.bounds.extents.y + 0.05f);
         var hit = Physics2D.Raycast(origin, Vector2.down, 0.1f, groundLayer);
         if (perks != null && perks.IsUnlocked("Jump attack") && !isGrounded && hit) attackComponent.Stomp();
         return hit;
     }
-
+    protected bool CheckPit()
+    {
+        bool canGo;
+        transform.position += Vector3.right * direction;
+        canGo = CheckGround();
+        transform.position += Vector3.left * direction;
+        return canGo;
+    }
     private void FixedUpdate()
     {
         if (health.HP <= 0 && tag != "Player") return;

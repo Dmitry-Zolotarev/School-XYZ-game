@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class EnemyController : EntityController
 {
@@ -20,9 +21,10 @@ public class EnemyController : EntityController
             if (playerObj != null) player = playerObj.transform;
             else return;
         }
+        else if (player.GetComponent<HPComponent>().isDead) health.HP = health.maxHP;
 
+        velocityModifier = 1;
         if (attackComponent == null) return;
-
         float distanceToPlayerX = Mathf.Abs(transform.position.x - player.position.x);
         float distanceToPlayerY = Mathf.Abs(transform.position.y - player.position.y);
 
@@ -38,6 +40,7 @@ public class EnemyController : EntityController
                 onBeginChasing?.Invoke();
             }
             ChasePlayer();
+            if (Mathf.Abs(distanceToPlayerX) <= attackComponent.attackRadius) Attack();
         }
         else Patrol();
 
@@ -60,14 +63,12 @@ public class EnemyController : EntityController
         float distance = player.position.x - transform.position.x;
         SetDirection(distance > 0 ? 1 : -1);
 
-        if (Mathf.Abs(distance) < attackComponent.attackRadius || hitWall)
-        {
-            velocityModifier = 0;
-            Attack();
-        } 
-        else velocityModifier = 1;      
+        float attackDistance = Mathf.Max(attackComponent.attackRadius / 2f, 1);
+        
+        if (!CheckPit() || Mathf.Abs(distance) <= attackDistance || hitWall) velocityModifier = 0;
+           
     }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player")) return;

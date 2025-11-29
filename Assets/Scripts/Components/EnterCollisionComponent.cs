@@ -16,14 +16,14 @@ public class EnterCollisionComponent : MonoBehaviour
     private void OnTriggerStay2D(Collider2D other) => Stay(other.gameObject);
     private void Enter(GameObject obj) 
     {
-        if (obj.CompareTag(targetTag)) {
+        if (string.IsNullOrEmpty(targetTag) || obj.CompareTag(targetTag)) {
             action?.Invoke(obj);
             lastActionTime = Time.time;
         }
     }
     private void Stay(GameObject obj)
     {
-        if (isLooping && Time.time > lastActionTime + loopDelay && obj.CompareTag(targetTag)) 
+        if (isLooping && Time.time > lastActionTime + loopDelay && (string.IsNullOrEmpty(targetTag) || obj.CompareTag(targetTag))) 
         {
             lastActionTime = Time.time;
             action?.Invoke(obj);

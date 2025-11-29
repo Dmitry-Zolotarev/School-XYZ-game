@@ -36,10 +36,11 @@ public class HPComponent : MonoBehaviour
         return HP - wasHP;
     }
     public void UpdateMaxHP(int increase)
-    {      
-        maxHP += increase;
+    {
         HP = maxHP;
+        maxHP += increase;  
         HPLabel?.SetText($"♥ {HP}");
+        isDead = false;
     }
     public void Die()
     {
@@ -47,9 +48,10 @@ public class HPComponent : MonoBehaviour
         {
             var player = GameObject.FindGameObjectWithTag("Player");
             var leveling = player.GetComponent<Leveling>();
-            leveling.GetXP(XP_for_murder);
-            isDead = true;
+            leveling?.GetXP(XP_for_murder);
         }
+        HPLabel?.SetText($"♥ {HP = 0}");
+        isDead = true;
         onDie?.Invoke();
     }
     

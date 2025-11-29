@@ -151,9 +151,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7572b3d175ae1894ea8273499a56de96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnterCollisionComponent
-  targetTag: Player
+  targetTag: 
   isLooping: 1
-  loopDelay: 0.1
+  loopDelay: 0.2
   action:
     m_PersistentCalls:
       m_Calls:
@@ -181,4 +181,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308778dcd3c40224db9c755e3b03e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponent
-  damage: 1
+  damage: 2

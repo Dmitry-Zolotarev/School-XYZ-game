@@ -18,6 +18,7 @@ TagManager:
   - GameOver
   - PerkButton
   - MusicPlayer
+  - DangerFloor
   layers:
   - Default
   - TransparentFX

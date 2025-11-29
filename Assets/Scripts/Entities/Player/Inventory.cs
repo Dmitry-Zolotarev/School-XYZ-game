@@ -122,4 +122,12 @@ public class Inventory : MonoBehaviour
             attack.attackCooldownScale = 1f / rayGun.fireRate;
         }
     }
+    public bool Contains(string name)
+    {
+        foreach (var item in Items)
+        {
+            if (item?.name == name) return true;
+        }
+        return false;
+    }
 }
