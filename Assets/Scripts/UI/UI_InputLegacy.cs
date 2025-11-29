@@ -21,8 +21,11 @@ public class UI_InputLegacy : MonoBehaviour
             }
             else pauseComponent?.Pause();
         }
-        if (Input.GetKeyDown(KeyCode.K)) statsWindow.ToggleStatsWindow();
-        if (Input.GetKeyDown(KeyCode.I)) statsWindow.ToggleInventoryWindow();
-        if (Input.GetKeyDown(KeyCode.P)) statsWindow.TogglePerksWindow();
+        if(Time.timeScale > 0)
+        {
+            if (Input.GetKeyDown(KeyCode.K)) statsWindow.ToggleStatsWindow();
+            if (Input.GetKeyDown(KeyCode.I)) statsWindow.ToggleInventoryWindow();
+            if (Input.GetKeyDown(KeyCode.P)) statsWindow.TogglePerksWindow();
+        }       
     }   
 }

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,12 @@ public class PlayerController : EntityController
     public new void OnDie()
     {
         base.OnDie();
+        animator.SetTrigger(AnimatorDie);
+        StartCoroutine(Revive());
+    }
+    private IEnumerator Revive()
+    {
+        yield return new WaitForSeconds(2);
         transform.position = checkPoint + Vector3.up;
         health.UpdateMaxHP(0);
     }

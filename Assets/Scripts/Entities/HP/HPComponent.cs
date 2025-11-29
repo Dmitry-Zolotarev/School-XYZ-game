@@ -8,8 +8,7 @@ public class HPComponent : MonoBehaviour
     [HideInInspector] public int HP;
     public int XP_for_murder = 50;
     public int maxHP = 100;
-    
-    private bool isDead;
+    public bool isDead;
     [SerializeField] private TextMeshProUGUI HPLabel;
     public UnityEvent onDamage, onHeal, onDie;
     

@@ -12,15 +12,15 @@ public class UI_Input : MonoBehaviour
     }
     public void ToggleStatsWindow(InputAction.CallbackContext context)
     {
-        if (context.performed) statsWindow.ToggleStatsWindow();
+        if (context.performed && Time.timeScale > 0) statsWindow.ToggleStatsWindow();
     }
     public void ToggleInventoryWindow(InputAction.CallbackContext context)
     {
-        if (context.performed) statsWindow.ToggleInventoryWindow();
+        if (context.performed && Time.timeScale > 0) statsWindow.ToggleInventoryWindow();
     }
     public void TogglePerksWindow(InputAction.CallbackContext context)
     {
-        if (context.performed) statsWindow.TogglePerksWindow();
+        if (context.performed && Time.timeScale > 0) statsWindow.TogglePerksWindow();
     }
     public void ToggleEscape(InputAction.CallbackContext context)
     {

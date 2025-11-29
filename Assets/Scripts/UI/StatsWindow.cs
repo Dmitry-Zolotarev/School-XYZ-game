@@ -75,7 +75,6 @@ public class StatsWindow : MonoBehaviour
         menu.SetActive(true);
 
         Cursor.visible = true;
-        Time.timeScale = 0f;
     }   
 
     public void CloseWindow()
@@ -90,11 +89,9 @@ public class StatsWindow : MonoBehaviour
         if (inventory != null && hotBarScript != null)
         {
             inventory.SelectItem(inventory.selectedSlot % hotBarScript.hotbarSize);
-        }
-          
+        }    
         statsWindow.SetActive(false);
         Cursor.visible = false;
-        Time.timeScale = 1f;
     }
     public void CloseWindow(InputAction.CallbackContext context)
     {

@@ -51,7 +51,6 @@ public class EntityController : MonoBehaviour
     public void SetDirection(float _direction)
     {
         direction = _direction;
-
         if (_direction > 0 && !facingRight) Flip();
         else if (_direction < 0 && facingRight) Flip();
     }
