@@ -21,7 +21,6 @@ public class EnemyController : EntityController
             if (playerObj != null) player = playerObj.transform;
             else return;
         }
-        else if (player.GetComponent<HPComponent>().isDead) health.HP = health.maxHP;
 
         velocityModifier = 1;
         if (attackComponent == null) return;
@@ -53,9 +52,11 @@ public class EnemyController : EntityController
             hitWall = false;
             SetDirection(-direction);
         }
-
-        if (transform.position.x >= rightPoint.position.x) SetDirection(-1);
-        if (transform.position.x <= leftPoint.position.x) SetDirection(1);
+        if (leftPoint != null && rightPoint != null)
+        {
+            if (transform.position.x >= rightPoint.position.x) SetDirection(-1);
+            if (transform.position.x <= leftPoint.position.x) SetDirection(1);
+        }       
     }
 
     private void ChasePlayer()

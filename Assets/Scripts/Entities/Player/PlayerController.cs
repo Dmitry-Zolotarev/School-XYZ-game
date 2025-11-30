@@ -1,17 +1,13 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(HPComponent))]
 public class PlayerController : EntityController
 {
     [SerializeField] private UnityEvent onJump, onDash;
     [SerializeField] private float jumpForce = 5.5f, dashForce = 3f;
-    [HideInInspector] public Vector3 checkPoint;
-    private void Start()
-    {
-        checkPoint = transform.position;
-    }
     public new void OnDie()
     {
         base.OnDie();
@@ -21,9 +17,7 @@ public class PlayerController : EntityController
     private IEnumerator Revive()
     {
         yield return new WaitForSeconds(1);
-        transform.position = checkPoint + Vector3.up;
-        transform.rotation = Quaternion.identity;
-        health.UpdateMaxHP(0);
+        SceneManager.LoadScene("Level1");
     }
     public void Jump()
     {

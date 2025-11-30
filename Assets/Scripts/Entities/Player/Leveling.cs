@@ -26,9 +26,9 @@ public class Leveling : MonoBehaviour
     }
     private IEnumerator LevelUP()
     {
-        level++; 
+        level++;
         perks.perkScore++;
-        XP %= currentXPforLevelUP;
+        XP -= currentXPforLevelUP;
         if (health != null) health.UpdateMaxHP(HPIncrease);
         if (attack != null) attack.damage += damageIncrease;
         currentXPforLevelUP = xp_forLevelUP * level;

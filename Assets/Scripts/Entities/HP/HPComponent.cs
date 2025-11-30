@@ -1,14 +1,15 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class HPComponent : MonoBehaviour
 {
-    
-    [HideInInspector] public int HP;
-    public int XP_for_murder = 50;
     public int maxHP = 100;
-    public bool isDead;
+    public int XP_for_murder = 50;
+    [HideInInspector] public bool isDead;
+    [HideInInspector] public int HP;
+    [SerializeField] private Image HPBar;
     [SerializeField] private TextMeshProUGUI HPLabel;
     public UnityEvent onDamage, onHeal, onDie;
     
@@ -21,7 +22,7 @@ public class HPComponent : MonoBehaviour
     {
         HP -= damage;
         HP = Mathf.Max(HP, 0);
-        HPLabel?.SetText($"♥ {HP}");
+        UpdateUI();
         if (HP > 0) onDamage?.Invoke();
         else Die();
     }
@@ -30,17 +31,15 @@ public class HPComponent : MonoBehaviour
         var wasHP = HP;
         HP += healing;
         if (HP > maxHP) HP = maxHP;
-
-        HPLabel?.SetText($"♥ {HP}");
+        UpdateUI();
         onHeal?.Invoke();
         return HP - wasHP;
     }
     public void UpdateMaxHP(int increase)
     {
+        maxHP += increase;
         HP = maxHP;
-        maxHP += increase;  
-        HPLabel?.SetText($"♥ {HP}");
-        isDead = false;
+        UpdateUI();
     }
     public void Die()
     {
@@ -50,9 +49,13 @@ public class HPComponent : MonoBehaviour
             var leveling = player.GetComponent<Leveling>();
             leveling?.GetXP(XP_for_murder);
         }
-        HPLabel?.SetText($"♥ {HP = 0}");
+        UpdateUI();
         isDead = true;
         onDie?.Invoke();
     }
-    
+    private void UpdateUI()
+    {
+        if (HPBar != null) HPBar.fillAmount = HP / (float)maxHP;
+        if (HPLabel != null) HPLabel.SetText($"♥ {HP}");
+    }
 }

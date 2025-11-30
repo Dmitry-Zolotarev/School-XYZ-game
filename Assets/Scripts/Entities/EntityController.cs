@@ -15,14 +15,14 @@ public class EntityController : MonoBehaviour
     protected Rigidbody2D rb;
     protected Animator animator;
     
-    [SerializeField] private GameObject runParticles, jumpParticles, fallParticles, hitParticles;
+    [SerializeField] private GameObject HPBar, runParticles, jumpParticles, fallParticles, hitParticles;  
     [HideInInspector] public SpawnComponent spawner;
+    
     protected PerksComponent perks;
 
-    [SerializeField] protected float velocity = 1f;
+    [SerializeField] protected float velocity = 1f, HPBarOffset = 0.8f, HPBarScale = 0.1f;
     [SerializeField] protected LayerMask groundLayer;
-
-    public bool isRunning, isGrounded, isJumping, facingRight = true;
+    protected bool isRunning, isGrounded, isJumping, facingRight = true;
 
     protected static readonly int AnimatorIsGrounded = Animator.StringToHash("IsGrounded");
     protected static readonly int AnimatorIsJumping = Animator.StringToHash("IsJumping");
@@ -30,10 +30,10 @@ public class EntityController : MonoBehaviour
     protected static readonly int AnimatorHit = Animator.StringToHash("Hit");
     protected static readonly int AnimatorDie = Animator.StringToHash("Die");
 
-    public HPComponent health;
+    [HideInInspector] public HPComponent health;
     protected AttackComponent attackComponent;
     protected int jumpCount = 0, dashCount = 0, velocityModifier = 1;
-    
+    protected Collider2D collider;
 
     protected void Awake()
     {
@@ -44,6 +44,8 @@ public class EntityController : MonoBehaviour
         health = GetComponent<HPComponent>();
         attackComponent = GetComponent<AttackComponent>();
         perks = GetComponent<PerksComponent>();
+        collider = GetComponent<Collider2D>();
+        if(HPBar != null) HPBar.transform.localScale = Vector3.one * HPBarScale;
     }
 
     public void SetPosition(Vector3 pos) => transform.position = pos;
@@ -80,7 +82,7 @@ public class EntityController : MonoBehaviour
         return canGo;
     }
     private void FixedUpdate()
-    {
+    {    
         if (health.HP <= 0 && tag != "Player") return;
         bool lastGrounded = isGrounded;
         isGrounded = CheckGround();
@@ -108,9 +110,15 @@ public class EntityController : MonoBehaviour
             spawner.Spawn();
         }
         else if (isRunning && runParticles != null)
+        {
             spawner.prefab = runParticles;
-        else if (isJumping && jumpParticles != null)
-            spawner.prefab = jumpParticles;
+        }          
+        else if (isJumping && jumpParticles != null) spawner.prefab = jumpParticles;
+
+        if (HPBar != null) HPBar.transform.position = transform.position + Vector3.up * HPBarOffset;
+
+        
+        
     }
     public void OnDamage()
     {
@@ -125,6 +133,7 @@ public class EntityController : MonoBehaviour
     public void OnDie()
     {      
         animator.SetTrigger(AnimatorDie);
+        if (HPBar != null) Destroy(HPBar);
         if (hitParticles)
         {
             spawner.prefab = hitParticles;
