@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,6 +9,7 @@ public class AttackComponent : MonoBehaviour
     [SerializeField] private float attackCooldown = 0.5f;
 
     [HideInInspector] public SpawnComponent spawner;
+    [SerializeField] private List<SpawnComponent> guns;
     private Animator animator;
     
     private LineRenderer laserRay;
@@ -28,7 +30,7 @@ public class AttackComponent : MonoBehaviour
     [SerializeField] private UnityEvent onMeleeAttack, onRangeAttack, onAnyAttack;
     void Awake()
     {
-        spawner = GetComponent<SpawnComponent>();
+        spawner = GetComponent<SpawnComponent>();      
         animator = GetComponent<Animator>();
         laserRay = GetComponent<LineRenderer>();
         laserRay.enabled = false;
@@ -80,12 +82,10 @@ public class AttackComponent : MonoBehaviour
         animator.SetTrigger(AnimatorRange);
         yield return new WaitForSeconds(attackCooldown * attackCooldownScale / 3f);
         onRangeAttack?.Invoke();
+        spawner.prefab = projectile;
+        spawner.Spawn();
 
-        if (projectile != null)
-        {
-            spawner.prefab = projectile;
-            spawner.Spawn();
-        }
+        foreach(var gun in guns) gun.Spawn();
     }
 
     protected IEnumerator Ray()

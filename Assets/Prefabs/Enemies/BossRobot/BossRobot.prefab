@@ -29,73 +29,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8199040796088032942}
-  - {fileID: 4393879766889086273}
   - {fileID: 4643664948098456882}
   - {fileID: 1887984655910554244}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &4325253223688249018
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 8199040796088032942}
-  m_Layer: 3
-  m_Name: LeftPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &8199040796088032942
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4325253223688249018}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1428455411254460405}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &7664301588655417999
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4393879766889086273}
-  m_Layer: 3
-  m_Name: RightPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4393879766889086273
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7664301588655417999}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1428455411254460405}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &5154918477707207774
 PrefabInstance:
@@ -378,10 +314,10 @@ PrefabInstance:
       addedObject: {fileID: 3428525370451461882}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 757c60c880701bc4aab7b2673d4cae51, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 8682492424879475606}
+      addedObject: {fileID: 3342162378651427152}
     - targetCorrespondingSourceObject: {fileID: -8653719598885068355, guid: 757c60c880701bc4aab7b2673d4cae51, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3342162378651427152}
+      addedObject: {fileID: 3884039561312580476}
     - targetCorrespondingSourceObject: {fileID: -6784807584013071356, guid: 757c60c880701bc4aab7b2673d4cae51, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4113504491034744388}
@@ -773,15 +709,15 @@ MonoBehaviour:
   fallParticles: {fileID: 0}
   hitParticles: {fileID: 0}
   spawner: {fileID: 0}
-  velocity: 5
+  velocity: 6
   HPBarOffset: 2.8
   HPBarScale: 0.2
   groundLayer:
     serializedVersion: 2
     m_Bits: 8
   health: {fileID: 0}
-  leftPoint: {fileID: 8199040796088032942}
-  rightPoint: {fileID: 4393879766889086273}
+  leftPoint: {fileID: 0}
+  rightPoint: {fileID: 0}
   detectionRange: {x: 15, y: 5}
   onBeginChasing:
     m_PersistentCalls:
@@ -915,7 +851,7 @@ MonoBehaviour:
     _clip: {fileID: 8300000, guid: 7d701dbabbf5b1a40976d24c1adc797c, type: 3}
   - _id: Die
     _clip: {fileID: 8300000, guid: 3af88f1e81410424d858874d29738c0a, type: 3}
---- !u!114 &8682492424879475606
+--- !u!114 &3342162378651427152
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -924,12 +860,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 5816827170271266129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9650b5a39a3c9e5408231e2ba98deeea, type: 3}
+  m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BossRobotAttack
+  m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
+  latency: 1
+--- !u!114 &3884039561312580476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5816827170271266129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9285f4c78c8292549a9b4bcaa2206d13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
   attackParticles: {fileID: 0}
   attackCooldown: 1
   spawner: {fileID: 0}
+  guns:
+  - {fileID: 4113504491034744388}
+  - {fileID: 2348689251806862874}
   rayOffset: {x: 0.5, y: 2}
   armRadiusIncrease: 0
   attackCooldownScale: 1
@@ -959,35 +911,7 @@ MonoBehaviour:
         m_CallState: 2
   onAnyAttack:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 8682492424879475606}
-        m_TargetAssemblyTypeName: BossRobotAttack, Assembly-CSharp
-        m_MethodName: GunsAttack
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  guns:
-  - {fileID: 4113504491034744388}
-  - {fileID: 2348689251806862874}
---- !u!114 &3342162378651427152
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5816827170271266129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
-  latency: 1
+      m_Calls: []
 --- !u!1 &8541586673375701224 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6784807584013071356, guid: 757c60c880701bc4aab7b2673d4cae51, type: 3}
