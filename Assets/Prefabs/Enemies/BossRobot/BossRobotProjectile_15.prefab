@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
   latency: 0
+  destroyAtSpawn: 0
 --- !u!50 &-4263759415381829620
 Rigidbody2D:
   serializedVersion: 5
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ProjectileComponent
   shootForce: 15
-  shootAngle: 10
+  shootAngle: 0
   collisionDelay: 0.2
 --- !u!70 &-5280665115629971709
 CapsuleCollider2D:

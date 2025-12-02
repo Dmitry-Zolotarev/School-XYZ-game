@@ -129,7 +129,6 @@ public class EntityController : MonoBehaviour
         }
         animator.SetTrigger(AnimatorHit);
     }
-
     public void OnDie()
     {      
         animator.SetTrigger(AnimatorDie);
@@ -156,7 +155,6 @@ public class EntityController : MonoBehaviour
         {
             attackComponent.CurrentDirection = facingRight ? Vector2.right : Vector2.left;
             attackComponent.Attack();
-        }
-        
+        }        
     }
 }

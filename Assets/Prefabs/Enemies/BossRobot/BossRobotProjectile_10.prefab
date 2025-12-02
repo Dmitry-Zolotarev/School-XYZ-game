@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308778dcd3c40224db9c755e3b03e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponent
-  damage: 2
+  damage: 5
 --- !u!212 &2717777832523369629
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -141,7 +141,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2246880366536601965, guid: c130b3ec545166b42a5cdb0f5929a500, type: 3}
+  m_Sprite: {fileID: 6828141574091718752, guid: 6f4d5f264568b214498f9baa3a4b5db1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   frameRate: 2
   playLooping: 0
   sprites:
-  - {fileID: 2246880366536601965, guid: c130b3ec545166b42a5cdb0f5929a500, type: 3}
+  - {fileID: 6828141574091718752, guid: 6f4d5f264568b214498f9baa3a4b5db1, type: 3}
   onComplete:
     m_PersistentCalls:
       m_Calls:
@@ -196,6 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
   latency: 0
+  destroyAtSpawn: 0
 --- !u!50 &-4263759415381829620
 Rigidbody2D:
   serializedVersion: 5

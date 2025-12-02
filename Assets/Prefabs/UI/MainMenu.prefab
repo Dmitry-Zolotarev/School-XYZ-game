@@ -778,4 +778,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1085c6bc79c3c944db2ec63d9fa0323e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSceneComponent
-  levelName: Level1
+  sceneName: Level1

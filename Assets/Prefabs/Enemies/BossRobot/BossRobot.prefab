@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 308778dcd3c40224db9c755e3b03e999, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DamageComponent
-  damage: 1
+  damage: 3
 --- !u!114 &221190834549435166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,12 +704,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
   HPBar: {fileID: 5719900053517538684}
-  runParticles: {fileID: 0}
+  runParticles: {fileID: 445565870571551919, guid: 9ed2ed285b1507743b7660c8769a2183, type: 3}
   jumpParticles: {fileID: 0}
   fallParticles: {fileID: 0}
-  hitParticles: {fileID: 0}
+  hitParticles: {fileID: 445565870571551919, guid: 880efdb6ca622c84da44ee3adb5b5036, type: 3}
   spawner: {fileID: 0}
-  velocity: 6
+  velocity: 5
   HPBarOffset: 2.8
   HPBarScale: 0.2
   groundLayer:
@@ -864,6 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
   latency: 1
+  destroyAtSpawn: 0
 --- !u!114 &3884039561312580476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -876,7 +877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9285f4c78c8292549a9b4bcaa2206d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::AttackComponent
-  attackParticles: {fileID: 0}
+  attackParticles: {fileID: 445565870571551919, guid: a891b539975f74e4f883811ee6c9ba9d, type: 3}
   attackCooldown: 1
   spawner: {fileID: 0}
   guns:
@@ -888,7 +889,7 @@ MonoBehaviour:
   CurrentDirection: {x: 0, y: 0, z: 0}
   damage: 5
   damageIncrease: 1
-  attackRadius: 3
+  attackRadius: 5
   attackMode: 1
   projectile: {fileID: 2808415219190108505, guid: c7594fc1a60a55d45b4cec9a192de2fb, type: 3}
   onMeleeAttack:

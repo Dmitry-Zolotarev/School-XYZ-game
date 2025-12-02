@@ -16,7 +16,7 @@ MonoBehaviour:
   count: 1
   Icon: {fileID: -2170712247897187164, guid: 70d6f9f9ee1c2a34eb13b82f2441d301, type: 3}
   modelPrefab: {fileID: 5684535031508799029, guid: e08096c0cc21e0f44b2ca591f7f62578, type: 3}
-  fireRate: 1
+  fireRate: 0.8
   shootForce: 15
   shootAngle: 10
   projectile: {fileID: 2808415219190108505, guid: 17a27a475b5218345a3bb78ce6e85e98, type: 3}

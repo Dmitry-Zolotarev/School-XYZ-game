@@ -2442,7 +2442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1085c6bc79c3c944db2ec63d9fa0323e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::LoadSceneComponent
-  levelName: MainMenu
+  sceneName: MainMenu
 --- !u!1 &5781294960529216604
 GameObject:
   m_ObjectHideFlags: 0
