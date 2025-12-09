@@ -25,8 +25,8 @@ public class Inventory : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Items[selectedSlot] != null && animator != null)
-            Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
+        if (Items[selectedSlot] != null && animator != null) Items[selectedSlot].Render(itemHand, itemOffset, transform.localScale);
+
     }
 
     public void SelectItemWithoutInvoke(int i)

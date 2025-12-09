@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4167320445106583154}
   - component: {fileID: 341165756935148265}
   - component: {fileID: 3349530969001932974}
+  - component: {fileID: 2894283473912627333}
   m_Layer: 0
   m_Name: Barrel
   m_TagString: Untagged
@@ -171,7 +172,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790c04c8f2e52a74896136299e7eaa26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HPComponent
-  maxHP: 20
+  maxHP: 25
   XP_for_murder: 0
   isDead: 0
   HP: 0
@@ -179,7 +180,19 @@ MonoBehaviour:
   HPLabel: {fileID: 0}
   onDamage:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2894283473912627333}
+        m_TargetAssemblyTypeName: SpawnComponent, Assembly-CSharp
+        m_MethodName: Spawn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   onHeal:
     m_PersistentCalls:
       m_Calls: []
@@ -238,3 +251,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpawnComponent
   spawnOffset: {x: 0, y: 0.5, z: 0}
   prefab: {fileID: 4187119041051710950, guid: e86746c7df19b6943b4c68b0bf93f7f7, type: 3}
+--- !u!114 &2894283473912627333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6103860446858465651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbf9f59ce37998e4486ed64afc6d1da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpawnComponent
+  spawnOffset: {x: 0, y: 0.5, z: 0}
+  prefab: {fileID: 445565870571551919, guid: a891b539975f74e4f883811ee6c9ba9d, type: 3}

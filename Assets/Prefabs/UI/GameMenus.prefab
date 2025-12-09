@@ -4014,6 +4014,14 @@ PrefabInstance:
       value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 3673570955619291489, guid: 299721127d736a44d92af56e120c317d, type: 3}
+      propertyPath: m_Spacing.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673570955619291489, guid: 299721127d736a44d92af56e120c317d, type: 3}
+      propertyPath: m_Spacing.y
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 3673570955619291489, guid: 299721127d736a44d92af56e120c317d, type: 3}
       propertyPath: m_Padding.m_Top
       value: 12
       objectReference: {fileID: 0}
@@ -4087,11 +4095,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5867525861837058236, guid: 299721127d736a44d92af56e120c317d, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.5
+      value: -2.1366577
       objectReference: {fileID: 0}
     - target: {fileID: 5867525861837058236, guid: 299721127d736a44d92af56e120c317d, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -125.500015
+      value: -124.550766
       objectReference: {fileID: 0}
     - target: {fileID: 5867525861837058236, guid: 299721127d736a44d92af56e120c317d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
