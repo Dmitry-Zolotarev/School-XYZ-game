@@ -28,12 +28,13 @@ public class Leveling : MonoBehaviour
     {
         level++;
         perks.perkScore++;
-        XP -= currentXPforLevelUP;
-        if (health != null) health.UpdateMaxHP(HPIncrease);
+        XP -= currentXPforLevelUP;     
         if (attack != null) attack.damage += damageIncrease;
         currentXPforLevelUP = xp_forLevelUP * level;
         Instantiate(levelUPLabel, transform.position, Quaternion.identity);
+
         yield return new WaitForSeconds(0.2f);
+        if (health != null) health.UpdateMaxHP(HPIncrease);
         OnLevelUP?.Invoke();
     }
 }

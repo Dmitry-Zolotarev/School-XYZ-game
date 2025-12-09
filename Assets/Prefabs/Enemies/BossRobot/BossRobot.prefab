@@ -718,7 +718,7 @@ MonoBehaviour:
   health: {fileID: 0}
   leftPoint: {fileID: 0}
   rightPoint: {fileID: 0}
-  detectionRange: {x: 15, y: 5}
+  detectionRange: {x: 20, y: 5}
   onBeginChasing:
     m_PersistentCalls:
       m_Calls:
