@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 8644970349260631543}
   - component: {fileID: 7617131852618516276}
   - component: {fileID: 3832598539395365396}
-  - component: {fileID: 705028378302234617}
   - component: {fileID: 2973128787890664455}
   - component: {fileID: 1598339133497621554}
+  - component: {fileID: 4593333407472192858}
   m_Layer: 0
   m_Name: HealPotion
   m_TagString: Untagged
@@ -132,36 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2efc103ecb8a64b91634ed6450b31a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HealComponent
-  healValue: 5
---- !u!114 &705028378302234617
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113525450005253869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32abfcfb162ca764dae527bd04723ee7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnterTriggerComponent
-  _tag: Player
-  isLooping: 0
-  action:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 3832598539395365396}
-        m_TargetAssemblyTypeName: HealComponent, Assembly-CSharp
-        m_MethodName: Heal
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  healValue: 20
 --- !u!114 &2973128787890664455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,7 +145,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aefa0e523735d7249a6d1f913a727fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DestroyObjectComponent
-  _objectToDestroy: {fileID: 9113525450005253869}
+  latency: 0.1
+  destroyAtSpawn: 0
 --- !u!70 &1598339133497621554
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -212,3 +184,33 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 0.3, y: 0.45}
   m_Direction: 0
+--- !u!114 &4593333407472192858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113525450005253869}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7572b3d175ae1894ea8273499a56de96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnterCollisionComponent
+  targetTag: Player
+  isLooping: 0
+  loopDelay: 0
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 3832598539395365396}
+        m_TargetAssemblyTypeName: HealComponent, Assembly-CSharp
+        m_MethodName: Heal
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 3546267150103402514, guid: 85f1a35b336b57d4295afadce95e5563, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -68,7 +68,7 @@ MonoBehaviour:
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 24, y: 24}
-  m_Spacing: {x: 14, y: 14}
+  m_Spacing: {x: 16, y: 14}
   m_Constraint: 0
   m_ConstraintCount: 2
 --- !u!114 &7834458132648350599
@@ -113,6 +113,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69401859e857cb640a56690718d90105, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::InventoryWindow
-  itemIconPrefab: {fileID: 0}
   inventory: {fileID: 0}
   hotbarSize: 5
