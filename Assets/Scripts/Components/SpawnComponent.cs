@@ -7,7 +7,6 @@ public class SpawnComponent : MonoBehaviour
     
     public void Spawn()
     {
-        if(prefab.tag != "Untagged") Debug.Log(prefab.tag);
         var spawnedObject = Instantiate(prefab, transform.position, Quaternion.identity);
         spawnedObject.transform.localScale = transform.lossyScale;
         spawnedObject.transform.position += spawnOffset;

@@ -2091,6 +2091,7 @@ GameObject:
   - component: {fileID: 3276213541899168322}
   - component: {fileID: 7775584782125258333}
   - component: {fileID: 6581269500421162066}
+  - component: {fileID: 8053898341637010886}
   m_Layer: 5
   m_Name: GameMenus
   m_TagString: Untagged
@@ -2296,6 +2297,18 @@ MonoBehaviour:
   m_DefaultActionMap: UI Actions
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &8053898341637010886
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5318894758626864771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb34b5069b8a6e148ae06e7ad21cfb0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChangePitchComponent
 --- !u!1 &5493517269401414332
 GameObject:
   m_ObjectHideFlags: 0

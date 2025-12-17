@@ -8,8 +8,8 @@ public class ChangePitchComponent : MonoBehaviour
         var musicPlayerObject = GameObject.FindGameObjectWithTag("MusicPlayer");
         musicPlayer = musicPlayerObject?.GetComponent<AudioSource>();
     }
-    public void ChangeMusicPitch(int k) 
+    public void ChangeMusicPitch(int percent) 
     {
-        if(musicPlayer != null) musicPlayer.pitch = k / 100f;
+        if(musicPlayer != null) musicPlayer.pitch = percent / 100f;
     } 
 }

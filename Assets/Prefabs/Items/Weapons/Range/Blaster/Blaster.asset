@@ -17,5 +17,5 @@ MonoBehaviour:
   Icon: {fileID: 3537879861638250659, guid: c02d14ae9c5e7c74da92830816327cd2, type: 3}
   modelPrefab: {fileID: 5684535031508799029, guid: 1d5baa7d6789aa44fb86449f0efc8923, type: 3}
   damageIncrease: 2
-  rangeIncrease: 6
+  rangeIncrease: 8
   fireRate: 0.8
