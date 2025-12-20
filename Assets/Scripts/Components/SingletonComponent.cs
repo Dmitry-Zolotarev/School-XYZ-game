@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SingletonComponent : MonoBehaviour
 {
-    private static SingletonComponent instance;
+    protected static SingletonComponent instance;
     private void Awake()
     {
         if (instance != null && instance.gameObject != gameObject)
